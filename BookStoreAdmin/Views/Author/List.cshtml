@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout = null;
+}
+
+<accordion>
+    <accordion-group #group *ngFor="let author of (store.select('authors') | async)?.authors">
+        <div accordion-heading>
+            {{author.first_name}}&nbsp;&nbsp;{{author.last_name}}
+            <i class="pull-right float-xs-right glyphicon"
+               [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+        </div>
+        {{author.description}}
+        &nbsp;<br /><br /><br />
+    </accordion-group>
+    
+</accordion>
+
+<author-add></author-add>

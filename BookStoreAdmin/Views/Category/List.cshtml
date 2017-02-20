@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout = null;
+}
+
+<accordion>
+    <accordion-group #group *ngFor="let category of (store.select('categories') | async)?.categories">
+        <div accordion-heading>
+            {{category.name}}
+            <i class="pull-right float-xs-right glyphicon"
+               [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+        </div>
+        {{category.description}}
+        &nbsp;<br /><br /><br />
+    </accordion-group>
+
+</accordion>
+
+<category-add></category-add>

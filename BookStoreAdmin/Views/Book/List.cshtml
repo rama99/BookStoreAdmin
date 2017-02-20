@@ -1,0 +1,9 @@
+﻿
+@{
+    Layout = null;
+}
+
+{{ store.select('books') | async | json }}
+
+
+<book-add></book-add>
