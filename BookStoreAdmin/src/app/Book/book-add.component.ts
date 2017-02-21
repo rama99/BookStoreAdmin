@@ -1,7 +1,16 @@
 ﻿import { Component, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
 import { Store } from '@ngrx/store';
+import { AuthorModel } from '../author/author-model';
+import { CategoryModel } from '../Category/category-model';
+
+
 import { addBook } from './actions';
-import { FormBuilder , FormArray , FormGroup , Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
+
+import { loadAuthors } from '../author/actions';
+import { loadCatgories } from '../Category/actions';
 
 @Component({
     selector: 'book-add',
@@ -12,6 +21,9 @@ import { FormBuilder , FormArray , FormGroup , Validators } from '@angular/forms
 export class BookAddComponent implements OnInit {
 
     public fg: FormGroup;
+    public authors$: Observable<AuthorModel>;
+    public categories$: Observable<CategoryModel>;
+
     @ViewChild('staticModal') model: any;
 
     constructor(
@@ -26,16 +38,20 @@ export class BookAddComponent implements OnInit {
             "id": [0, Validators.compose([Validators.required])],
             "title": ["", Validators.compose([Validators.required])],
             "description": ["", Validators.compose([Validators.required])],
-            "category": [, Validators.compose([Validators.required])],
-            "authors": [, Validators.compose([Validators.required])],
+            "category": ["", Validators.compose([Validators.required])],
+            "authors": ["", Validators.compose([Validators.required])],
             "price": [, Validators.compose([Validators.required])]
-        })
+        });
+
+        this.store.dispatch(loadAuthors());
+        this.store.dispatch(loadCatgories());
+        this.authors$ = this.store.select('authors');
+        this.categories$ = this.store.select('categories');
     }
 
     addBook() {
 
         if (this.fg.invalid) {
-            alert('invalid');
             this.model.show();
         }
         else {

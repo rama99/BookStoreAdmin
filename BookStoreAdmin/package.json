@@ -4,7 +4,7 @@
   "description": "QuickStart package.json from the documentation, supplemented with testing support",
   "scripts": {
     "build": "tsc -p src/",
-    "webpack": "webpack -w",
+    "webpack": "webpack -w",    
     "build:watch": "tsc -p src/ -w",
     "build:e2e": "tsc -p e2e/",
     "serve": "lite-server -c=bs-config.json",
@@ -27,13 +27,13 @@
   "dependencies": {
     "@angular/common": "~2.4.0",
     "@angular/compiler": "~2.4.0",
-    "@angular/compiler-cli": "^2.4.7",
+    "@angular/compiler-cli": "^2.4.8",
     "@angular/core": "~2.4.0",
     "@angular/forms": "~2.4.0",
     "@angular/http": "~2.4.0",
     "@angular/platform-browser": "~2.4.0",
     "@angular/platform-browser-dynamic": "~2.4.0",
-    "@angular/platform-server": "^2.4.7",
+    "@angular/platform-server": "^2.4.8",
     "@angular/router": "~3.4.0",
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^2.0.0",
@@ -46,6 +46,8 @@
     "zone.js": "^0.7.4"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "^2.4.8",
+    "@ngtools/webpack": "^1.2.10",
     "@types/jasmine": "^2.5.36",
     "@types/node": "^6.0.46",
     "canonical-path": "0.0.2",

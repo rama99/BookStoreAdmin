@@ -130,6 +130,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Author.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\a2.png" />
+    <Content Include="images\aspmvc.jpg" />
+    <Content Include="images\bootstrap.jpg" />
+    <Content Include="images\ef.jpg" />
+    <Content Include="images\es6.png" />
+    <Content Include="images\ngrx.jpg" />
+    <Content Include="images\nodejs.png" />
+    <Content Include="images\rxjs.png" />
+    <Content Include="images\sqlServer.png" />
+    <Content Include="images\ts.png" />
+    <Content Include="images\webpack.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="package.json" />
@@ -156,7 +168,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="index.html" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -187,20 +198,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="BAL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\app\about.component.ts" />
     <TypeScriptCompile Include="src\app\actions.ts" />
-    <TypeScriptCompile Include="src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.effects.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
@@ -233,11 +242,12 @@
     <TypeScriptCompile Include="src\app\category.service.ts" />
     <TypeScriptCompile Include="src\app\Category\reducer.ts" />
     <TypeScriptCompile Include="src\app\login-model.ts" />
-    <TypeScriptCompile Include="src\app\temp.service.ts" />
     <TypeScriptCompile Include="src\app\home.component.ts" />
     <TypeScriptCompile Include="src\app\login.component.ts" />
-    <TypeScriptCompile Include="src\app\Shared\shared.module.ts" />
     <TypeScriptCompile Include="src\app\reducer.ts" />
+    <TypeScriptCompile Include="src\app\StoreModel.ts" />
+    <TypeScriptCompile Include="src\app\user.service.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

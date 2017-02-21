@@ -8,12 +8,13 @@ import { AuthorActionTypes, loadAuthorsSuccess, addAuthorSuccess } from './autho
 
 import { CategoryService } from './category.service';
 
-import { TempService } from './temp.service';
-
 import { CategoryActionTypes, loadCategoriesSuccess, addCategorySuccess } from './category/actions';
 
 import { BookService } from './book.service';
 import { BookActionTypes, loadBooksSuccess, addBook, addBookSuccess } from './book/actions';
+
+import { UserService } from './user.service';
+import { UserActionTypes , validateUser , validateUserSuccess , logOutSuccess , logOut  } from './actions';
 
 @Injectable()
 export class AppEffects {
@@ -22,8 +23,8 @@ export class AppEffects {
         private actions$: Actions,
         private authorService: AuthorService,
         private service: CategoryService, 
-        private bookService: BookService
-        
+        private bookService: BookService,
+        private userService: UserService        
         
     ) { }
 
@@ -56,4 +57,14 @@ export class AppEffects {
         .ofType(BookActionTypes.ADD_BOOK)
         .mergeMap((action) => this.bookService.addBook(action.payload))
         .map(book => addBookSuccess(book));
+
+    @Effect() login$ = this.actions$
+        .ofType(UserActionTypes.VALIDATE_USER)
+        .mergeMap((action) => this.userService.validateUser(action.payload))
+        .map(loginResponse => validateUserSuccess(loginResponse));
+
+    @Effect() logout$ = this.actions$
+        .ofType(UserActionTypes.LOGOUT)
+        .mergeMap(() => this.userService.logOut())
+        .map(loginResponse => validateUserSuccess(loginResponse));
 }

@@ -1,11 +1,13 @@
 ﻿import { Action } from '@ngrx/store';
 
-import { LoginModel } from './login-model';
+import { LoginModel , LoginResponseModel } from './login-model';
 
 export const UserActionTypes = {
 
     VALIDATE_USER: 'VALIDATE_USER',
-    VALIDATE_USER_SUCCESS: 'VALIDATE_USER_SUCCESS'    
+    VALIDATE_USER_SUCCESS: 'VALIDATE_USER_SUCCESS',
+    LOGOUT: 'LOGOUT',
+    LOGOUT_SUCCESS:'LOGOUT_SUCCESS'    
 
 }
 
@@ -18,11 +20,28 @@ export function validateUser(login: LoginModel): Action {
 
 }
 
-export function validateUserSuccess(login: LoginModel): Action {
+export function validateUserSuccess(loginResponse: LoginResponseModel): Action {
 
     return {
         type: UserActionTypes.VALIDATE_USER_SUCCESS,
-        payload: login
+        payload: loginResponse
     }
 
 } 
+
+
+export function logOut(): Action {
+
+    return {
+        type: UserActionTypes.LOGOUT,
+        payload:{}
+    }
+}
+
+export function logOutSuccess(): Action {
+
+    return {
+        type: UserActionTypes.LOGOUT_SUCCESS,
+        payload: {}
+    }
+}

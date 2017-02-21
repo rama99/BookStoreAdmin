@@ -18,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducer as authorReducer } from './author/reducer';
 import { reducer as categoryReducer } from './Category/reducer';
 import { reducer as bookReducer } from './book/reducer';
+import { reducer as userReducer } from './reducer';
  
 import { AppEffects } from './app.effects';
 //import { AuthorEffects } from './author/authors-effects';
@@ -27,12 +28,14 @@ import { canActivateGuard } from './canActivate';
 
 import { CategoryService } from './category.service';
 import { BookService } from './book.service';
+import { UserService } from './user.service';
 
 
 @NgModule({
     imports: [BrowserModule,
         RouterModule.forRoot([
             { path: '', component: LoginComponent },
+            { path: 'home', component: HomeComponent },
             { path: 'about', canActivate: [canActivateGuard],  component: AboutComponent },
             { path: 'login', component: LoginComponent }
         ]),
@@ -44,13 +47,14 @@ import { BookService } from './book.service';
         StoreModule.provideStore({
             authors: authorReducer,
             categories: categoryReducer,
-            books: bookReducer
+            books: bookReducer,
+            user: userReducer
         }),
         EffectsModule.run(AppEffects) /*,
         EffectsModule.run(CategoryEffects)*/
     ],
     declarations: [AppComponent, AboutComponent, HomeComponent, LoginComponent],
-    providers: [canActivateGuard, CategoryService, BookService],
+    providers: [canActivateGuard, CategoryService, BookService, UserService],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-﻿<nav class="navbar navbar-inverse">
+﻿<nav class="navbar navbar-inverse"  *ngIf="blnDisplayMenu">
     <div class="container-fluid">
         
         <ul class="nav navbar-nav">
@@ -13,6 +13,7 @@
 
     </div>
 </nav>
+
 <router-outlet></router-outlet>
 
 

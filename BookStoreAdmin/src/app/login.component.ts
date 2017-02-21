@@ -1,5 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormGroup , FormArray , FormBuilder  , Validators} from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { ActivatedRoute , Router } from '@angular/router';
+
+import { UserActionTypes, validateUser, validateUserSuccess } from './actions';
+import { StoreModel } from './StoreModel';
+import { LoginResponseModel } from './login-model';
 
 @Component({
     selector: '',
@@ -9,12 +15,15 @@ import { FormGroup , FormArray , FormBuilder  , Validators} from '@angular/forms
 export class LoginComponent implements OnInit {
 
     formgroup: FormGroup;
+    errorMessage: string;
 
     constructor(
-        private fb:FormBuilder
-    ) {
+        private fb: FormBuilder,
+        private store: Store<StoreModel>,
+        private route: ActivatedRoute,
+        private router: Router
 
-    }
+    ) {}
 
     ngOnInit() {
 
@@ -25,7 +34,27 @@ export class LoginComponent implements OnInit {
     }
 
     validateLogin() {
-        alert('login');
+      
+        if (this.formgroup.invalid) {
+            this.errorMessage = "Please enter User Name / Password";
+        }
+        else {
+
+            this.store.dispatch(validateUser(this.formgroup.value));
+            this.store.select('user').subscribe(
+
+                (user: LoginResponseModel) => {
+
+                    if (user.isValidUser) {
+                        this.router.navigate(['home']);
+                    }
+                    else {
+                        this.errorMessage = "Invalid User Name / Password";
+                    }
+                }
+            )
+        }       
     }
+
 
 }

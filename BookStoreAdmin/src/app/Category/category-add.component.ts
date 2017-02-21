@@ -24,8 +24,8 @@ export class CategoryAddComponent implements OnInit {
 
      this.fg =   this.fb.group({
             "id": [0, Validators.compose([Validators.required])],
-            "name": ["name", Validators.compose([Validators.required])],
-            "description": ["description", Validators.compose([Validators.required])]
+            "name": ["", Validators.compose([Validators.required])],
+            "description": ["", Validators.compose([Validators.required])]
         })
 
     }

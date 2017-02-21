@@ -18,8 +18,7 @@ export function reducer(state: State = initialState, action: Action):State {
     switch (action.type) {
 
         case BookActionTypes.LOAD_BOOKS_SUCCESS:
-
-            alert(action.payload);
+            
             return {
                 currentPage: 0,
                 books: action.payload
@@ -41,8 +40,7 @@ export function reducer(state: State = initialState, action: Action):State {
 
                  //state.authors.concat(action.payload)
             };
-
-            alert(xx.books.length);
+            
             return xx;
     }
 

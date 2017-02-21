@@ -32,7 +32,7 @@ export function reducer(state: State = initialState, action: Action) {
                 currentPage: state.currentPage,
                 authors: state.authors.concat(action.payload)
             }
-            alert(xx.authors.length);
+           
             return xx;
         default: return state;
     }

@@ -10,9 +10,7 @@ export const BookActionTypes = {
     ADD_BOOK_SUCCESS:'ADD_BOOK_SUCCESS'
 }
 
-export function loadBooks(): Action {
-
-    alert('LOAD_BOOKS');
+export function loadBooks(): Action {   
 
     return {
         type: BookActionTypes.LOAD_BOOKS,

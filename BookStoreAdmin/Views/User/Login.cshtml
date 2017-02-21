@@ -3,9 +3,9 @@
     Layout = null;
 }
 
-
 <form class="form-signin" [formGroup]="formgroup" (ngSubmit)="validateLogin()">
     <h2 class="form-signin-heading">Please sign in</h2>
+    {{errorMessage}}
     <div *ngIf="error">
         <small>{{error}}</small>
     </div>
