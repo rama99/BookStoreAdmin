@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BookStoreAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="author">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="row_version" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="created_on" Type="datetimeoffset" Precision="7" />
+        </EntityType>
+        <EntityType Name="book">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="fk_category_id" Type="int" Nullable="false" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="row_version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="created_on" Type="datetimeoffset" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BookStoreAdmin.dbo.book_author' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="book_author">
+          <Key>
+            <PropertyRef Name="fk_author_id" />
+            <PropertyRef Name="fk_book_id" />
+          </Key>
+          <Property Name="fk_author_id" Type="int" Nullable="false" />
+          <Property Name="fk_book_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="row_version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="created_on" Type="datetimeoffset" Precision="7" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="row_version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="created_on" Type="datetimeoffset" Precision="7" />
+        </EntityType>
+        <Association Name="FK_book_author_author">
+          <End Role="author" Type="Self.author" Multiplicity="1" />
+          <End Role="book_author" Type="Self.book_author" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="author">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="book_author">
+              <PropertyRef Name="fk_author_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_book_author_book">
+          <End Role="book" Type="Self.book" Multiplicity="1" />
+          <End Role="book_author" Type="Self.book_author" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="book_author">
+              <PropertyRef Name="fk_book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_book_category">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="book" Type="Self.book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="book">
+              <PropertyRef Name="fk_category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BookStoreAdminModelStoreContainer">
+          <EntitySet Name="author" EntityType="Self.author" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="book" EntityType="Self.book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="book_author" EntityType="Self.book_author" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [book_author].[fk_author_id] AS [fk_author_id], 
+    [book_author].[fk_book_id] AS [fk_book_id]
+    FROM [dbo].[book_author] AS [book_author]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_book_author_author" Association="Self.FK_book_author_author">
+            <End Role="author" EntitySet="author" />
+            <End Role="book_author" EntitySet="book_author" />
+          </AssociationSet>
+          <AssociationSet Name="FK_book_author_book" Association="Self.FK_book_author_book">
+            <End Role="book" EntitySet="book" />
+            <End Role="book_author" EntitySet="book_author" />
+          </AssociationSet>
+          <AssociationSet Name="FK_book_category" Association="Self.FK_book_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="book" EntitySet="book" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BookStoreAdminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="author">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="row_version" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="created_on" Type="DateTimeOffset" Precision="7" />
+          <NavigationProperty Name="books" Relationship="Self.book_author" FromRole="author" ToRole="book" />
+        </EntityType>
+        <EntityType Name="book">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fk_category_id" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="row_version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="created_on" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <NavigationProperty Name="category" Relationship="Self.FK_book_category" FromRole="book" ToRole="category" />
+          <NavigationProperty Name="authors" Relationship="Self.book_author" FromRole="book" ToRole="author" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="row_version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="created_on" Type="DateTimeOffset" Precision="7" />
+          <NavigationProperty Name="books" Relationship="Self.FK_book_category" FromRole="category" ToRole="book" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="row_version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="created_on" Type="DateTimeOffset" Precision="7" />
+        </EntityType>
+        <Association Name="FK_book_category">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="book" Type="Self.book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="book">
+              <PropertyRef Name="fk_category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="book_author">
+          <End Role="author" Type="Self.author" Multiplicity="*" />
+          <End Role="book" Type="Self.book" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BookStoreAdminEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="authors" EntityType="Self.author" />
+          <EntitySet Name="books" EntityType="Self.book" />
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_book_category" Association="Self.FK_book_category">
+            <End Role="category" EntitySet="categories" />
+            <End Role="book" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="book_author" Association="Self.book_author">
+            <End Role="author" EntitySet="authors" />
+            <End Role="book" EntitySet="books" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BookStoreAdminModelStoreContainer" CdmEntityContainer="BookStoreAdminEntities1">
+          <EntitySetMapping Name="authors">
+            <EntityTypeMapping TypeName="BookStoreAdminModel.author">
+              <MappingFragment StoreEntitySet="author">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="row_version" ColumnName="row_version" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="books">
+            <EntityTypeMapping TypeName="BookStoreAdminModel.book">
+              <MappingFragment StoreEntitySet="book">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="fk_category_id" ColumnName="fk_category_id" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="row_version" ColumnName="row_version" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="BookStoreAdminModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="row_version" ColumnName="row_version" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="BookStoreAdminModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="row_version" ColumnName="row_version" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="book_author" TypeName="BookStoreAdminModel.book_author" StoreEntitySet="book_author">
+            <EndProperty Name="author">
+              <ScalarProperty Name="id" ColumnName="fk_author_id" />
+            </EndProperty>
+            <EndProperty Name="book">
+              <ScalarProperty Name="id" ColumnName="fk_book_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

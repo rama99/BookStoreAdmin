@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
 
         this.formgroup = this.fb.group({
-            "login": ["", Validators.compose([Validators.required])],
+            "userName": ["", Validators.compose([Validators.required])],
             "password": ["", Validators.compose([Validators.required])]
         })
     }
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
                     if (user.isValidUser) {
                         this.router.navigate(['home']);
                     }
-                    else {
+                    else if (user.errorMessage != '' && user.errorMessage != null) {
                         this.errorMessage = "Invalid User Name / Password";
                     }
                 }

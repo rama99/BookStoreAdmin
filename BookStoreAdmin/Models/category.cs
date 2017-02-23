@@ -12,17 +12,16 @@ namespace BookStoreAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class author
+    public partial class category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public author()
+        public category()
         {
             this.books = new HashSet<book>();
         }
     
         public int id { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
+        public string name { get; set; }
         public string description { get; set; }
         public byte[] row_version { get; set; }
         public Nullable<System.DateTimeOffset> created_on { get; set; }

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using BookStoreAdmin.BAL;
+using BookStoreAdmin.ViewModels;
+
 namespace BookStoreAdmin.Controllers
 {
     public class BookController : Controller
@@ -22,6 +25,12 @@ namespace BookStoreAdmin.Controllers
         public ActionResult Add()
         {
             return View();
+        }
+
+        // GetBooks
+        public ActionResult GetBooks()
+        {
+            return Json(BookStoreAdmin.BAL.Book.GetBookDetails(), JsonRequestBehavior.AllowGet);
         }
     }
 }

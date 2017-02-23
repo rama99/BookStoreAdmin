@@ -43,6 +43,7 @@ export class AuthorAddComponent implements OnInit {
         }
         else {
             this.store.dispatch(addAuthor(this.fg.value));
+            this.fg.reset();
         }
     }
 

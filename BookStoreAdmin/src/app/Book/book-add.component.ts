@@ -43,7 +43,7 @@ export class BookAddComponent implements OnInit {
             "price": [, Validators.compose([Validators.required])]
         });
 
-        this.store.dispatch(loadAuthors());
+      this.store.dispatch(loadAuthors());
         this.store.dispatch(loadCatgories());
         this.authors$ = this.store.select('authors');
         this.categories$ = this.store.select('categories');

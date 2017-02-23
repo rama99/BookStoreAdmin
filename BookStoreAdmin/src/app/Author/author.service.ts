@@ -1,7 +1,9 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http , Headers , RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 import { AuthorModel } from './author-model';
 
@@ -12,20 +14,21 @@ export class AuthorService {
 
     }
 
-    loadAuthors(): Observable<AuthorModel[]> {
+    loadAuthors(): Observable<AuthorModel[]> {      
 
-        let authors = [
-            { id: 1, first_name: 'rama', last_name: 'kishore', description: 'desc here' },
-            { id: 2, first_name: 'kiran', last_name: 'kumar', description: 'desc here' }
-
-        ]
-        
-        return Observable.of(authors);
+        return this.http.get('http://localhost:57599/author/GetBooks')
+            .map((data) => data.json()); 
+       
     }
 
     addAuthor(authorModel: AuthorModel): Observable<AuthorModel> {
 
-        return Observable.of(authorModel);
+        let headers: Headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.post('http://localhost:57599/author/AddAuthor', JSON.stringify(authorModel), { headers: headers })
+                        .map(data => data.json());
+            //return Observable.of(authorModel);
     }
 
 }

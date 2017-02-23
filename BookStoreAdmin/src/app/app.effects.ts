@@ -41,7 +41,7 @@ export class AppEffects {
     @Effect() categories$ = this.actions$
         .ofType(CategoryActionTypes.LOAD_CATEGORIES)
         .mergeMap(() => this.service.loadCategories())
-        .map(authors => loadCategoriesSuccess(authors));
+        .map(categories => loadCategoriesSuccess(categories));
 
     @Effect() addCategory$ = this.actions$
         .ofType(CategoryActionTypes.ADD_CATEGORY)
@@ -63,8 +63,8 @@ export class AppEffects {
         .mergeMap((action) => this.userService.validateUser(action.payload))
         .map(loginResponse => validateUserSuccess(loginResponse));
 
-    @Effect() logout$ = this.actions$
+  /*  @Effect() logout$ = this.actions$
         .ofType(UserActionTypes.LOGOUT)
         .mergeMap(() => this.userService.logOut())
-        .map(loginResponse => validateUserSuccess(loginResponse));
+        .map(loginResponse => validateUserSuccess(loginResponse));*/
 }

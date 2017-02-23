@@ -16,8 +16,10 @@ export class BookService {
     loadBooks(): Observable<BookModel[]> {
 
         let data = [
-            { id:1 , title:'Book 1' , description:' this is a description' , category: 1 , authors:[1,2,3,4] , price:99.99 }
+            { id: 1, title: 'Book 1', description: ' this is a description', category: { id: 1, name: 'category 1' , description:'desc here'}, authors: [{id:1 , first_name:'fname' , last_name: 'lname' , description:'description here'}] , price:99.99 }
         ]
+
+        alert('loadBooks');
 
         return Observable.of(data);
     }

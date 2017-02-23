@@ -37,6 +37,7 @@ export class CategoryAddComponent implements OnInit {
         }
         else {
             this.store.dispatch(addCategory(this.fg.value));
+            this.fg.reset();
         }        
     }
 

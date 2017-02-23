@@ -12,22 +12,14 @@ namespace BookStoreAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class author
+    public partial class user
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public author()
-        {
-            this.books = new HashSet<book>();
-        }
-    
         public int id { get; set; }
+        public string user_name { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
-        public string description { get; set; }
+        public string password { get; set; }
         public byte[] row_version { get; set; }
         public Nullable<System.DateTimeOffset> created_on { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<book> books { get; set; }
     }
 }

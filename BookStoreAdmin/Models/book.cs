@@ -12,22 +12,24 @@ namespace BookStoreAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class author
+    public partial class book
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public author()
+        public book()
         {
-            this.books = new HashSet<book>();
+            this.authors = new HashSet<author>();
         }
     
         public int id { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
+        public string title { get; set; }
         public string description { get; set; }
+        public int fk_category_id { get; set; }
+        public decimal price { get; set; }
         public byte[] row_version { get; set; }
-        public Nullable<System.DateTimeOffset> created_on { get; set; }
+        public System.DateTimeOffset created_on { get; set; }
     
+        public virtual category category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<book> books { get; set; }
+        public virtual ICollection<author> authors { get; set; }
     }
 }

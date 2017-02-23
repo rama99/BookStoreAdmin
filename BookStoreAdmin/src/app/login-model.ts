@@ -5,6 +5,8 @@
 
 
 export interface LoginResponseModel {
+    userName?: string;
+    fullName?: string;
     isValidUser: boolean;
     errorMessage: string;
 }
