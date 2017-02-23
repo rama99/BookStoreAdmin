@@ -1,5 +1,5 @@
 import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule , Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 
@@ -54,7 +54,7 @@ import { UserService } from './user.service';
         EffectsModule.run(CategoryEffects)*/
     ],
     declarations: [AppComponent, AboutComponent, HomeComponent, LoginComponent],
-    providers: [canActivateGuard, CategoryService, BookService, UserService],
+    providers: [canActivateGuard, CategoryService, BookService, UserService, Title],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

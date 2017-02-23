@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute , Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { UserActionTypes, validateUser, validateUserSuccess } from './actions';
 import { StoreModel } from './StoreModel';
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
         private fb: FormBuilder,
         private store: Store<StoreModel>,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private title:Title
 
     ) {}
 
@@ -31,6 +33,8 @@ export class LoginComponent implements OnInit {
             "userName": ["", Validators.compose([Validators.required])],
             "password": ["", Validators.compose([Validators.required])]
         })
+
+        this.title.setTitle('Login');
     }
 
     validateLogin() {

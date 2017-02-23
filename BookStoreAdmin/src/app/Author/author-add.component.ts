@@ -1,5 +1,5 @@
 ﻿import { Component , OnInit , ViewChild , ElementRef} from '@angular/core';
-
+import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { addAuthor } from './actions';
@@ -22,7 +22,8 @@ export class AuthorAddComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         public store: Store<{}>,
-        private router:Router
+        private router: Router,
+        private titleService: Title
     ) { }
 
     ngOnInit() {
@@ -32,6 +33,7 @@ export class AuthorAddComponent implements OnInit {
             "last_name": ["", Validators.compose([Validators.required, Validators.maxLength(50)])],
             "description": ["", Validators.compose([Validators.required, Validators.maxLength(2000)])]
         })
+       
     }
 
     addAuthor() {
