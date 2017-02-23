@@ -16,7 +16,7 @@ export class AuthorService {
 
     loadAuthors(): Observable<AuthorModel[]> {      
 
-        return this.http.get('http://localhost:57599/author/GetBooks')
+        return this.http.get('http://localhost:57599/author/GetAuthors')
             .map((data) => data.json()); 
        
     }

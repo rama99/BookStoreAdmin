@@ -22,6 +22,6 @@ export class BookListComponent {
     }
 
     ngOnInit() {
-        this.store.dispatch(loadBooks());
+        
     }
 }

@@ -11,17 +11,19 @@ namespace BookStoreAdmin.Controllers
 {
     public class BookController : Controller
     {
-        // GET: Book
+        // template
         public ActionResult Index()
         {
             return View();
         }
 
+        // template
         public ActionResult List()
         {
             return View();
         }
 
+        // template
         public ActionResult Add()
         {
             return View();
@@ -32,5 +34,20 @@ namespace BookStoreAdmin.Controllers
         {
             return Json(BookStoreAdmin.BAL.Book.GetBookDetails(), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult AddBook(BookStoreAdmin.ViewModels.BookRequest bookRequest)
+        {
+
+            try
+            {
+                BookStoreAdmin.BAL.Book.AddBook(bookRequest);
+                return Json(bookRequest, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+            }
+        } 
     }
 }

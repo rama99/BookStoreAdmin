@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-
+<h2>Add Book</h2>
 <form [formGroup]="fg" (ngSubmit)="addBook()">
     <div class="form-group">
         <label>Title</label>
@@ -14,20 +14,22 @@
     </div>
     <div class="form-group">
         <label>Category</label>
-        <select formControlName="category" class="form-control">
-            <option value="">Select an Author</option>
-            <option value="author.id" *ngFor="let author of (authors$ | async)?.authors">
-                {{ author?.first_name }}&nbsp;&nbsp; {{ author?.last_name }}
+        <select formControlName="category" class="form-control" >
+            <option value="">Select a Category</option>
+            <option [value]="category.id" *ngFor="let category of (categories$ | async)?.categories">
+                {{category?.name}}
             </option>
         </select>
     </div>
     <div class="form-group">
         <label>Authors</label>
-        <select formControlName="authors" class="form-control" multiple>            
-            <option value="category.id" *ngFor="let category of (categories$ | async)?.categories">
-                {{category?.name}} 
+        <select formControlName="authors" class="form-control" multiple>
+            <option value="">Select an Author</option>
+            <option [value]="author.id" *ngFor="let author of (authors$ | async)?.authors">
+                {{ author?.first_name }}&nbsp;&nbsp; {{ author?.last_name }}
             </option>
         </select>
+
     </div>
     <div class="form-group">
         <label>Price</label>

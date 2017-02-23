@@ -24,7 +24,7 @@ namespace BookStoreAdmin.BAL
                     {
                         id = author.id,
                         description = author.description,
-                        first_name = author.description,
+                        first_name = author.first_name,
                         last_name = author.last_name
                     }).ToList(),
                     price = book.price
@@ -33,6 +33,37 @@ namespace BookStoreAdmin.BAL
 
                 return books;
             }
-        } 
+        }
+        
+        public static void AddBook(BookStoreAdmin.ViewModels.BookRequest objBookRequest)
+        {
+            BookStoreAdmin.Models.book book = new book();
+
+            
+                using (BookStoreAdmin.Models.BookStoreAdminEntities1 context = new BookStoreAdminEntities1())
+                {
+                    book.title = objBookRequest.title;
+                    book.description = objBookRequest.description;
+                    book.fk_category_id = objBookRequest.category;
+                    book.price = objBookRequest.price;
+
+                    foreach (int authorId in objBookRequest.authors)
+                    {
+                        book.authors.Add(new Models.author() { id = authorId });
+                    }
+                    book.created_on = new DateTimeOffset();
+
+                    context.books.Add(book);
+
+                    foreach (BookStoreAdmin.Models.author author in book.authors)
+                    {
+                        context.Entry(author).State = System.Data.Entity.EntityState.Unchanged;
+                    }
+
+                    context.SaveChanges();
+                }
+          
+            
+        }
     }
 }

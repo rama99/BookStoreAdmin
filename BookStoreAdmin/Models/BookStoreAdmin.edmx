@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BookStoreAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BookStoreAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="author">
           <Key>
             <PropertyRef Name="id" />
@@ -28,8 +28,6 @@
           <Property Name="row_version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
           <Property Name="created_on" Type="datetimeoffset" Precision="7" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BookStoreAdmin.dbo.book_author' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="book_author">
           <Key>
             <PropertyRef Name="fk_author_id" />
@@ -99,14 +97,9 @@ warning 6002: The table/view 'BookStoreAdmin.dbo.book_author' does not have a pr
         <EntityContainer Name="BookStoreAdminModelStoreContainer">
           <EntitySet Name="author" EntityType="Self.author" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="book" EntityType="Self.book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="book_author" EntityType="Self.book_author" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="book_author" EntityType="Self.book_author" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [book_author].[fk_author_id] AS [fk_author_id], 
-    [book_author].[fk_book_id] AS [fk_book_id]
-    FROM [dbo].[book_author] AS [book_author]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_book_author_author" Association="Self.FK_book_author_author">
             <End Role="author" EntitySet="author" />
             <End Role="book_author" EntitySet="book_author" />
@@ -120,8 +113,7 @@ warning 6002: The table/view 'BookStoreAdmin.dbo.book_author' does not have a pr
             <End Role="book" EntitySet="book" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BookStoreAdminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

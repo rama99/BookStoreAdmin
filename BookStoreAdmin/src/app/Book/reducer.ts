@@ -23,7 +23,7 @@ export function reducer(state: State = initialState, action: Action):State {
                 currentPage: 0,
                 books: action.payload
             }
-        case BookActionTypes.ADD_BOOK_SUCCESS:           
+        case BookActionTypes.ADD_BOOK_SUCCESS:
             /*
 
              let xx = {
@@ -38,10 +38,11 @@ export function reducer(state: State = initialState, action: Action):State {
                 currentPage: state.currentPage,
                 books: state.books.concat(action.payload)
 
-                 //state.authors.concat(action.payload)
+                //state.authors.concat(action.payload)
             };
-            
-            return xx;
+
+            //return xx;
+            return state;
     }
 
 }

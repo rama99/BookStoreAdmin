@@ -3,7 +3,29 @@
     Layout = null;
 }
 
-{{ store.select('books') | async | json }}
+<div *ngFor="let book of (store.select('books') | async)?.books">
+    <div class="col-md-1"><strong>Title</strong></div>
+    <div class="col-md-11"> {{book.title}}</div>
+
+    <div class="col-md-1"><strong>Authors</strong></div>
+    <div class="col-md-11">
+     <span *ngFor="let author of book.authors">
+         {{ author.first_name }} {{ author.last_name }},
+     </span>        
+    </div>
+
+    <div class="col-md-1"><strong>Category</strong></div>
+    <div class="col-md-11">{{ book.category.name }}</div>
+
+    <div class="col-md-1"><strong>Price</strong></div>
+    <div class="col-md-11">{{ book.price }}</div> 
+    
+    <div class="col-md-1"><strong>Description:</strong></div>   
+    <div class="col-md-11">
+      {{book.description}}
+    </div>
+    <br />&nbsp;  
+</div>
 
 <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 <book-add></book-add>

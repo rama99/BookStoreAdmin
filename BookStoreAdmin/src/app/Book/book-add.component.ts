@@ -11,6 +11,7 @@ import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 
 import { loadAuthors } from '../author/actions';
 import { loadCatgories } from '../Category/actions';
+import { loadBooks } from '../book/actions';
 
 @Component({
     selector: 'book-add',
@@ -43,10 +44,11 @@ export class BookAddComponent implements OnInit {
             "price": [, Validators.compose([Validators.required])]
         });
 
-      this.store.dispatch(loadAuthors());
         this.store.dispatch(loadCatgories());
+        this.store.dispatch(loadAuthors());       
+        this.store.dispatch(loadBooks());
         this.authors$ = this.store.select('authors');
-        this.categories$ = this.store.select('categories');
+        this.categories$ = this.store.select('categories'); 
     }
 
     addBook() {

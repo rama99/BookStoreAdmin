@@ -17,7 +17,7 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
-        public ActionResult GetBooks()
+        public ActionResult GetAuthors()
         {
             List<BookStoreAdmin.ViewModels.Author> authors = BookStoreAdmin.BAL.Author.GetAuthors();
             return Json(authors, JsonRequestBehavior.AllowGet);
