@@ -1,4 +1,4 @@
-﻿import { Component , OnInit , ViewChild , ElementRef} from '@angular/core';
+﻿import { Component , OnInit , ViewChild , ElementRef , Renderer , AfterViewInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -13,17 +13,19 @@ import { ActivatedRoute , Router } from '@angular/router';
 })
 
 
-export class AuthorAddComponent implements OnInit {
+export class AuthorAddComponent implements OnInit, AfterViewInit{
 
     error: string;
     fg: FormGroup;
     @ViewChild('staticModal') model: any;
+    @ViewChild('firstName') firstName: ElementRef;
 
     constructor(
         private formBuilder: FormBuilder,
         public store: Store<{}>,
         private router: Router,
-        private titleService: Title
+        private titleService: Title,
+        private renderer: Renderer
     ) { }
 
     ngOnInit() {
@@ -34,6 +36,10 @@ export class AuthorAddComponent implements OnInit {
             "description": ["", Validators.compose([Validators.required, Validators.maxLength(2000)])]
         })
        
+    }
+
+    ngAfterViewInit() {
+        this.renderer.invokeElementMethod(this.firstName.nativeElement, 'focus');
     }
 
     addAuthor() {

@@ -1,4 +1,4 @@
-﻿import { Component , OnInit , ViewChild } from '@angular/core';
+﻿import { Component , OnInit , ViewChild  , Renderer , AfterViewInit , ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { addCategory } from './actions';
@@ -9,15 +9,22 @@ import { addCategory } from './actions';
 
 })
 
-export class CategoryAddComponent implements OnInit {
+export class CategoryAddComponent implements OnInit , AfterViewInit {
 
     fg: FormGroup;
-    @ViewChild('staticModal') modal:any
+    @ViewChild('staticModal') modal: any
+    @ViewChild('name') name: ElementRef; 
+
     constructor(
         private fb: FormBuilder,
-        public store:Store<{}>
+        public store: Store<{}>,
+        private renderer:Renderer
     ) {
 
+    }
+
+    ngAfterViewInit() {
+        this.renderer.invokeElementMethod(this.name.nativeElement, 'focus');
     }
 
     ngOnInit() {

@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit , AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.renderer.invokeElementMethod(this.userName.nativeElement, 'focus');
+        this.renderer.invokeElementMethod(this.userName.nativeElement, 'focus');        
     }
 
     validateLogin() {

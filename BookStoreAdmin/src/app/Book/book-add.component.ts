@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ViewChild } from '@angular/core';
+﻿import { Component, OnInit, ViewChild , Renderer , ElementRef , AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from '@ngrx/store';
@@ -19,18 +19,24 @@ import { loadBooks } from '../book/actions';
 
 })
 
-export class BookAddComponent implements OnInit {
+export class BookAddComponent implements OnInit , AfterViewInit{
 
     public fg: FormGroup;
     public authors$: Observable<AuthorModel>;
     public categories$: Observable<CategoryModel>;
 
     @ViewChild('staticModal') model: any;
+    @ViewChild('title') title: ElementRef;
 
     constructor(
         private fb: FormBuilder,
-        public store: Store<{}>) {
+        public store: Store<{}>,
+        private renderer: Renderer) {
 
+    }
+
+    ngAfterViewInit() {
+        this.renderer.invokeElementMethod(this.title.nativeElement, 'focus');
     }
 
     ngOnInit() {
