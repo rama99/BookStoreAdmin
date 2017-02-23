@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit , ViewChild , AfterViewInit , ElementRef , Renderer } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,17 +13,19 @@ import { LoginResponseModel } from './login-model';
     templateUrl:'/user/login'
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit , AfterViewInit {
 
     formgroup: FormGroup;
     errorMessage: string;
+    @ViewChild('userName') userName: ElementRef;
 
     constructor(
         private fb: FormBuilder,
         private store: Store<StoreModel>,
         private route: ActivatedRoute,
         private router: Router,
-        private title:Title
+        private title: Title,
+        private renderer: Renderer
 
     ) {}
 
@@ -35,6 +37,10 @@ export class LoginComponent implements OnInit {
         })
 
         this.title.setTitle('Login');
+    }
+
+    ngAfterViewInit() {
+        this.renderer.invokeElementMethod(this.userName.nativeElement, 'focus');
     }
 
     validateLogin() {
