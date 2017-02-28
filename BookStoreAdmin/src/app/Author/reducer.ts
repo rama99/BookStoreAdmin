@@ -19,12 +19,16 @@ export function reducer(state: State = initialState, action: Action) {
        /* case AuthorActionTypes.LOAD_AUTHORS:
             return state; */
         case AuthorActionTypes.LOAD_AUTHORS_SUCCESS:
-
-          //  alert(action.payload.length);
+            
               return {
                   currentPage: 0,
                   authors:action.payload
-              }
+            }
+        case AuthorActionTypes.LOAD_ALL_SUCCESS:
+            return {
+                currentPage: state.currentPage,
+                authors: action.payload.authors
+            }
         case AuthorActionTypes.ADD_AUTHOR_SUCCESS:
 
 

@@ -35,6 +35,17 @@ namespace BookStoreAdmin.Controllers
             return Json(BookStoreAdmin.BAL.Book.GetBookDetails(), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetBooks1()
+        {
+            BookStoreAdmin.ViewModels.BooksListAndAdd obj = new BookStoreAdmin.ViewModels.BooksListAndAdd();
+            obj.authors = BookStoreAdmin.BAL.Author.GetAuthors();
+            obj.categories = BookStoreAdmin.BAL.Category.GetCategories();
+            obj.books = BookStoreAdmin.BAL.Book.GetBookDetails();
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
+
+        }
+
         [HttpPost]
         public ActionResult AddBook(BookStoreAdmin.ViewModels.BookRequest bookRequest)
         {

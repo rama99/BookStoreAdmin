@@ -3,7 +3,7 @@ import { Http , Headers , RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
-import { BookModel } from './book/book-model';
+import { BookModel , BookCategoryAuthorModel } from './book/book-model';
 
 
 @Injectable()
@@ -23,6 +23,12 @@ export class BookService {
             .map((data) => data.json());
 
         //return Observable.of(data);
+    }
+
+    loadBookCategoryAuthor(): Observable<BookCategoryAuthorModel> {
+
+        return this.http.get('http://localhost:57599/book/getbooks1')
+            .map((data) => data.json());
     }
 
     addBook(book: BookModel): Observable<BookModel> {

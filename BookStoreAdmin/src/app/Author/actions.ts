@@ -1,5 +1,6 @@
 ﻿import { Action } from '@ngrx/store';
 import { AuthorModel } from './author-model';
+import {BookCategoryAuthorModel } from '../book/book-model';
 
 // Action Types
 export const AuthorActionTypes = {
@@ -9,6 +10,8 @@ export const AuthorActionTypes = {
     EDIT_AUTHOR: 'EDIT_AUTHOR',
     LOAD_AUTHORS_SUCCESS: 'LOAD_AUTHORS_SUCCESS',
     ADD_AUTHOR_SUCCESS: 'ADD_AUTHOR_SUCCESS',
+    LOAD_ALL: 'LOAD_ALL',
+    LOAD_ALL_SUCCESS:'LOAD_ALL_SUCCESS'
 }
 
 // Actions
@@ -20,7 +23,7 @@ export function loadAuthors():Action {
 }
 
 export function loadAuthorsSuccess(authors: AuthorModel[]): Action {
-
+    
     return {
         type: AuthorActionTypes.LOAD_AUTHORS_SUCCESS,
         payload:authors
@@ -40,3 +43,10 @@ export function addAuthorSuccess(author: AuthorModel): Action {
         payload: author
     }
 }
+
+/*export function loadAllSuccess(all: BookCategoryAuthorModel): Action {
+    return {
+        type: AuthorActionTypes.LOAD_ALL_SUCCESS,
+        payload: all.books
+    }
+}*/

@@ -23,6 +23,11 @@ export function reducer(state: State = initialState, action: Action):State {
                 currentPage: 0,
                 books: action.payload
             }
+        case BookActionTypes.LOAD_ALL_SUCCESS:
+            return {
+                currentPage: state.currentPage,
+                books: action.payload.books
+            }
         case BookActionTypes.ADD_BOOK_SUCCESS:
             /*
 

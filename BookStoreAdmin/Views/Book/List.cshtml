@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-
+<h2>Books List</h2>
 <div *ngFor="let book of (store.select('books') | async)?.books">
     <div class="col-md-1"><strong>Title</strong></div>
     <div class="col-md-11"> {{book.title}}</div>

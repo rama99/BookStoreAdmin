@@ -24,4 +24,11 @@ namespace BookStoreAdmin.ViewModels
         public List<int> authors { get; set; }
         public decimal price { get; set; }
     }
+
+    public class BooksListAndAdd
+    {
+        public List<Book> books { get; set; }
+        public List<Author> authors { get; set; }
+        public List<Category> categories { get; set; }
+    }
 }

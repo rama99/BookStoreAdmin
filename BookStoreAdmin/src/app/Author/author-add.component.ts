@@ -1,9 +1,10 @@
-﻿import { Component , OnInit , ViewChild , ElementRef , Renderer , AfterViewInit } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, ElementRef, Renderer, AfterViewInit, ViewContainerRef} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { addAuthor } from './actions';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
+import { addAuthor } from './actions';
 import { ActivatedRoute , Router } from '@angular/router';
 
 @Component({
@@ -25,8 +26,14 @@ export class AuthorAddComponent implements OnInit, AfterViewInit{
         public store: Store<{}>,
         private router: Router,
         private titleService: Title,
-        private renderer: Renderer
-    ) { }
+        private renderer: Renderer,
+        public toastr: ToastsManager,
+        vcr: ViewContainerRef
+    ) 
+    {
+        // Use with angular v2.2 or above
+        this.toastr.setRootViewContainerRef(vcr);
+    }
 
     ngOnInit() {
         this.fg = this.formBuilder.group({
@@ -51,6 +58,7 @@ export class AuthorAddComponent implements OnInit, AfterViewInit{
         }
         else {
             this.store.dispatch(addAuthor(this.fg.value));
+            this.toastr.success('Added!!');
             this.fg.reset();
         }
     }

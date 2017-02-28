@@ -1,4 +1,4 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , OnInit , DoCheck } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StoreModel } from './storemodel';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import { LoginResponseModel } from './login-model';
 })
 
 
-export class AppComponent  {
+export class AppComponent implements OnInit , DoCheck{
 
     public blnDisplayMenu: boolean;
 
@@ -23,9 +23,14 @@ export class AppComponent  {
     }
 
     ngOnInit() {
+
         this.store.select('user').subscribe(
             (data: LoginResponseModel) => { this.blnDisplayMenu = data.isValidUser }
-        )
+        );
+    }
+
+    ngDoCheck() {    
+
     }
 
     logOut() {

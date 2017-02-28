@@ -10,3 +10,11 @@ export interface BookModel {
     authors: AuthorModel[];
     price: number;
 }
+
+export interface BookCategoryAuthorModel {
+
+    books: BookModel[];
+    authors: AuthorModel[];
+    categories: CategoryModel[]
+
+}

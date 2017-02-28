@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 //import { StoreModule } from '@ngrx/store';
 //import { EffectsModule } from '@ngrx/effects';
 
@@ -46,7 +47,8 @@ import { AuthorService } from './author.service';
             authors: authorReducer
         }),
         EffectsModule.run(AuthorEffects) , */
-        AccordionModule.forRoot()
+        AccordionModule.forRoot(),
+        ToastModule.forRoot()
               ],
     exports: [],
     declarations: [AuthorMainComponent,
