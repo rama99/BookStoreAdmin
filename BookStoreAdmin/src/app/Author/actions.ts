@@ -1,6 +1,8 @@
 ﻿import { Action } from '@ngrx/store';
 import { AuthorModel } from './author-model';
-import {BookCategoryAuthorModel } from '../book/book-model';
+import { BookCategoryAuthorModel } from '../book/book-model';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ViewContainerRef } from '@angular/core';
 
 // Action Types
 export const AuthorActionTypes = {
@@ -23,7 +25,7 @@ export function loadAuthors():Action {
 }
 
 export function loadAuthorsSuccess(authors: AuthorModel[]): Action {
-    
+   
     return {
         type: AuthorActionTypes.LOAD_AUTHORS_SUCCESS,
         payload:authors
@@ -38,6 +40,9 @@ export function addAuthor(author:AuthorModel): Action {
 }
 
 export function addAuthorSuccess(author: AuthorModel): Action {
+
+    console.log('1');
+
     return {
         type: AuthorActionTypes.ADD_AUTHOR_SUCCESS,
         payload: author

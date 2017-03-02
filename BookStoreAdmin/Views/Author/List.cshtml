@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-
+<h2> Author List</h2>
 <accordion>
     <accordion-group #group *ngFor="let author of (store.select('authors') | async)?.authors">
         <div accordion-heading>

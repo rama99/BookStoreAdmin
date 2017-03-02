@@ -5,7 +5,8 @@ import { Store } from '@ngrx/store';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { addAuthor } from './actions';
-import { ActivatedRoute , Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthorModel } from './author-model';
 
 @Component({
     selector: 'author-add',
@@ -58,8 +59,17 @@ export class AuthorAddComponent implements OnInit, AfterViewInit{
         }
         else {
             this.store.dispatch(addAuthor(this.fg.value));
-            this.toastr.success('Added!!');
-            this.fg.reset();
+
+          //  console.log('2')
+
+            this.store.subscribe(() => console.log(2));
+
+          /*  this.store.select("authors").subscribe(
+                (data: AuthorModel[]) => { alert( 'Total Reords' + data.length); }
+            );
+
+            this.toastr.success('2Added!!');
+            this.fg.reset(); */
         }
     }
 
