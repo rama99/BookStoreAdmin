@@ -37,11 +37,11 @@ export function addCategory(category: CategoryModel): Action {
 }
 
 
-export function addCategorySuccess(category: CategoryModel): Action {
+export function addCategorySuccess(data: any): Action {
 
     return {
         type: CategoryActionTypes.ADD_CATEGORY_SUCCESS,
-        payload: category
+        payload: data.data
     }
 }
 

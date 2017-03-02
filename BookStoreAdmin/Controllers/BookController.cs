@@ -37,28 +37,32 @@ namespace BookStoreAdmin.Controllers
 
         public ActionResult GetBooks1()
         {
+            BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.BooksListAndAdd> response = new Response<ViewModels.BooksListAndAdd>();
+
             BookStoreAdmin.ViewModels.BooksListAndAdd obj = new BookStoreAdmin.ViewModels.BooksListAndAdd();
             obj.authors = BookStoreAdmin.BAL.Author.GetAuthors();
             obj.categories = BookStoreAdmin.BAL.Category.GetCategories();
             obj.books = BookStoreAdmin.BAL.Book.GetBookDetails();
 
-            return Json(obj, JsonRequestBehavior.AllowGet);
+            response.data = obj;
+            response.success = true;
+            response.errorMessage = null;
+
+
+            return Json(response, JsonRequestBehavior.AllowGet);
 
         }
 
         [HttpPost]
         public ActionResult AddBook(BookStoreAdmin.ViewModels.BookRequest bookRequest)
         {
+            BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.Book> response = new ViewModels.Response<BookStoreAdmin.ViewModels.Book>();
 
-            try
-            {
-                BookStoreAdmin.BAL.Book.AddBook(bookRequest);
-                return Json(bookRequest, JsonRequestBehavior.AllowGet);
-            }
-            catch(Exception ex)
-            {
-                return Json(ex, JsonRequestBehavior.AllowGet);
-            }
+            response.data = BookStoreAdmin.BAL.Book.AddBook(bookRequest);
+            response.success = true;
+            response.errorMessage = null;
+            return Json(response, JsonRequestBehavior.AllowGet);
+            
         } 
     }
 }

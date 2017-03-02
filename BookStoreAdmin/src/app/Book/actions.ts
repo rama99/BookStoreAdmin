@@ -41,11 +41,11 @@ export function loadBookAuthorCategory(): Action {
     }
 }
 
-export function loadBookAuthorCategorySuccess(data: BookCategoryAuthorModel): Action {
+export function loadBookAuthorCategorySuccess(data: any): Action {
 
     return {
         type: BookActionTypes.LOAD_BOOKS_AUTHORS_CATEGORIES_SUCCESS,
-        payload:data
+        payload:data.data
     }
 
 }
@@ -59,11 +59,11 @@ export function addBook(book: BookModel): Action {
 
 }
 
-export function addBookSuccess(book: BookModel): Action {
+export function addBookSuccess(data: any): Action {
 
     return {
         type: BookActionTypes.ADD_BOOK_SUCCESS,
-        payload:book
+        payload:data.data
     }
 }
 

@@ -20,7 +20,14 @@ namespace BookStoreAdmin.Controllers
         public ActionResult GetCategories()
         {
             List<BookStoreAdmin.ViewModels.Category> categories = BookStoreAdmin.BAL.Category.GetCategories();
-            return Json(categories, JsonRequestBehavior.AllowGet);
+
+            BookStoreAdmin.ViewModels.Response<List<BookStoreAdmin.ViewModels.Category>> response = new Response<List<ViewModels.Category>>();
+
+            response.success = true;
+            response.errorMessage = null;
+            response.data = categories;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult List()
@@ -37,8 +44,15 @@ namespace BookStoreAdmin.Controllers
         [HttpPost]
         public ActionResult AddCategory(BookStoreAdmin.ViewModels.Category category)
         {
+            BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.Category> response = new ViewModels.Response<BookStoreAdmin.ViewModels.Category>();
+
             category = BookStoreAdmin.BAL.Category.AddCategory(category);
-            return Json(category, JsonRequestBehavior.AllowGet);
+
+            response.success = true;
+            response.data = category;
+            response.errorMessage = null;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         } 
     }
 }

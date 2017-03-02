@@ -39,12 +39,14 @@ export class CategoryAddComponent implements OnInit , AfterViewInit {
 
     addCategory() {       
 
+        alert(JSON.stringify(this.fg.value));
+
         if (this.fg.invalid) {
             this.modal.show();
         }
         else {
             this.store.dispatch(addCategory(this.fg.value));
-            this.fg.reset();
+           // this.fg.reset();
         }        
     }
 

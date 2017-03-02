@@ -21,16 +21,13 @@ namespace BookStoreAdmin.Controllers
         {
             List<BookStoreAdmin.ViewModels.Author> authors = BookStoreAdmin.BAL.Author.GetAuthors();
 
-            var response = new Response<List<BookStoreAdmin.ViewModels.Author>>()
-            {
-                success = true,
-                errorMessage = "dsfdf",
-                data = authors
-            };
+            BookStoreAdmin.ViewModels.Response<List<BookStoreAdmin.ViewModels.Author>> response = new Response<List<ViewModels.Author>>();
 
-            //  Response.StatusCode = 400;
-            //  return Json(response, JsonRequestBehavior.AllowGet);
-            return Json(authors, JsonRequestBehavior.AllowGet);
+            response.success = true;
+            response.errorMessage = null;
+            response.data = authors;
+          
+            return Json(response, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -48,8 +45,14 @@ namespace BookStoreAdmin.Controllers
         [HttpPost]
         public ActionResult AddAuthor(BookStoreAdmin.ViewModels.Author author)
         {
+            BookStoreAdmin.ViewModels.Response< BookStoreAdmin.ViewModels.Author> response = new ViewModels.Response<BookStoreAdmin.ViewModels.Author>();
             author = BookStoreAdmin.BAL.Author.AddAuthor(author);
-            return Json(author, JsonRequestBehavior.AllowGet);
+
+            response.success = true;
+            response.data = author;
+            response.errorMessage = null;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
     }
     

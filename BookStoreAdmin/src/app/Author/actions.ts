@@ -8,12 +8,19 @@ import { ViewContainerRef } from '@angular/core';
 export const AuthorActionTypes = {
 
     LOAD_AUTHORS: 'LOAD_AUTHORS',
-    ADD_AUTHOR: 'ADD_AUTHOR',
-    EDIT_AUTHOR: 'EDIT_AUTHOR',
     LOAD_AUTHORS_SUCCESS: 'LOAD_AUTHORS_SUCCESS',
+    LOAD_AUTHORS_ERROR: 'LOAD_AUTHORS_ERROR',
+
+    ADD_AUTHOR: 'ADD_AUTHOR',
     ADD_AUTHOR_SUCCESS: 'ADD_AUTHOR_SUCCESS',
+    ADD_AUTHOR_ERROR:'ADD_AUTHOR_ERROR',
+
+    EDIT_AUTHOR: 'EDIT_AUTHOR',
+    
+    
     LOAD_ALL: 'LOAD_ALL',
-    LOAD_ALL_SUCCESS:'LOAD_ALL_SUCCESS'
+    LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS',
+    LOAD_ALL_ERROR: 'LOAD_ALL_ERROR'
 }
 
 // Actions
@@ -32,6 +39,14 @@ export function loadAuthorsSuccess(authors: AuthorModel[]): Action {
     }
 }
 
+export function loadAuthorsError(errors: string[]): Action {
+
+    return {
+        type: AuthorActionTypes.LOAD_AUTHORS_ERROR,
+        payload:errors
+    }
+}
+
 export function addAuthor(author:AuthorModel): Action {
     return {
         type: AuthorActionTypes.ADD_AUTHOR,
@@ -39,19 +54,11 @@ export function addAuthor(author:AuthorModel): Action {
     }
 }
 
-export function addAuthorSuccess(author: AuthorModel): Action {
-
-    console.log('1');
+export function addAuthorSuccess(data: any): Action {    
 
     return {
         type: AuthorActionTypes.ADD_AUTHOR_SUCCESS,
-        payload: author
+        payload: data.data
     }
 }
 
-/*export function loadAllSuccess(all: BookCategoryAuthorModel): Action {
-    return {
-        type: AuthorActionTypes.LOAD_ALL_SUCCESS,
-        payload: all.books
-    }
-}*/

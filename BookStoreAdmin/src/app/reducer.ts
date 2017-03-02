@@ -6,11 +6,13 @@ import { UserActionTypes } from './actions';
 export interface State {
     isValidUser: boolean;
     userName: string;
+    errors: string[];
 }
 
 const initialState: State = {
     isValidUser: false,
-    userName:null
+    userName: null,
+    errors: []
 }
 
 
@@ -23,7 +25,7 @@ export function reducer(state: State = initialState, action: Action):State {
         case UserActionTypes.VALIDATE_USER_SUCCESS:
             return Object.assign({}, action.payload);
         case UserActionTypes.LOGOUT_SUCCESS:
-            return Object.assign({}, { isValidUser: false, userName: null } );
+            return Object.assign({}, state , { isValidUser: false, userName: null } );
         default:
             return state;    
     }

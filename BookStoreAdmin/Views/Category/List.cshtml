@@ -6,11 +6,11 @@
 <accordion>
     <accordion-group #group *ngFor="let category of (store.select('categories') | async)?.categories">
         <div accordion-heading>
-            <h4>Author Name :</h4> {{category.name}}
+            <h4>Category Name :</h4> {{category.name}}
             <i class="pull-right float-xs-right glyphicon"
                [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
         </div>
-        <h4>About Author :</h4> {{category.description}}
+        <h4>Description :</h4> {{category.description}}
         &nbsp;<br /><br /><br />
     </accordion-group>
 
