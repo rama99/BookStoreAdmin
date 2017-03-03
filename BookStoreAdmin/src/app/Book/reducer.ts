@@ -17,25 +17,28 @@ const initialState: State = {
 
 export function reducer(state: State = initialState, action: Action):State {
 
-    switch (action.type) {
+    try {
+        switch (action.type) {
 
-        case BookActionTypes.LOAD_BOOKS_SUCCESS: 
+            /* case BookActionTypes.LOAD_BOOKS_SUCCESS:
+     
+                 let xx2 = Object.assign({}, state, { books: action.payload }); 
+                 return xx2;*/
 
-            return Object.assign({}, state, { books: action.payload })
+            case BookActionTypes.LOAD_ALL_SUCCESS:
 
-        case BookActionTypes.LOAD_ALL_SUCCESS:
-            return Object.assign({}, state, { books: action.payload.data.books });
-        case BookActionTypes.ADD_BOOK_SUCCESS:          
+                let xx1 = Object.assign({}, state, { books: action.payload.data.books });               
+                return xx1;
 
-            let books = state.books.concat(action.payload);
+            case BookActionTypes.ADD_BOOK_SUCCESS:            
 
-            let xx = {
-                currentPage: state.currentPage,
-                books: books,
-                errors: state.errors
-            };
+                return Object.assign({}, state, { books: state.books.concat(action.payload) });
 
-            return xx;        
+            default: return state;
+        }
+    }
+    catch (err) {
+        alert('error');
     }
 
 }

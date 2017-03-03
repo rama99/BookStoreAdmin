@@ -48,11 +48,7 @@ export class BookAddComponent implements OnInit , AfterViewInit{
             "category": ["", Validators.compose([Validators.required])],
             "authors": ["", Validators.compose([Validators.required])],
             "price": [, Validators.compose([Validators.required])]
-        });
-
-       /* this.store.dispatch(loadCatgories());
-        this.store.dispatch(loadAuthors());       
-        this.store.dispatch(loadBooks()); */
+        });     
 
         this.store.dispatch(loadBookAuthorCategory());
 
@@ -67,8 +63,7 @@ export class BookAddComponent implements OnInit , AfterViewInit{
             this.model.show();
         }
         else {
-            this.store.dispatch(addBook(this.fg.value));
-            console.log(this.fg.value);
+            this.store.dispatch(addBook(this.fg.value));           
         }
         
     }

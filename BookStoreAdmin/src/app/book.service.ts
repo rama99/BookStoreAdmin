@@ -33,32 +33,13 @@ export class BookService {
 
     addBook(book: BookModel): Observable<BookModel> {
 
-        let headers = new Headers();
-
-        let book1 = {
-            id: 0,
-            title: 'dynamic',
-            description: 'desc here',
-            category: 2,
-            authors: [2, 3],
-            price:1234
-        }
-
-        /*          id: number;
-                    title: string;
-                    description: string;
-                    category: CategoryModel;
-                    authors: AuthorModel[];
-                    price: number;
-
-        */
+        let headers = new Headers();       
 
         headers.append('Content-Type', 'application/json');
 
         return this.http.post('http://localhost:57599/book/AddBook', JSON.stringify(book), { headers: headers })
                         .map(data => data.json());
-
-        //return Observable.of(book);
+       
     }
 
 
