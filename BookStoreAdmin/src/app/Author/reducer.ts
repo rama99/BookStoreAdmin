@@ -44,7 +44,19 @@ export function reducer(state: State = initialState, action: Action) {
             }           
             return xx;
         case AuthorActionTypes.EDIT_AUTHOR_SUCCESS:
-            return state;
+
+            return Object.assign({}, state, {
+                authors: state.authors.map(author => {
+
+                    if (author.id != action.payload.id) {                        
+                        return author;
+                    }
+                    else {                        
+                        return action.payload
+                    }
+                })
+                    });
+            
         default: return state;
     }
 

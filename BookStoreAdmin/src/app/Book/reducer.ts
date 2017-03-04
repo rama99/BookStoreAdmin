@@ -18,21 +18,29 @@ const initialState: State = {
 export function reducer(state: State = initialState, action: Action):State {
 
     try {
-        switch (action.type) {
-
-            /* case BookActionTypes.LOAD_BOOKS_SUCCESS:
-     
-                 let xx2 = Object.assign({}, state, { books: action.payload }); 
-                 return xx2;*/
+        switch (action.type) {          
 
             case BookActionTypes.LOAD_ALL_SUCCESS:
 
-                let xx1 = Object.assign({}, state, { books: action.payload.data.books });               
-                return xx1;
-
+                return Object.assign({}, state, { books: action.payload.data.books });               
+             
             case BookActionTypes.ADD_BOOK_SUCCESS:            
 
                 return Object.assign({}, state, { books: state.books.concat(action.payload) });
+
+            case BookActionTypes.EDIT_BOOK_SUCCESS:
+
+                return Object.assign({}, state, {
+                    categories: state.books.map(book => {
+
+                        if (book.id != action.payload.id) {
+                            return book;
+                        }
+                        else {
+                            return action.payload;
+                        }
+                    })
+                });
 
             default: return state;
         }

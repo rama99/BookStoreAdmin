@@ -10,6 +10,7 @@ import { ModalModule } from 'ng2-bootstrap/modal';
 import { BookMainComponent } from './book-main.component';
 import { BookAddComponent } from './book-add.component';
 import { BookListComponent } from './book-list.component';
+import { BookEditComponent } from './book-edit.component';
 
 @NgModule({
     imports: [CommonModule,
@@ -28,7 +29,7 @@ import { BookListComponent } from './book-list.component';
         ModalModule.forRoot()
     ],
     exports: [],
-    declarations: [BookMainComponent, BookListComponent, BookAddComponent],
+    declarations: [BookMainComponent, BookListComponent, BookAddComponent, BookEditComponent],
     providers:[]
 
 })

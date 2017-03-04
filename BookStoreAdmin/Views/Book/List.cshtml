@@ -30,3 +30,21 @@
 
 <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 <book-add></book-add>
+
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Edit</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <book-edit [book]="editBook" [model]="staticModal"></book-edit>               
+            </div>
+        </div>
+    </div>
+</div>

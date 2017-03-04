@@ -38,7 +38,21 @@ export function reducer(state:State = initialState, action: Action):State {
             errors:[]
             }
         case CategoryActionTypes.EDIT_CATEGORY_SUCCESS:
-            return state;
+
+            return Object.assign({}, state, {
+                categories: state.categories.map(category => {
+
+                    if (category.id != action.payload.id) {                       
+                        return category;
+                    }
+                    else {                        
+                        return action.payload;
+                    }
+                })
+            });
+            
+
+            //return state;
         default: return state;   
     }
 }

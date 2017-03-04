@@ -13,6 +13,10 @@ export const BookActionTypes = {
     ADD_BOOK: 'ADD_BOOK',
     ADD_BOOK_SUCCESS: 'ADD_BOOK_SUCCESS',
 
+    EDIT_BOOK: 'EDIT_BOOK',
+    EDIT_BOOK_SUCCESS: 'EDIT_BOOK_SUCCESS',
+    EDIT_BOOK_ERROR: 'EDIT_BOOK_ERROR',
+
     LOAD_ALL: 'LOAD_ALL',
     LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS'
 }
@@ -64,6 +68,22 @@ export function addBookSuccess(data: any): Action {
     return {
         type: BookActionTypes.ADD_BOOK_SUCCESS,
         payload:data.data
+    }
+}
+
+export function editBook(book: BookModel): Action {
+
+    return {
+        type: BookActionTypes.EDIT_BOOK,
+        payload: book
+    };
+}
+
+export function editBookSuccess(data: any): Action {
+
+    return {
+        type: BookActionTypes.EDIT_BOOK_SUCCESS,
+        payload: data.data
     }
 }
 

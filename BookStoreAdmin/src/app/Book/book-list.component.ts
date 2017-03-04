@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -13,7 +13,9 @@ import { loadBooks } from './actions';
 
 export class BookListComponent {
 
-    books: Observable<BookModel[]>;
+   // books: Observable<BookModel[]>;
+    editBook: BookModel;
+    @ViewChild('staticModal') model: any;
 
     constructor(
         public store: Store<{}>
@@ -26,6 +28,7 @@ export class BookListComponent {
     }
 
     edit(book: BookModel) {
-        alert('TODO');
+        this.editBook = book;
+        this.model.show();
     }
 }

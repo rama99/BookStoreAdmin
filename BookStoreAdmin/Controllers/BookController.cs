@@ -29,6 +29,12 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
+        // template
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
         // GetBooks
         public ActionResult GetBooks()
         {

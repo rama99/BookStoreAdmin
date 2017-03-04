@@ -15,7 +15,7 @@ import { CategoryService } from './category.service';
 import { CategoryActionTypes, loadCategoriesSuccess, addCategorySuccess , editCatgorySuccess } from './category/actions';
 
 import { BookService } from './book.service';
-import { BookActionTypes, loadBooksSuccess, addBook, addBookSuccess, loadBookAuthorCategory, loadAllSuccess  } from './book/actions';
+import { BookActionTypes, loadBooksSuccess, addBook, addBookSuccess, loadBookAuthorCategory, loadAllSuccess , editBookSuccess  } from './book/actions';
 
 import { UserService } from './user.service';
 import { UserActionTypes, validateUser, validateUserSuccess, logOutSuccess, logOut } from './actions';
@@ -90,7 +90,14 @@ export class AppEffects {
         .ofType(BookActionTypes.ADD_BOOK)
         .switchMap((action) => this.bookService.addBook(action.payload)
             .map((book) => addBookSuccess(book))
-        );    
+        );  
+
+    @Effect() editBook$ = this.actions$
+        .ofType(BookActionTypes.EDIT_BOOK)
+        .switchMap(
+        (action) => this.bookService.editBook(action.payload)
+            .map(book => editBookSuccess(book))
+        );  
 
     @Effect() login$ = this.actions$
         .ofType(UserActionTypes.VALIDATE_USER)

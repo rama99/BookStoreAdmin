@@ -42,5 +42,14 @@ export class BookService {
        
     }
 
+    editBook(bookModel: BookModel): Observable<BookModel> {
+
+        let headers: Headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.post('http://localhost:57599/book/EditBook', JSON.stringify(bookModel), { headers: headers })
+            .map(data => data.json());
+    }
+
 }
 
