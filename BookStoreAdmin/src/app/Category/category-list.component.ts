@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -12,8 +12,9 @@ import { loadCatgories } from './actions';
 })
 
 export class CategoryListComponent {
-
-    categories: Observable<CategoryModel[]>;
+    
+    @ViewChild('staticModal') model: any;
+    editCategory: CategoryModel;
 
     constructor(        
         public store: Store<{}>
@@ -23,5 +24,10 @@ export class CategoryListComponent {
 
     ngOnInit() {
         this.store.dispatch(loadCatgories());
+    }
+
+    edit(category: CategoryModel) {
+        this.editCategory = category;
+        this.model.show();
     }
 }

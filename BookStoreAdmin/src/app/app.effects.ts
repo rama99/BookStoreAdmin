@@ -8,11 +8,11 @@ import { Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 
 import { AuthorService } from './author/author.service';
-import { AuthorActionTypes, loadAuthorsSuccess, loadAuthorsError , addAuthorSuccess } from './author/actions';
+import { AuthorActionTypes, loadAuthorsSuccess, loadAuthorsError , addAuthorSuccess , editAuthorSuccess} from './author/actions';
 
 import { CategoryService } from './category.service';
 
-import { CategoryActionTypes, loadCategoriesSuccess, addCategorySuccess } from './category/actions';
+import { CategoryActionTypes, loadCategoriesSuccess, addCategorySuccess , editCatgorySuccess } from './category/actions';
 
 import { BookService } from './book.service';
 import { BookActionTypes, loadBooksSuccess, addBook, addBookSuccess, loadBookAuthorCategory, loadAllSuccess  } from './book/actions';
@@ -32,17 +32,12 @@ export class AppEffects {
         private bookService: BookService,
         private userService: UserService        
         
-    ) { }
-
-    
-     /*   @Effect() authors$ = this.actions$
-        .ofType(AuthorActionTypes.LOAD_AUTHORS)
-        .switchMap(() => this.authorService.loadAuthors())
-        .map(authors => loadAuthorsSuccess(authors)); */
+    ) { }    
+     
 
     @Effect() authors$ = this.actions$
         .ofType(AuthorActionTypes.LOAD_AUTHORS)
-        .switchMap(() => this.authorService.loadAuthors()
+        .switchMap(() => this.authorService.loadAuthors() 
             .map(authors => loadAuthorsSuccess(authors))
             .catch(error => Observable.of(loadAuthorsError(error)))
         );
@@ -52,11 +47,14 @@ export class AppEffects {
         .ofType(AuthorActionTypes.ADD_AUTHOR)
         .switchMap((action) => this.authorService.addAuthor(action.payload)
             .map(author => addAuthorSuccess(author))
-
         );
 
-       // .switchMap((action) => this.authorService.addAuthor(action.payload))
-      //  .map(author => addAuthorSuccess(author));
+    @Effect() editAuthor$ = this.actions$
+        .ofType(AuthorActionTypes.EDIT_AUTHOR)
+        .switchMap(
+        (action) => this.authorService.editAuthor(action.payload)
+            .map(author => editAuthorSuccess(author))
+        );
 
     @Effect() categories$ = this.actions$
         .ofType(CategoryActionTypes.LOAD_CATEGORIES)
@@ -67,6 +65,13 @@ export class AppEffects {
         .ofType(CategoryActionTypes.ADD_CATEGORY)
         .switchMap((action) => this.service.addCategory(action.payload)
             .map((category) => addCategorySuccess(category))
+        );
+
+    @Effect() editCategory$ = this.actions$
+        .ofType(CategoryActionTypes.EDIT_CATEGORY)
+        .switchMap(
+        (action) => this.service.editAuthor(action.payload)
+            .map(category => editCatgorySuccess(category))
         );
      
 

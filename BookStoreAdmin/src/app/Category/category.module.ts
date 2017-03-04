@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { CategoryMainComponent } from './category-main.component';
 import { CategoryListComponent } from './category-list.component';
 import { CategoryAddComponent } from './category-add.component';
+import { EditCategoryComponent } from './category-edit.component';
 
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { AccordionModule } from 'ng2-bootstrap/accordion';
@@ -36,7 +37,7 @@ import { AccordionModule } from 'ng2-bootstrap/accordion';
         AccordionModule.forRoot()
     ],
     exports: [],
-    declarations: [CategoryMainComponent, CategoryListComponent, CategoryAddComponent],
+    declarations: [CategoryMainComponent, CategoryListComponent, CategoryAddComponent, EditCategoryComponent],
     //providers: [CategoryService]
 })
 

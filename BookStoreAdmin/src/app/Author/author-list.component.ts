@@ -1,7 +1,8 @@
-﻿import { Component, ViewChild , OnInit} from '@angular/core';
+﻿import { Component, ViewChild , OnInit , AfterViewInit} from '@angular/core';
 import { ModalDirective } from 'ng2-bootstrap/modal';
 
 import { loadAuthors } from './actions';
+import { AuthorModel } from './author-model';
 
 import { Store } from '@ngrx/store';
 
@@ -11,14 +12,27 @@ import { Store } from '@ngrx/store';
 
 })
 
-export class AuthorListComponent implements OnInit {
+export class AuthorListComponent implements OnInit, AfterViewInit {
+
+    @ViewChild('staticModal') model: any;
+
+    editAuthor: AuthorModel;
 
     constructor(
         public store: Store<{}>
     ) { }
 
     ngOnInit() {
-        this.store.dispatch(loadAuthors());       
+        this.store.dispatch(loadAuthors());        
+    }
+
+    ngAfterViewInit() {
+        
+    }
+
+    edit(author: AuthorModel) {       
+        this.editAuthor = author;
+        this.model.show();       
     }
 
     public totalItems: number = 64;

@@ -36,7 +36,9 @@ export function reducer(state:State = initialState, action: Action):State {
             currentPage: state.currentPage,
             categories: state.categories.concat(action.payload),
             errors:[]
-        }
+            }
+        case CategoryActionTypes.EDIT_CATEGORY_SUCCESS:
+            return state;
         default: return state;   
     }
 }

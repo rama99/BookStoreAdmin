@@ -33,5 +33,19 @@ namespace BookStoreAdmin.BAL
 
             return category;
         }
+
+        public static BookStoreAdmin.ViewModels.Category EditCategory(BookStoreAdmin.ViewModels.Category category)
+        {
+            BookStoreAdmin.Models.category objCategory = new Models.category();
+
+            using (BookStoreAdmin.Models.BookStoreAdminEntities1 context = new BookStoreAdminEntities1())
+            {
+                objCategory = context.categories.Find(category.id);
+                objCategory.name = category.name;               
+                objCategory.description = category.description;
+                context.SaveChanges();
+            }
+            return category;
+        }
     }
 }

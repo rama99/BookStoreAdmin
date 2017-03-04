@@ -24,4 +24,8 @@ export class BookListComponent {
     ngOnInit() {
         
     }
+
+    edit(book: BookModel) {
+        alert('TODO');
+    }
 }

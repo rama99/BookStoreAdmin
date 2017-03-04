@@ -37,5 +37,14 @@ export class CategoryService {
         //return Observable.of(category);
     }
 
+    editAuthor(authorModel: CategoryModel): Observable<CategoryModel> {
+
+        let headers: Headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.post('http://localhost:57599/category/EditCategory', JSON.stringify(authorModel), { headers: headers })
+            .map(data => data.json());
+    }
+
 
 }

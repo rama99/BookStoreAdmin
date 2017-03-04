@@ -12,8 +12,26 @@
         </div>
         <h4>Author Description :</h4>{{author.description}}
         &nbsp;<br /><br /><br />
+        <input type="button" (click)="edit(author)" value="Edit" class="btn btn-primary btn-md" />
     </accordion-group>
     
 </accordion>
 <hr style="height:1px;border:none;color:#333;background-color:#333;" />
 <author-add></author-add>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Edit</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               <author-edit [author]="editAuthor" [model]="staticModal"></author-edit>
+            </div>
+        </div>
+    </div>
+</div>

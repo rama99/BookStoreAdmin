@@ -9,6 +9,10 @@ export const CategoryActionTypes = {
     ADD_CATEGORY: 'ADD_CATEGORY',
     ADD_CATEGORY_SUCCESS: 'ADD_CATEGORY_SUCCESS',
 
+    EDIT_CATEGORY: 'EDIT_CATEGORY',
+    EDIT_CATEGORY_SUCCESS: 'EDIT_CATEGORY_SUCCESS',
+    EDIT_CATEGORY_ERROR: 'EDIT_CATEGORY_ERROR',
+
     LOAD_ALL: 'LOAD_ALL',
     LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS'
 }
@@ -45,9 +49,18 @@ export function addCategorySuccess(data: any): Action {
     }
 }
 
-/*export function loadAllSuccess(all: BookCategoryAuthorModel): Action {
+export function editCategory(category: CategoryModel): Action {
+
     return {
-        type: CategoryActionTypes.LOAD_ALL_SUCCESS,
-        payload: all.categories
+        type: CategoryActionTypes.EDIT_CATEGORY,
+        payload: category
     }
-}*/
+}
+
+export function editCatgorySuccess(data: any): Action {
+
+    return {
+        type: CategoryActionTypes.EDIT_CATEGORY_SUCCESS,
+        payload: data.data
+    }
+}

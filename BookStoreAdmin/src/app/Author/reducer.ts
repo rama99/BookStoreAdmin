@@ -17,9 +17,10 @@ const initialState: State = {
 export function reducer(state: State = initialState, action: Action) {
 
     switch (action.type) {
-      
-        case AuthorActionTypes.LOAD_AUTHORS_SUCCESS:
-            
+
+        case AuthorActionTypes.LOAD_AUTHORS:           
+            return state;      
+        case AuthorActionTypes.LOAD_AUTHORS_SUCCESS:            
               return {
                   currentPage: state.currentPage,
                   authors:action.payload.data
@@ -40,9 +41,10 @@ export function reducer(state: State = initialState, action: Action) {
             let xx = {
                 currentPage: state.currentPage,
                 authors: state.authors.concat(action.payload)
-            }
-           
+            }           
             return xx;
+        case AuthorActionTypes.EDIT_AUTHOR_SUCCESS:
+            return state;
         default: return state;
     }
 

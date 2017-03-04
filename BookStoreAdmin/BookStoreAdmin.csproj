@@ -257,6 +257,8 @@
     <Content Include="Views\Book\List.cshtml" />
     <Content Include="Views\Book\Add.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Author\Edit.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -277,6 +279,7 @@
     <TypeScriptCompile Include="src\app\Author\actions.ts" />
     <TypeScriptCompile Include="src\app\Author\author-add.component.ts" />
     <TypeScriptCompile Include="src\app\Author\author-detail.component.ts" />
+    <TypeScriptCompile Include="src\app\Author\author-edit.component.ts" />
     <TypeScriptCompile Include="src\app\Author\author-list.component.ts" />
     <TypeScriptCompile Include="src\app\Author\author-main.component.ts" />
     <TypeScriptCompile Include="src\app\Author\author-model.ts" />
@@ -296,6 +299,7 @@
     <TypeScriptCompile Include="src\app\Category\actions.ts" />
     <TypeScriptCompile Include="src\app\Category\categories-effects.ts" />
     <TypeScriptCompile Include="src\app\Category\category-add.component.ts" />
+    <TypeScriptCompile Include="src\app\Category\category-edit.component.ts" />
     <TypeScriptCompile Include="src\app\Category\category-list.component.ts" />
     <TypeScriptCompile Include="src\app\Category\category-main.component.ts" />
     <TypeScriptCompile Include="src\app\Category\category-model.ts" />

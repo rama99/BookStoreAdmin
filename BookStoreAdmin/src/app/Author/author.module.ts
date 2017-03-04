@@ -17,13 +17,13 @@ import { ModalModule } from 'ng2-bootstrap/modal';
 
 // RECOMMENDED (doesn't work with system.js)
 import { PaginationModule } from 'ng2-bootstrap/pagination';
-
 import { AccordionModule } from 'ng2-bootstrap/accordion';
 
 import { AuthorMainComponent } from './author-main.component';
 import { AuthorListComponent } from './author-list.component';
 import { AuthorAddComponent } from './author-add.component';
 import { AuthorDetailComponent } from './author-detail.component';
+import { AuthorEditComponent } from './author-edit.component';
 
 import { AuthorService } from './author.service';
 
@@ -33,8 +33,8 @@ import { AuthorService } from './author.service';
             {
                 path: 'author', component: AuthorMainComponent, children: [
                     { path: '', component: AuthorListComponent },
-                    { path: 'add', component: AuthorAddComponent }
-                    
+                    { path: 'add', component: AuthorAddComponent },
+                    { path: 'edit', component: AuthorEditComponent}
                     ] }
 
         ]),
@@ -54,7 +54,8 @@ import { AuthorService } from './author.service';
     declarations: [AuthorMainComponent,
         AuthorListComponent,
         AuthorAddComponent,
-        AuthorDetailComponent],
+        AuthorDetailComponent,
+        AuthorEditComponent],
     providers: [AuthorService]
 })
 

@@ -28,7 +28,6 @@ namespace BookStoreAdmin.Controllers
             response.data = authors;
           
             return Json(response, JsonRequestBehavior.AllowGet);
-
         }
 
         public ActionResult List()
@@ -42,11 +41,30 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
+        // Template
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult AddAuthor(BookStoreAdmin.ViewModels.Author author)
-        {
+        {          
+
             BookStoreAdmin.ViewModels.Response< BookStoreAdmin.ViewModels.Author> response = new ViewModels.Response<BookStoreAdmin.ViewModels.Author>();
             author = BookStoreAdmin.BAL.Author.AddAuthor(author);
+
+            response.success = true;
+            response.data = author;
+            response.errorMessage = null;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EditAuthor(BookStoreAdmin.ViewModels.Author author)
+        {
+            BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.Author> response = new ViewModels.Response<BookStoreAdmin.ViewModels.Author>();
+            author = BookStoreAdmin.BAL.Author.EditAuthor(author);
 
             response.success = true;
             response.data = author;

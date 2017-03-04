@@ -16,6 +16,8 @@ export const AuthorActionTypes = {
     ADD_AUTHOR_ERROR:'ADD_AUTHOR_ERROR',
 
     EDIT_AUTHOR: 'EDIT_AUTHOR',
+    EDIT_AUTHOR_SUCCESS: 'EDIT_AUTHOR_SUCCESS',
+    EDIT_AUTHOR_ERROR: 'EDIT_AUTHOR_ERROR',
     
     
     LOAD_ALL: 'LOAD_ALL',
@@ -59,6 +61,22 @@ export function addAuthorSuccess(data: any): Action {
     return {
         type: AuthorActionTypes.ADD_AUTHOR_SUCCESS,
         payload: data.data
+    }
+}
+
+export function editAuthor(author: AuthorModel): Action {
+
+    return {
+        type: AuthorActionTypes.EDIT_AUTHOR,
+        payload:author
+    }
+}
+
+export function editAuthorSuccess(data: any): Action {
+
+    return {
+        type: AuthorActionTypes.EDIT_AUTHOR_SUCCESS,
+        payload:data.data
     }
 }
 

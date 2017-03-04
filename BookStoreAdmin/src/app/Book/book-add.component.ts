@@ -64,8 +64,6 @@ export class BookAddComponent implements OnInit , AfterViewInit{
         }
         else {
             this.store.dispatch(addBook(this.fg.value));           
-        }
-        
+        }        
     }
-
 }

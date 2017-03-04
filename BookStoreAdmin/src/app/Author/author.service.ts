@@ -31,4 +31,13 @@ export class AuthorService {
             //return Observable.of(authorModel);
     }
 
+    editAuthor(authorModel: AuthorModel): Observable<AuthorModel> {
+
+        let headers: Headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.post('http://localhost:57599/author/EditAuthor', JSON.stringify(authorModel), { headers: headers })
+            .map(data => data.json());
+    }
+
 }

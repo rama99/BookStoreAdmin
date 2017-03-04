@@ -41,6 +41,11 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult AddCategory(BookStoreAdmin.ViewModels.Category category)
         {
@@ -53,6 +58,19 @@ namespace BookStoreAdmin.Controllers
             response.errorMessage = null;
 
             return Json(response, JsonRequestBehavior.AllowGet);
-        } 
+        }
+
+        [HttpPost]
+        public ActionResult EditCategory(BookStoreAdmin.ViewModels.Category category)
+        {
+            BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.Category> response = new ViewModels.Response<BookStoreAdmin.ViewModels.Category>();
+            category = BookStoreAdmin.BAL.Category.EditCategory(category);
+
+            response.success = true;
+            response.data = category;
+            response.errorMessage = null;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }
