@@ -35,7 +35,7 @@ export class AppComponent implements OnInit , DoCheck{
 
     logOut() {
         this.store.dispatch(logOut());
-        this.router.navigate(['login']);
+        this.router.navigate(['spa', 'login']);
     }
 
 

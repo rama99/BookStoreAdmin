@@ -70,5 +70,11 @@ namespace BookStoreAdmin.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
             
         } 
+
+        [HttpPost]
+        public ActionResult EditBook()
+        {
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
     }
 }

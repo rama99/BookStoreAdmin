@@ -31,7 +31,7 @@ import { AuthorService } from './author.service';
     imports: [CommonModule,
         RouterModule.forChild([
             {
-                path: 'author', component: AuthorMainComponent, children: [
+                path: 'spa/author', component: AuthorMainComponent, children: [
                     { path: '', component: AuthorListComponent },
                     { path: 'add', component: AuthorAddComponent },
                     { path: 'edit', component: AuthorEditComponent}

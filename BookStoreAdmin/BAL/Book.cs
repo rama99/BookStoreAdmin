@@ -88,5 +88,20 @@ namespace BookStoreAdmin.BAL
 
             return objBook;
         }
+
+      /*  public static BookStoreAdmin.ViewModels.Book EditAuthor(BookStoreAdmin.ViewModels.Book book)
+        {
+            BookStoreAdmin.Models.book objBook = new Models.book();
+
+            using (BookStoreAdmin.Models.BookStoreAdminEntities1 context = new BookStoreAdminEntities1())
+            {
+                objBook = context.books.Find(book.id);
+                objAuthor.first_name = author.first_name;
+                objAuthor.last_name = author.last_name;
+                objAuthor.description = author.description;
+                context.SaveChanges();
+            }
+            return book;
+        } */
     }
 }

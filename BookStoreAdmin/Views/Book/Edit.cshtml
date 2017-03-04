@@ -3,7 +3,7 @@
     Layout = null;
 }
 
-<form [formGroup]="fg">
+<form [formGroup]="fg" (ngSubmit)="edit()">
     <div class="form-group">
         <label>Title</label>
         <input #title type="text" formControlName="title" class="form-control" />

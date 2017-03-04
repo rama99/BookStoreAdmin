@@ -2,11 +2,11 @@
     <div class="container-fluid">
         
         <ul class="nav navbar-nav">
-            <li><a [routerLink]="['./home']">Home</a></li>
-            <li><a [routerLink]="['./author']" routerLinkActive="active">Authors</a></li>
-            <li><a [routerLink]="['./categories']" routerLinkActive="active">Categories</a></li>
-            <li><a [routerLink]="['./books']" routerLinkActive="active">Books</a></li>            
-            <li><a [routerLink]="['./about']" routerLinkActive="active">About</a></li>
+            <li><a [routerLink]="['spa' , 'home']">Home</a></li>
+            <li><a [routerLink]="['spa' , 'author']" routerLinkActive="active">Authors</a></li>
+            <li><a [routerLink]="['spa' , 'categories']" routerLinkActive="active">Categories</a></li>
+            <li><a [routerLink]="['spa' , 'books']" routerLinkActive="active">Books</a></li>            
+            <li><a [routerLink]="['spa' , 'about']" routerLinkActive="active">About</a></li>
             <li><a href="javascript:void(0)" (click)="logOut()" routerLinkActive="active">Logout</a></li>
             
         </ul>

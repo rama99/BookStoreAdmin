@@ -20,7 +20,7 @@ import { BookEditComponent } from './book-edit.component';
         RouterModule.forChild([
 
             {
-                path: 'books', component: BookMainComponent, children: [
+                path: 'spa/books', component: BookMainComponent, children: [
                     { path: '', component: BookListComponent },
                     { path: 'add', component: BookAddComponent }
                 ]

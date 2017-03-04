@@ -35,9 +35,10 @@ import { UserService } from './user.service';
     imports: [BrowserModule,
         RouterModule.forRoot([
             { path: '', component: LoginComponent },
-            { path: 'home', component: HomeComponent },
-            { path: 'about', canActivate: [canActivateGuard],  component: AboutComponent },
-            { path: 'login', component: LoginComponent }
+           // { path: 'home', component: HomeComponent },
+            { path: "spa/home", component: HomeComponent },
+            { path: 'spa/about', canActivate: [canActivateGuard],  component: AboutComponent },
+            { path: 'spa/login', component: LoginComponent }
         ]),
         AuthorModule,
         CategoryModule,

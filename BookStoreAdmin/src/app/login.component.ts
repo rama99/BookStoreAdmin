@@ -56,7 +56,8 @@ export class LoginComponent implements OnInit , AfterViewInit {
                 (user: LoginResponseModel) => {
 
                     if (user.isValidUser) {
-                        this.router.navigate(['home']);
+                       // this.router.navigate(['home']);
+                        this.router.navigate(['spa' , 'home']);
                     }
                     else if (user.errorMessage != '' && user.errorMessage != null) {
                         this.errorMessage = "Invalid User Name / Password";
