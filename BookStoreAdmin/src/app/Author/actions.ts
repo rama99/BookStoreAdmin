@@ -27,7 +27,8 @@ export const AuthorActionTypes = {
 }
 
 // Actions
-export function loadAuthors():Action {
+export function loadAuthors(): Action {
+    $.blockUI();
     return {
         type: AuthorActionTypes.LOAD_AUTHORS,
         payload:{}
@@ -35,7 +36,7 @@ export function loadAuthors():Action {
 }
 
 export function loadAuthorsSuccess(authors: AuthorModel[]): Action {
-   
+    $.unblockUI();
     return {
         type: AuthorActionTypes.LOAD_AUTHORS_SUCCESS,
         payload:authors
@@ -50,7 +51,9 @@ export function loadAuthorsError(errors: string[]): Action {
     }
 }
 
-export function addAuthor(author:AuthorModel): Action {
+export function addAuthor(author: AuthorModel): Action {
+
+    $.blockUI();
     return {
         type: AuthorActionTypes.ADD_AUTHOR,
         payload: author
@@ -58,7 +61,7 @@ export function addAuthor(author:AuthorModel): Action {
 }
 
 export function addAuthorSuccess(data: any): Action {    
-
+    $.unblockUI();
     return {
         type: AuthorActionTypes.ADD_AUTHOR_SUCCESS,
         payload: data.data
@@ -66,7 +69,7 @@ export function addAuthorSuccess(data: any): Action {
 }
 
 export function editAuthor(author: AuthorModel): Action {
-
+    $.blockUI();
     return {
         type: AuthorActionTypes.EDIT_AUTHOR,
         payload:author
@@ -74,7 +77,7 @@ export function editAuthor(author: AuthorModel): Action {
 }
 
 export function editAuthorSuccess(data: any): Action {
-
+    $.unblockUI();
     return {
         type: AuthorActionTypes.EDIT_AUTHOR_SUCCESS,
         payload:data.data

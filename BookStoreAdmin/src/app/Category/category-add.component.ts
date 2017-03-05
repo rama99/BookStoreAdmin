@@ -43,9 +43,8 @@ export class CategoryAddComponent implements OnInit , AfterViewInit {
 
     }
 
-    addCategory() {       
-
-        alert(JSON.stringify(this.fg.value));
+    addCategory() { 
+        
 
         if (this.fg.invalid) {
             this.store.dispatch(validationErrorCategory(this.getValidationErrorMsgs()));

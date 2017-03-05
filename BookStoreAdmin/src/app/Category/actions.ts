@@ -20,7 +20,9 @@ export const CategoryActionTypes = {
 }
 
 // actions
-export function loadCatgories():Action {
+export function loadCatgories(): Action {
+
+    $.blockUI();
     return {
         type: CategoryActionTypes.LOAD_CATEGORIES,
         payload: {}
@@ -28,7 +30,7 @@ export function loadCatgories():Action {
 }
 
 export function loadCategoriesSuccess(categories: CategoryModel[]): Action {   
-
+    $.unblockUI();
     return {
         type: CategoryActionTypes.LOAD_CATEGORIES_SUCCESS,
         payload: categories
@@ -36,6 +38,8 @@ export function loadCategoriesSuccess(categories: CategoryModel[]): Action {
 }
 
 export function addCategory(category: CategoryModel): Action {
+
+    $.blockUI();
     return {
         type: CategoryActionTypes.ADD_CATEGORY,
         payload: category
@@ -44,7 +48,7 @@ export function addCategory(category: CategoryModel): Action {
 
 
 export function addCategorySuccess(data: any): Action {
-
+    $.unblockUI();
     return {
         type: CategoryActionTypes.ADD_CATEGORY_SUCCESS,
         payload: data.data
@@ -53,6 +57,7 @@ export function addCategorySuccess(data: any): Action {
 
 export function editCategory(category: CategoryModel): Action {
 
+    $.blockUI();
     return {
         type: CategoryActionTypes.EDIT_CATEGORY,
         payload: category
@@ -60,7 +65,7 @@ export function editCategory(category: CategoryModel): Action {
 }
 
 export function editCatgorySuccess(data: any): Action {
-
+    $.unblockUI();
     return {
         type: CategoryActionTypes.EDIT_CATEGORY_SUCCESS,
         payload: data.data

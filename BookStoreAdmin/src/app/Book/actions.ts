@@ -24,7 +24,7 @@ export const BookActionTypes = {
 }
 
 export function loadBooks(): Action {   
-
+    $.blockUI();
     return {
         type: BookActionTypes.LOAD_BOOKS,
         payload: {}
@@ -32,7 +32,7 @@ export function loadBooks(): Action {
 }
 
 export function loadBooksSuccess(books:BookModel[]): Action {
-    
+    $.unblockUI();
     return {
         type: BookActionTypes.LOAD_BOOKS_SUCCESS,
         payload:books
@@ -40,7 +40,7 @@ export function loadBooksSuccess(books:BookModel[]): Action {
 }
 
 export function loadBookAuthorCategory(): Action {
-
+    $.blockUI();
     return {
         type: BookActionTypes.LOAD_BOOKS_AUTHORS_CATEGORIES,
         payload: {}
@@ -48,7 +48,7 @@ export function loadBookAuthorCategory(): Action {
 }
 
 export function loadBookAuthorCategorySuccess(data: any): Action {
-
+    $.unblockUI();
     return {
         type: BookActionTypes.LOAD_BOOKS_AUTHORS_CATEGORIES_SUCCESS,
         payload:data.data
@@ -57,7 +57,7 @@ export function loadBookAuthorCategorySuccess(data: any): Action {
 }
 
 export function addBook(book: BookModel): Action {
-
+    $.blockUI();
     return {
         type: BookActionTypes.ADD_BOOK,
         payload:book
@@ -66,7 +66,7 @@ export function addBook(book: BookModel): Action {
 }
 
 export function addBookSuccess(data: any): Action {
-
+    $.unblockUI();
     return {
         type: BookActionTypes.ADD_BOOK_SUCCESS,
         payload:data.data
@@ -74,7 +74,7 @@ export function addBookSuccess(data: any): Action {
 }
 
 export function editBook(book: BookModel): Action {
-
+    $.blockUI();
     return {
         type: BookActionTypes.EDIT_BOOK,
         payload: book
@@ -82,7 +82,7 @@ export function editBook(book: BookModel): Action {
 }
 
 export function editBookSuccess(data: any): Action {
-
+    $.unblockUI();
     return {
         type: BookActionTypes.EDIT_BOOK_SUCCESS,
         payload: data.data
@@ -90,7 +90,7 @@ export function editBookSuccess(data: any): Action {
 }
 
 export function loadAllSuccess(all: BookCategoryAuthorModel): Action {
-
+    $.unblockUI();
     return {
         type: BookActionTypes.LOAD_ALL_SUCCESS,
         payload:all

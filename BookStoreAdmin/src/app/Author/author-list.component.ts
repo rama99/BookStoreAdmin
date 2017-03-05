@@ -22,7 +22,8 @@ export class AuthorListComponent implements OnInit, AfterViewInit {
         public store: Store<{}>
     ) { }
 
-    ngOnInit() {
+    ngOnInit() {        
+
         this.store.dispatch(loadAuthors());        
     }
 
