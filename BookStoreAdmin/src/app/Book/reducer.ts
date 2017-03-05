@@ -35,7 +35,7 @@ export function reducer(state: State = initialState, action: Action):State {
             case BookActionTypes.EDIT_BOOK_SUCCESS:
 
                 return Object.assign({}, state, {
-                    categories: state.books.map(book => {
+                    books: state.books.map(book => {
 
                         if (book.id != action.payload.id) {
                             return book;

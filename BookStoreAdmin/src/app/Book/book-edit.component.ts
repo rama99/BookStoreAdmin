@@ -81,8 +81,7 @@ export class BookEditComponent implements OnInit, OnChanges, AfterViewInit{
         { 
             if (!this.fg.invalid)
             {
-                //this.store.dispatch(editAuthor(this.fg.value));
-                alert('TO DO');
+                this.store.dispatch(editBook(this.fg.value));                
                 this.model.hide();
             }
             else

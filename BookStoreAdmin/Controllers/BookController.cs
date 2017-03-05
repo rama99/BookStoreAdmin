@@ -72,9 +72,16 @@ namespace BookStoreAdmin.Controllers
         } 
 
         [HttpPost]
-        public ActionResult EditBook()
+        public ActionResult EditBook(BookStoreAdmin.ViewModels.BookRequest bookRequest)
         {
-            return Json(null, JsonRequestBehavior.AllowGet);
+            BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.Book> response = new Response<ViewModels.Book>();
+            BookStoreAdmin.ViewModels.Book book = BookStoreAdmin.BAL.Book.EditBook(bookRequest);
+
+            response.success = true;
+            response.data = book;
+            response.errorMessage = null;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
     }
 }

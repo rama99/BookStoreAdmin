@@ -89,19 +89,64 @@ namespace BookStoreAdmin.BAL
             return objBook;
         }
 
-      /*  public static BookStoreAdmin.ViewModels.Book EditAuthor(BookStoreAdmin.ViewModels.Book book)
+        public static BookStoreAdmin.ViewModels.Book EditBook(BookStoreAdmin.ViewModels.BookRequest objBookRequest)
         {
-            BookStoreAdmin.Models.book objBook = new Models.book();
+            BookStoreAdmin.Models.book book = new Models.book();
+            List<int> intAuthorids = new List<int>();
+            BookStoreAdmin.ViewModels.Book objBook = new ViewModels.Book();
 
             using (BookStoreAdmin.Models.BookStoreAdminEntities1 context = new BookStoreAdminEntities1())
             {
-                objBook = context.books.Find(book.id);
-                objAuthor.first_name = author.first_name;
-                objAuthor.last_name = author.last_name;
-                objAuthor.description = author.description;
+                book = context.books.Include("authors").Single(b => b.id == objBookRequest.id);
+
+                foreach (var author in book.authors.ToList())
+                {                   
+                    if (!objBookRequest.authors.Contains(author.id))
+                        book.authors.Remove(author);                   
+                }
+
+                foreach (var newAuthorId in objBookRequest.authors)
+                {
+                    // Add the roles which are not in the list of user's roles
+                    if (!book.authors.Any(r => r.id == newAuthorId))
+                    {
+                        var newAuthor = new author { id = newAuthorId };
+                        context.authors.Attach(newAuthor);
+                        book.authors.Add(newAuthor);
+                    }                   
+                }
+
+                book.title = objBookRequest.title;
+                book.description = objBookRequest.description;
+                book.price = objBookRequest.price;
+                book.fk_category_id = objBookRequest.category;                
                 context.SaveChanges();
             }
-            return book;
-        } */
+
+
+            using (BookStoreAdmin.Models.BookStoreAdminEntities1 context = new BookStoreAdminEntities1())
+            {
+                objBook = context.books
+                    .Where(b => b.id == book.id)
+                    .Select(book1 => new BookStoreAdmin.ViewModels.Book()
+                    {
+                        id = book1.id,
+                        title = book1.title,
+                        description = book1.description,
+                        category = new ViewModels.Category() { id = book1.category.id, description = book1.category.description, name = book1.category.name },
+                        authors = book1.authors.Select((author) => new BookStoreAdmin.ViewModels.Author()
+                        {
+                            id = author.id,
+                            description = author.description,
+                            first_name = author.first_name,
+                            last_name = author.last_name
+                        }).ToList(),
+                        price = book1.price
+
+                    }).Single();
+            }
+
+            return objBook;
+        } 
     }
 }
