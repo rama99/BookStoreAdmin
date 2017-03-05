@@ -13,6 +13,8 @@ export const BookActionTypes = {
     ADD_BOOK: 'ADD_BOOK',
     ADD_BOOK_SUCCESS: 'ADD_BOOK_SUCCESS',
 
+    VALIDATION_ERROR_BOOK: 'VALIDATION_ERROR_BOOK', 
+
     EDIT_BOOK: 'EDIT_BOOK',
     EDIT_BOOK_SUCCESS: 'EDIT_BOOK_SUCCESS',
     EDIT_BOOK_ERROR: 'EDIT_BOOK_ERROR',
@@ -93,5 +95,12 @@ export function loadAllSuccess(all: BookCategoryAuthorModel): Action {
         type: BookActionTypes.LOAD_ALL_SUCCESS,
         payload:all
     }
+}
 
+export function validationErrorBook(data: any): Action {
+
+    return {
+        type: BookActionTypes.VALIDATION_ERROR_BOOK,
+        payload: data
+    }
 }

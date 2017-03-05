@@ -5,6 +5,11 @@
 
 <form [formGroup]="fg">
 
+    <ul>
+        <li *ngFor="let error of errors">
+            {{error}}
+        </li>
+    </ul>    
     <div class="form-group">
         <label>First Name</label>
         <input type="hidden" formControlName="id" />

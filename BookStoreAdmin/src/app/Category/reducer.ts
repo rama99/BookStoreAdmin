@@ -50,9 +50,9 @@ export function reducer(state:State = initialState, action: Action):State {
                     }
                 })
             });
-            
-
-            //return state;
+        case CategoryActionTypes.VALIDATION_ERROR_CATEGORY:
+            return Object.assign({}, state, { errors: action.payload });
+          
         default: return state;   
     }
 }

@@ -5,12 +5,8 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
-//import { StoreModule } from '@ngrx/store';
-//import { EffectsModule } from '@ngrx/effects';
 
-//import { reducer as authorReducer } from './reducer';
-
-//import { AuthorEffects } from './authors-effects';
+import { SharedModule } from '../shared/shared.module';
 
 // RECOMMENDED (doesn't work with system.js)
 import { ModalModule } from 'ng2-bootstrap/modal';
@@ -48,7 +44,8 @@ import { AuthorService } from './author.service';
         }),
         EffectsModule.run(AuthorEffects) , */
         AccordionModule.forRoot(),
-        ToastModule.forRoot()
+        ToastModule.forRoot(),
+        SharedModule
               ],
     exports: [],
     declarations: [AuthorMainComponent,

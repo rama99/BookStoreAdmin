@@ -4,14 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { AuthorModel } from '../author/author-model';
 import { CategoryModel } from '../Category/category-model';
-
+import { validationMessages } from './validations';
 
 import { addBook } from './actions';
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 
 import { loadAuthors } from '../author/actions';
 import { loadCatgories } from '../Category/actions';
-import { loadBooks, loadBookAuthorCategory, loadAllSuccess} from '../book/actions';
+import { loadBooks, loadBookAuthorCategory, loadAllSuccess , validationErrorBook } from '../book/actions';
 
 @Component({
     selector: 'book-add',
@@ -24,6 +24,14 @@ export class BookAddComponent implements OnInit , AfterViewInit{
     public fg: FormGroup;
     public authors$: Observable<AuthorModel>;
     public categories$: Observable<CategoryModel>;
+
+    formErrors = {
+        'title': '',
+        'description': '',
+        'category': '',
+        'authors': '',
+        'price':''
+    }; 
 
     @ViewChild('staticModal') model: any;
     @ViewChild('title') title: ElementRef;
@@ -60,10 +68,37 @@ export class BookAddComponent implements OnInit , AfterViewInit{
     addBook() {
 
         if (this.fg.invalid) {
+            this.store.dispatch(validationErrorBook(this.getValidationErrorMsgs()));
             this.model.show();
         }
         else {
             this.store.dispatch(addBook(this.fg.value));           
         }        
+    }
+
+    getValidationErrorMsgs() {
+
+        let errors: string[] = [];
+
+        for (const field in this.formErrors) {
+
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            const control = this.fg.get(field);
+
+            if (control.invalid) {
+                const messages = validationMessages[field];
+
+                for (const key in control.errors) {
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+
+            if (this.formErrors[field] != '') {
+                errors.push(this.formErrors[field]);
+            }
+        }
+
+        return errors;
     }
 }

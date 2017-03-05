@@ -18,7 +18,8 @@ export const AuthorActionTypes = {
     EDIT_AUTHOR: 'EDIT_AUTHOR',
     EDIT_AUTHOR_SUCCESS: 'EDIT_AUTHOR_SUCCESS',
     EDIT_AUTHOR_ERROR: 'EDIT_AUTHOR_ERROR',
-    
+
+    VALIDATION_ERROR_AUTHOR: 'VALIDATION_ERROR_AUTHOR',    
     
     LOAD_ALL: 'LOAD_ALL',
     LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS',
@@ -77,6 +78,14 @@ export function editAuthorSuccess(data: any): Action {
     return {
         type: AuthorActionTypes.EDIT_AUTHOR_SUCCESS,
         payload:data.data
+    }
+}
+
+export function validationErrorAuthor(data: any): Action {
+
+    return {
+        type: AuthorActionTypes.VALIDATION_ERROR_AUTHOR,
+        payload:data
     }
 }
 

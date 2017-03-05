@@ -31,7 +31,7 @@ export class AuthorListComponent implements OnInit, AfterViewInit {
     }
 
     edit(author: AuthorModel) {       
-        this.editAuthor = author;
+        this.editAuthor = Object.assign({},author);
         this.model.show();       
     }
 

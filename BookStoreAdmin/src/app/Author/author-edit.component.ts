@@ -1,20 +1,28 @@
-﻿import { Component, OnInit, Input, OnChanges, AfterViewInit, SimpleChange } from '@angular/core';
+﻿import { Component, OnInit, Input, OnChanges, DoCheck , AfterViewInit, SimpleChange } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup , Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { AuthorModel } from './author-model';
-import { editAuthor } from './actions';
+import { editAuthor, validationErrorAuthor } from './actions';
+import { validationMessages } from './validation';
 
 @Component({
     selector: 'author-edit',
     templateUrl:'./author/edit'
 })
 
-export class AuthorEditComponent implements OnInit, OnChanges, AfterViewInit{
+export class AuthorEditComponent implements OnInit, OnChanges, AfterViewInit, DoCheck{
 
     @Input() author: AuthorModel;
     @Input() model: any;
     fg: FormGroup;
+    errors: string[];
+
+    formErrors = {
+        'first_name': '',
+        'last_name': '',
+        'description': ''
+    }; 
 
     constructor(
         public formBuilder: FormBuilder,
@@ -29,7 +37,12 @@ export class AuthorEditComponent implements OnInit, OnChanges, AfterViewInit{
             "first_name": ["", Validators.compose([Validators.required])],
             "last_name": ["", Validators.compose([Validators.required])],
             "description": ["", Validators.compose([Validators.required])]
-        });  
+        }); 
+        
+    }
+
+    ngDoCheck() {       
+        
     }
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }): any {
@@ -41,7 +54,9 @@ export class AuthorEditComponent implements OnInit, OnChanges, AfterViewInit{
                 last_name: this.author.last_name,
                 description: this.author.description
             });
-        }
+
+            this.errors = this.getValidationErrorMsgs();
+        }        
                     
     }
 
@@ -52,12 +67,49 @@ export class AuthorEditComponent implements OnInit, OnChanges, AfterViewInit{
     edit() {
         try {
             
-            this.store.dispatch(editAuthor(this.fg.value));
-            this.model.hide();
+            if (!this.fg.invalid)
+            {
+               // this.store.dispatch(validationErrorAuthor(this.getValidationErrorMsgs()));
+            //}
+           // else
+           // {
+                this.store.dispatch(editAuthor(this.fg.value));               
+                this.model.hide();
+            }
+            else
+            {
+                this.errors = this.getValidationErrorMsgs();
+            }
         }
         catch (err) {
             alert('error');
         }
+    }
+
+    getValidationErrorMsgs() {
+
+        let errors: string[] = [];
+
+        for (const field in this.formErrors) {
+
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            const control = this.fg.get(field);
+
+            if (control.invalid) {
+                const messages = validationMessages[field];
+
+                for (const key in control.errors) {
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+
+            if (this.formErrors[field] != '') {
+                errors.push(this.formErrors[field]);
+            }
+        }
+
+        return errors;
     }
 
 }

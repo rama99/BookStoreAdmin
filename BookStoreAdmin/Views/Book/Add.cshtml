@@ -48,7 +48,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                Please enter all values.
+                <ul>
+                    <li *ngFor="let error of (store.select('books') | async)?.errors">
+                        {{error}}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

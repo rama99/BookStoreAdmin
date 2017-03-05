@@ -56,7 +56,8 @@ export function reducer(state: State = initialState, action: Action) {
                     }
                 })
                     });
-            
+        case AuthorActionTypes.VALIDATION_ERROR_AUTHOR:            
+            return Object.assign({}, state, { errors: action.payload });   
         default: return state;
     }
 

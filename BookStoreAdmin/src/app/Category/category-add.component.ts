@@ -1,7 +1,8 @@
 ﻿import { Component , OnInit , ViewChild  , Renderer , AfterViewInit , ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { addCategory } from './actions';
+import { addCategory, validationErrorCategory } from './actions';
+import { validationMessages } from './validations';
 
 @Component({
     selector: 'category-add',
@@ -14,6 +15,11 @@ export class CategoryAddComponent implements OnInit , AfterViewInit {
     fg: FormGroup;
     @ViewChild('staticModal') modal: any
     @ViewChild('name') name: ElementRef; 
+
+    formErrors = {
+        'name': '',       
+        'description': ''
+    }; 
 
     constructor(
         private fb: FormBuilder,
@@ -42,12 +48,39 @@ export class CategoryAddComponent implements OnInit , AfterViewInit {
         alert(JSON.stringify(this.fg.value));
 
         if (this.fg.invalid) {
+            this.store.dispatch(validationErrorCategory(this.getValidationErrorMsgs()));
             this.modal.show();
         }
         else {
             this.store.dispatch(addCategory(this.fg.value));
            // this.fg.reset();
         }        
+    }
+
+    getValidationErrorMsgs() {
+
+        let errors: string[] = [];
+
+        for (const field in this.formErrors) {
+
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            const control = this.fg.get(field);
+
+            if (control.invalid) {
+                const messages = validationMessages[field];
+
+                for (const key in control.errors) {
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+
+            if (this.formErrors[field] != '') {
+                errors.push(this.formErrors[field]);
+            }
+        }
+
+        return errors;
     }
 
 }

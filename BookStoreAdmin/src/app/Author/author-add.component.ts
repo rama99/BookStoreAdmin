@@ -4,9 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
-import { addAuthor } from './actions';
+import { addAuthor , validationErrorAuthor } from './actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthorModel } from './author-model';
+import { validationMessages } from './validation';
 
 @Component({
     selector: 'author-add',
@@ -21,6 +22,12 @@ export class AuthorAddComponent implements OnInit, AfterViewInit{
     fg: FormGroup;
     @ViewChild('staticModal') model: any;
     @ViewChild('firstName') firstName: ElementRef;
+
+    formErrors = {
+        'first_name': '',
+        'last_name': '',
+        'description':''
+    };  
 
     constructor(
         private formBuilder: FormBuilder,
@@ -53,24 +60,40 @@ export class AuthorAddComponent implements OnInit, AfterViewInit{
     addAuthor() {
         console.log(this.fg.value);
 
-        if (this.fg.invalid) {
-            this.error = "Please enter valid values";
+        if (this.fg.invalid) {            
+            this.store.dispatch(validationErrorAuthor(this.getValidationErrorMsgs()));
             this.model.show();
         }
-        else {
+        else
+        {            
             this.store.dispatch(addAuthor(this.fg.value));
-
-          //  console.log('2')
-
-            this.store.subscribe(() => console.log(2));
-
-          /*  this.store.select("authors").subscribe(
-                (data: AuthorModel[]) => { alert( 'Total Reords' + data.length); }
-            );
-
-            this.toastr.success('2Added!!');
-            this.fg.reset(); */
         }
+    }
+
+    getValidationErrorMsgs() {
+
+        let errors: string[] = [];
+
+        for (const field in this.formErrors) {  
+
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            const control = this.fg.get(field);
+
+            if (control.invalid) {
+                const messages = validationMessages[field];
+
+                for (const key in control.errors) {                   
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+
+            if (this.formErrors[field] != '') {
+                errors.push(this.formErrors[field]);
+            }
+        }
+       
+        return errors;
     }
 
 }

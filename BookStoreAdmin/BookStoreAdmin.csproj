@@ -288,6 +288,7 @@
     <TypeScriptCompile Include="src\app\Author\author.service.ts" />
     <TypeScriptCompile Include="src\app\Author\authors-effects.ts" />
     <TypeScriptCompile Include="src\app\Author\reducer.ts" />
+    <TypeScriptCompile Include="src\app\Author\validation.ts" />
     <TypeScriptCompile Include="src\app\book.service.ts" />
     <TypeScriptCompile Include="src\app\Book\actions.ts" />
     <TypeScriptCompile Include="src\app\Book\book-add.component.ts" />
@@ -297,6 +298,7 @@
     <TypeScriptCompile Include="src\app\Book\book-model.ts" />
     <TypeScriptCompile Include="src\app\Book\book.module.ts" />
     <TypeScriptCompile Include="src\app\Book\reducer.ts" />
+    <TypeScriptCompile Include="src\app\Book\validations.ts" />
     <TypeScriptCompile Include="src\app\canActivate.ts" />
     <TypeScriptCompile Include="src\app\Category\actions.ts" />
     <TypeScriptCompile Include="src\app\Category\categories-effects.ts" />
@@ -308,10 +310,13 @@
     <TypeScriptCompile Include="src\app\Category\category.module.ts" />
     <TypeScriptCompile Include="src\app\category.service.ts" />
     <TypeScriptCompile Include="src\app\Category\reducer.ts" />
+    <TypeScriptCompile Include="src\app\Category\validations.ts" />
     <TypeScriptCompile Include="src\app\login-model.ts" />
     <TypeScriptCompile Include="src\app\home.component.ts" />
     <TypeScriptCompile Include="src\app\login.component.ts" />
     <TypeScriptCompile Include="src\app\reducer.ts" />
+    <TypeScriptCompile Include="src\app\Shared\keys.pipe.ts" />
+    <TypeScriptCompile Include="src\app\Shared\shared.module.ts" />
     <TypeScriptCompile Include="src\app\StoreModel.ts" />
     <TypeScriptCompile Include="src\app\user.service.ts" />
     <TypeScriptCompile Include="src\main.ts" />

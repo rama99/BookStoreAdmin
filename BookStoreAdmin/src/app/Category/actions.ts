@@ -13,6 +13,8 @@ export const CategoryActionTypes = {
     EDIT_CATEGORY_SUCCESS: 'EDIT_CATEGORY_SUCCESS',
     EDIT_CATEGORY_ERROR: 'EDIT_CATEGORY_ERROR',
 
+    VALIDATION_ERROR_CATEGORY: 'VALIDATION_ERROR_CATEGORY', 
+
     LOAD_ALL: 'LOAD_ALL',
     LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS'
 }
@@ -62,5 +64,13 @@ export function editCatgorySuccess(data: any): Action {
     return {
         type: CategoryActionTypes.EDIT_CATEGORY_SUCCESS,
         payload: data.data
+    }
+}
+
+export function validationErrorCategory(data: any): Action {
+
+    return {
+        type: CategoryActionTypes.VALIDATION_ERROR_CATEGORY,
+        payload:data
     }
 }

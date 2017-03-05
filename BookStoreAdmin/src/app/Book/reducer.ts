@@ -28,6 +28,10 @@ export function reducer(state: State = initialState, action: Action):State {
 
                 return Object.assign({}, state, { books: state.books.concat(action.payload) });
 
+            case BookActionTypes.VALIDATION_ERROR_BOOK:
+
+                return Object.assign({}, state, { errors: action.payload });
+
             case BookActionTypes.EDIT_BOOK_SUCCESS:
 
                 return Object.assign({}, state, {
