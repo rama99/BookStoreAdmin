@@ -28,7 +28,7 @@ export class BookListComponent {
     }
 
     edit(book: BookModel) {
-        this.editBook = book;
+        this.editBook = Object.assign({},book);
         this.model.show();
     }
 }

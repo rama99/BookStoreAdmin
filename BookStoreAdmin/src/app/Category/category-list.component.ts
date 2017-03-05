@@ -27,7 +27,7 @@ export class CategoryListComponent {
     }
 
     edit(category: CategoryModel) {
-        this.editCategory = category;
+        this.editCategory = Object.assign({},category);
         this.model.show();
     }
 }

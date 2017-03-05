@@ -68,11 +68,7 @@ export class AuthorEditComponent implements OnInit, OnChanges, AfterViewInit, Do
         try {
             
             if (!this.fg.invalid)
-            {
-               // this.store.dispatch(validationErrorAuthor(this.getValidationErrorMsgs()));
-            //}
-           // else
-           // {
+            {               
                 this.store.dispatch(editAuthor(this.fg.value));               
                 this.model.hide();
             }
@@ -111,5 +107,4 @@ export class AuthorEditComponent implements OnInit, OnChanges, AfterViewInit, Do
 
         return errors;
     }
-
 }

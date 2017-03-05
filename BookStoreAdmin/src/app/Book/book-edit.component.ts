@@ -8,6 +8,7 @@ import { AuthorModel } from '../author/author-model';
 import { CategoryModel } from '../Category/category-model';
 
 import { editBook } from './actions';
+import { validationMessages } from './validations';
 
 @Component({
     selector: 'book-edit',
@@ -19,6 +20,15 @@ export class BookEditComponent implements OnInit, OnChanges, AfterViewInit{
     @Input() book: BookModel;
     @Input() model: any;
     fg: FormGroup;
+    errors: string[];
+
+    formErrors = {
+        'title': '',
+        'description': '',
+        'category': '',
+        'authors': '',
+        'price': ''
+    }; 
 
     public authors$: Observable<AuthorModel>;
     public categories$: Observable<CategoryModel>;
@@ -56,6 +66,8 @@ export class BookEditComponent implements OnInit, OnChanges, AfterViewInit{
                 authors: this.book.authors.map(author => author.id),
                 price:this.book.price
             });
+
+            this.errors = this.getValidationErrorMsgs();
         }
 
     }
@@ -66,14 +78,47 @@ export class BookEditComponent implements OnInit, OnChanges, AfterViewInit{
 
     edit() {
         try
-        {
-            //this.store.dispatch(editBook(this.fg.value));
-            alert('TO DO');
-            this.model.hide();
+        { 
+            if (!this.fg.invalid)
+            {
+                //this.store.dispatch(editAuthor(this.fg.value));
+                alert('TO DO');
+                this.model.hide();
+            }
+            else
+            {
+                this.errors = this.getValidationErrorMsgs();
+            }
         }
         catch (err) {
             alert('error');
         }
+    }
+
+    getValidationErrorMsgs() {
+
+        let errors: string[] = [];
+
+        for (const field in this.formErrors) {
+
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            const control = this.fg.get(field);
+
+            if (control.invalid) {
+                const messages = validationMessages[field];
+
+                for (const key in control.errors) {
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+
+            if (this.formErrors[field] != '') {
+                errors.push(this.formErrors[field]);
+            }
+        }
+
+        return errors;
     }
 
 }

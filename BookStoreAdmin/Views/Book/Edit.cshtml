@@ -4,6 +4,12 @@
 }
 
 <form [formGroup]="fg" (ngSubmit)="edit()">
+
+    <ul>
+        <li *ngFor="let error of errors">
+            {{error}}
+        </li>
+    </ul>  
     <div class="form-group">
         <label>Title</label>
         <input #title type="text" formControlName="title" class="form-control" />

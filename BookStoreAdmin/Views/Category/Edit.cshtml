@@ -3,6 +3,12 @@
     Layout = null;
 }
 <form [formGroup]="fg" >
+
+    <ul>
+        <li *ngFor="let error of errors">
+            {{error}}
+        </li>
+    </ul>  
     <div class="form-group">
         <label>Name</label>
         <input type="text" #name formControlName="name" class="form-control" />
