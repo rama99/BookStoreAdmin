@@ -1,4 +1,4 @@
-# Angular QuickStart Source
+# Angular 2  sample application
 
 ## Sample SPA developed using below technologies
 
