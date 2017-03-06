@@ -12,7 +12,7 @@ export const UserActionTypes = {
 }
 
 export function validateUser(login: LoginModel): Action {
-
+    $.blockUI();
     return {
         type: UserActionTypes.VALIDATE_USER,
         payload:login
@@ -21,7 +21,7 @@ export function validateUser(login: LoginModel): Action {
 }
 
 export function validateUserSuccess(loginResponse: LoginResponseModel): Action {
-
+    $.unblockUI();
     return {
         type: UserActionTypes.VALIDATE_USER_SUCCESS,
         payload: loginResponse

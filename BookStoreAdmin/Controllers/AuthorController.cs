@@ -18,7 +18,8 @@ namespace BookStoreAdmin.Controllers
         }
 
         public ActionResult GetAuthors()
-        {
+        {            
+
             List<BookStoreAdmin.ViewModels.Author> authors = BookStoreAdmin.BAL.Author.GetAuthors();
 
             BookStoreAdmin.ViewModels.Response<List<BookStoreAdmin.ViewModels.Author>> response = new Response<List<ViewModels.Author>>();
