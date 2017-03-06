@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
 import { AboutComponent } from './about.component';
 import { LoginComponent } from './login.component';
+import { PageNotFoundComponent } from './404.component';
 
 import { AuthorModule } from './author/author.module';
 import { CategoryModule } from './Category/category.module';
@@ -38,7 +39,8 @@ import { UserService } from './user.service';
            // { path: 'home', component: HomeComponent },
             { path: "spa/home", component: HomeComponent },
             { path: 'spa/about', canActivate: [canActivateGuard],  component: AboutComponent },
-            { path: 'spa/login', component: LoginComponent }
+            { path: 'spa/login', component: LoginComponent },
+            { path: '**', component: PageNotFoundComponent}
         ]),
         AuthorModule,
         CategoryModule,
@@ -54,7 +56,7 @@ import { UserService } from './user.service';
         EffectsModule.run(AppEffects) /*,
         EffectsModule.run(CategoryEffects)*/
     ],
-    declarations: [AppComponent, AboutComponent, HomeComponent, LoginComponent],
+    declarations: [AppComponent, AboutComponent, HomeComponent, LoginComponent, PageNotFoundComponent],
     providers: [canActivateGuard, CategoryService, BookService, UserService, Title],
     bootstrap:    [ AppComponent ]
 })
