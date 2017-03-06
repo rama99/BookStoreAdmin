@@ -8,6 +8,7 @@ import { CategoryMainComponent } from './category-main.component';
 import { CategoryListComponent } from './category-list.component';
 import { CategoryAddComponent } from './category-add.component';
 import { EditCategoryComponent } from './category-edit.component';
+import { canActivateGuard } from '../canActivate';
 
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { AccordionModule } from 'ng2-bootstrap/accordion';
@@ -19,9 +20,9 @@ import { AccordionModule } from 'ng2-bootstrap/accordion';
         HttpModule,
         RouterModule.forChild([
             {
-                path: 'spa/categories', component: CategoryMainComponent, children: [
-                    { path: '', component: CategoryListComponent },
-                    { path: 'add', component: CategoryAddComponent }
+                path: 'spa/categories', canActivate: [canActivateGuard], component: CategoryMainComponent, children: [
+                    { path: '', canActivate: [canActivateGuard], component: CategoryListComponent },
+                    { path: 'add', canActivate: [canActivateGuard], component: CategoryAddComponent }
                 ]
             }
         ]),

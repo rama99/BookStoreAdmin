@@ -11,6 +11,7 @@ import { BookMainComponent } from './book-main.component';
 import { BookAddComponent } from './book-add.component';
 import { BookListComponent } from './book-list.component';
 import { BookEditComponent } from './book-edit.component';
+import { canActivateGuard } from '../canActivate';
 
 @NgModule({
     imports: [CommonModule,
@@ -20,9 +21,9 @@ import { BookEditComponent } from './book-edit.component';
         RouterModule.forChild([
 
             {
-                path: 'spa/books', component: BookMainComponent, children: [
-                    { path: '', component: BookListComponent },
-                    { path: 'add', component: BookAddComponent }
+                path: 'spa/books', canActivate: [canActivateGuard], component: BookMainComponent, children: [
+                    { path: '', canActivate: [canActivateGuard], component: BookListComponent },
+                    { path: 'add', canActivate: [canActivateGuard], component: BookAddComponent }
                 ]
             }
         ]),

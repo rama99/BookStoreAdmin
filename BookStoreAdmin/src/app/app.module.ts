@@ -37,7 +37,7 @@ import { UserService } from './user.service';
         RouterModule.forRoot([
             { path: '', component: LoginComponent },
            // { path: 'home', component: HomeComponent },
-            { path: "spa/home", component: HomeComponent },
+            { path: "spa/home", canActivate: [canActivateGuard], component: HomeComponent },
             { path: 'spa/about', canActivate: [canActivateGuard],  component: AboutComponent },
             { path: 'spa/login', component: LoginComponent },
             { path: '**', component: PageNotFoundComponent}

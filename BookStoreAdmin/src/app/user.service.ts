@@ -27,9 +27,13 @@ export class UserService {
         headers.append('Content-Type', 'application/json');
 
         return this.http.post('http://localhost:57599/user/login', login, { headers: headers })
-                        .map(data => data.json());
+                        .map(data => data.json());       
+    }
 
-       // return Observable.of(response); //.throttleTime(2000);
+    canActivate(): Observable<any> {
+
+        return this.http.get('http://localhost:57599/user/CanActivate')
+            .map(data => data.json());
     }
 
     logOut(): Observable<LoginResponseModel> {

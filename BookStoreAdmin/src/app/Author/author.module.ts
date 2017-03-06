@@ -22,18 +22,19 @@ import { AuthorDetailComponent } from './author-detail.component';
 import { AuthorEditComponent } from './author-edit.component';
 
 import { AuthorService } from './author.service';
+import { canActivateGuard } from '../canActivate';
 
 @NgModule({
     imports: [CommonModule,
         RouterModule.forChild([
             {
-                path: 'spa/author', component: AuthorMainComponent, children: [
-                    { path: '', component: AuthorListComponent },
-                    { path: 'add', component: AuthorAddComponent },
-                    { path: 'edit', component: AuthorEditComponent}
-                    ] }
+                path: 'spa/author', canActivate: [canActivateGuard], component: AuthorMainComponent, children: [
+                    { path: '', canActivate: [canActivateGuard], component: AuthorListComponent },
+                    { path: 'add', canActivate: [canActivateGuard], component: AuthorAddComponent },
+                    { path: 'edit', canActivate: [canActivateGuard], component: AuthorEditComponent }
+                ]
 
-        ]),
+            }]),
         ModalModule.forRoot(),
         PaginationModule.forRoot(),
         FormsModule,

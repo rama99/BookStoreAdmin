@@ -19,7 +19,7 @@ import { BookService } from './book.service';
 import { BookActionTypes, loadBooksSuccess, addBook, addBookSuccess, loadBookAuthorCategory, loadAllSuccess , editBookSuccess  } from './book/actions';
 
 import { UserService } from './user.service';
-import { UserActionTypes, validateUser, validateUserSuccess, logOutSuccess, logOut } from './actions';
+import { UserActionTypes, validateUser, validateUserSuccess, logOutSuccess, logOut , canActivateSuccess } from './actions';
 
 import { BookCategoryAuthorModel, BookModel } from './Book/book-model';
 
@@ -119,8 +119,17 @@ export class AppEffects {
 
     @Effect() login$ = this.actions$
         .ofType(UserActionTypes.VALIDATE_USER)
-        .switchMap((action) => this.userService.validateUser(action.payload))
-        .map(loginResponse => validateUserSuccess(loginResponse));
+        .switchMap(
+        (action) => this.userService.validateUser(action.payload)
+            .map(loginResponse => validateUserSuccess(loginResponse))
+        );
+        
+    @Effect() canActivate$ = this.actions$
+        .ofType(UserActionTypes.CAN_ACTIVATE)
+        .switchMap(
+        (action) => this.userService.canActivate()
+            .map(response => canActivateSuccess)
+        );
 
     @Effect() logout$ = this.actions$
         .ofType(UserActionTypes.LOGOUT)

@@ -20,13 +20,20 @@ namespace BookStoreAdmin.Controllers
         [HttpPost]
         public ActionResult Login(string userName , string password)
         {
-            BookStoreAdmin.ViewModels.LoginResponse loginResponse = BookStoreAdmin.BAL.User.ValidateUser(userName, password);
+            BookStoreAdmin.ViewModels.Response<LoginResponse> response = new Response<LoginResponse>();
 
-            if(loginResponse.isValidUser == true)
+            BookStoreAdmin.ViewModels.LoginResponse data = BookStoreAdmin.BAL.User.ValidateUser(userName, password);
+
+            if(data.isValidUser == true)
             {
-                Session["user"] = loginResponse;
+                Session["user"] = data;
             }
-            return Json(loginResponse, JsonRequestBehavior.AllowGet);
+
+            response.data = data;
+            response.success = true;
+            response.errorMessage = null;                     
+            
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -35,5 +42,25 @@ namespace BookStoreAdmin.Controllers
             Session.Remove("user");
             return Json("temp", JsonRequestBehavior.AllowGet);
         } 
+
+        //can activate action method
+        public ActionResult CanActivate()
+        {
+            BookStoreAdmin.ViewModels.Response<LoginResponse> response = new Response<LoginResponse>();
+            BookStoreAdmin.ViewModels.LoginResponse data = new LoginResponse() { errorMessage = null, isValidUser = false, fullName = "", userName = "" };
+
+
+            if (Session["user"] != null)
+            {
+                response.data = (LoginResponse)Session["user"];
+            }
+           else
+            {
+                response.data = data;
+            }
+
+            
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
     }
 }
