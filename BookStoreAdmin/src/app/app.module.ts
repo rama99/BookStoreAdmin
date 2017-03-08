@@ -35,12 +35,12 @@ import { UserService } from './user.service';
 @NgModule({
     imports: [BrowserModule,
         RouterModule.forRoot([
-            { path: '', component: LoginComponent },
+            { path: '', component: LoginComponent, data : { displayMenu: false } },
            // { path: 'home', component: HomeComponent },
             { path: "spa/home", canActivate: [canActivateGuard], component: HomeComponent },
             { path: 'spa/about', canActivate: [canActivateGuard],  component: AboutComponent },
-            { path: 'spa/login', component: LoginComponent },
-            { path: '**', component: PageNotFoundComponent}
+            { path: 'spa/login', component: LoginComponent, data: { displayMenu: false }  },
+            { path: '**', component: PageNotFoundComponent, data: { displayMenu: false }}
         ]),
         AuthorModule,
         CategoryModule,

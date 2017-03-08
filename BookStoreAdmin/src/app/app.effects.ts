@@ -2,6 +2,7 @@
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { ActivatedRoute , Router } from '@angular/router';
 
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
@@ -31,7 +32,9 @@ export class AppEffects {
         private authorService: AuthorService,
         private service: CategoryService, 
         private bookService: BookService,
-        private userService: UserService        
+        private userService: UserService,
+        private router: Router,
+        private route:ActivatedRoute        
         
     ) { }    
      
@@ -40,7 +43,10 @@ export class AppEffects {
         .ofType(AuthorActionTypes.LOAD_AUTHORS)
         .switchMap(() => this.authorService.loadAuthors() 
             .map(authors => loadAuthorsSuccess(authors))
-            .catch(() => of(loadAuthorsSuccess([])))           
+            .catch((error) => {               
+                this.redirectToLogin(error);
+                return of(loadAuthorsSuccess([]))
+            })           
         );
         
 
@@ -48,7 +54,11 @@ export class AppEffects {
         .ofType(AuthorActionTypes.ADD_AUTHOR)
         .switchMap((action) => this.authorService.addAuthor(action.payload)
             .map(author => addAuthorSuccess(author))
-            .catch(() => of(addAuthorSuccess({})))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                return of(addAuthorSuccess({}))
+            }) 
+            //.catch(() => of(addAuthorSuccess({})))
         );
 
     @Effect() editAuthor$ = this.actions$
@@ -56,7 +66,11 @@ export class AppEffects {
         .switchMap(
         (action) => this.authorService.editAuthor(action.payload)
             .map(author => editAuthorSuccess(author))
-            .catch(() => of(editAuthorSuccess({})))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                return of(editAuthorSuccess({}))
+            }) 
+            //.catch(() => of(editAuthorSuccess({})))
         );
 
     @Effect() categories$ = this.actions$
@@ -64,7 +78,12 @@ export class AppEffects {
         .switchMap(
         (action) => this.service.loadCategories()
             .map(categories => loadCategoriesSuccess(categories))
-            .catch(() => of(loadCategoriesSuccess([])))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                return of(loadCategoriesSuccess([]))
+            })
+
+          //  .catch(() => of(loadCategoriesSuccess([])))
         );
         
 
@@ -72,7 +91,12 @@ export class AppEffects {
         .ofType(CategoryActionTypes.ADD_CATEGORY)
         .switchMap((action) => this.service.addCategory(action.payload)
             .map((category) => addCategorySuccess(category))
-            .catch(() => of(addCategorySuccess({})))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                return of(addCategorySuccess({}))
+            })
+
+            //.catch(() => of(addCategorySuccess({})))
         );
 
     @Effect() editCategory$ = this.actions$
@@ -80,7 +104,12 @@ export class AppEffects {
         .switchMap(
         (action) => this.service.editAuthor(action.payload)
             .map(category => editCatgorySuccess(category))
-            .catch(() => of(editCatgorySuccess({})))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                return of(editCatgorySuccess({}))
+            })
+
+           // .catch(() => of(editCatgorySuccess({})))
         );
      
 
@@ -89,7 +118,12 @@ export class AppEffects {
         .switchMap(
         (action) => this.bookService.loadBooks()
             .map(books => loadBooksSuccess(books))
-            .catch(() => of(loadBooksSuccess([])))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                return of(loadBooksSuccess([]))
+            })
+
+           // .catch(() => of(loadBooksSuccess([])))
         );
        
 
@@ -98,7 +132,12 @@ export class AppEffects {
         .switchMap(
         (action) => this.bookService.loadBookCategoryAuthor()
             .map((data: BookCategoryAuthorModel) => loadAllSuccess(data))
-            .catch(() => of(loadAllSuccess({books:[] , authors:[] , categories:[]})))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                return of(loadAllSuccess({ books: [], authors: [], categories: [] }))
+            })
+
+            //.catch(() => of(loadAllSuccess({books:[] , authors:[] , categories:[]})))
         );       
 
 
@@ -106,7 +145,12 @@ export class AppEffects {
         .ofType(BookActionTypes.ADD_BOOK)
         .switchMap((action) => this.bookService.addBook(action.payload)
             .map((book) => addBookSuccess(book))
-            .catch(() => of(addBookSuccess({})))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                return of(addBookSuccess({}))
+            })
+
+            //.catch(() => of(addBookSuccess({})))
         );  
 
     @Effect() editBook$ = this.actions$
@@ -114,7 +158,12 @@ export class AppEffects {
         .switchMap(
         (action) => this.bookService.editBook(action.payload)
             .map(book => editBookSuccess(book))
-            .catch(() => of(editBookSuccess({})))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                return of(editBookSuccess({}))
+            })
+
+            //.catch(() => of(editBookSuccess({})))
         );  
 
     @Effect() login$ = this.actions$
@@ -135,4 +184,12 @@ export class AppEffects {
         .ofType(UserActionTypes.LOGOUT)
         .switchMap(() => this.userService.logOut())
         .map(loginResponse => validateUserSuccess(loginResponse));
+
+    redirectToLogin(error:any) 
+    {
+        if (error.status === 403) {
+            this.router.navigate(['spa', 'login']);
+        }
+        
+    }
 }

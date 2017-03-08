@@ -24,7 +24,7 @@ export class AppComponent implements OnInit , DoCheck{
 
     ngOnInit() {  
 
-        this.router.events.subscribe(e => {
+      this.router.events.subscribe(e => {
             if (e instanceof NavigationEnd) {
                 if (e.url == '/' || e.url == '/spa/login') {                   
                     this.blnDisplayMenu = false;
@@ -33,7 +33,8 @@ export class AppComponent implements OnInit , DoCheck{
                     this.blnDisplayMenu = true;
                 }
             }
-        });
+        }); 
+
     }
 
     ngDoCheck() {    

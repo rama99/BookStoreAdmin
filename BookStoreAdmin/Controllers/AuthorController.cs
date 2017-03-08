@@ -26,8 +26,8 @@ namespace BookStoreAdmin.Controllers
 
             response.success = true;
             response.errorMessage = null;
-            response.data = authors;
-          
+            response.data = authors;            
+
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
@@ -57,7 +57,7 @@ namespace BookStoreAdmin.Controllers
 
             response.success = true;
             response.data = author;
-            response.errorMessage = null;
+            response.errorMessage = null;            
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -69,7 +69,7 @@ namespace BookStoreAdmin.Controllers
 
             response.success = true;
             response.data = author;
-            response.errorMessage = null;
+            response.errorMessage = null;           
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
