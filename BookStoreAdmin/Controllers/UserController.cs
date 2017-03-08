@@ -35,12 +35,11 @@ namespace BookStoreAdmin.Controllers
             
             return Json(response, JsonRequestBehavior.AllowGet);
         }
-
-        [HttpPost]
+        
         public ActionResult Logout()
         {
             Session.Remove("user");
-            return Json("temp", JsonRequestBehavior.AllowGet);
+            return Json(new { }, JsonRequestBehavior.AllowGet);
         } 
 
         //can activate action method

@@ -26,12 +26,10 @@ export class AppComponent implements OnInit , DoCheck{
 
         this.router.events.subscribe(e => {
             if (e instanceof NavigationEnd) {
-                if (e.url == '/' || e.url == '/spa/login') {
-                    console.log(e.url);
+                if (e.url == '/' || e.url == '/spa/login') {                   
                     this.blnDisplayMenu = false;
                 }
-                else {
-                    console.log(e.url);
+                else {                    
                     this.blnDisplayMenu = true;
                 }
             }

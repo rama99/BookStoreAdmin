@@ -43,7 +43,10 @@ export class UserService {
             errorMessage: ""
         }
 
-        return Observable.of(response); //.throttleTime(2000);
+        return this.http.get('http://localhost:57599/user/logout')
+            .map(data => data.json());
+
+      //  return Observable.of(response); //.throttleTime(2000);
     }
 
 }
