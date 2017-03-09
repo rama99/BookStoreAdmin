@@ -3,7 +3,7 @@ import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { CategoryModel } from './category-model';
-import { editCategory } from './actions';
+import { CategoryActions } from './actions';
 import { validationMessages } from './validations';
 
 @Component({
@@ -61,7 +61,7 @@ export class EditCategoryComponent {
         try {           
 
             if (!this.fg.invalid) {
-                this.store.dispatch(editCategory(this.fg.value));
+                this.store.dispatch(CategoryActions.editCategory(this.fg.value));
                 this.model.hide();
             }
             else {

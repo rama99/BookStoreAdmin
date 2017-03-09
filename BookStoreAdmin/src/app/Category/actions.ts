@@ -19,8 +19,10 @@ export const CategoryActionTypes = {
     LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS'
 }
 
+export class CategoryActions {
+
 // actions
-export function loadCatgories(): Action {
+static loadCatgories(): Action {
 
     $.blockUI();
     return {
@@ -29,7 +31,7 @@ export function loadCatgories(): Action {
     }
 }
 
-export function loadCategoriesSuccess(categories: CategoryModel[]): Action {   
+static loadCategoriesSuccess(categories: CategoryModel[]): Action {   
     $.unblockUI();
     return {
         type: CategoryActionTypes.LOAD_CATEGORIES_SUCCESS,
@@ -37,7 +39,7 @@ export function loadCategoriesSuccess(categories: CategoryModel[]): Action {
     }
 }
 
-export function addCategory(category: CategoryModel): Action {
+static addCategory(category: CategoryModel): Action {
 
     $.blockUI();
     return {
@@ -47,7 +49,7 @@ export function addCategory(category: CategoryModel): Action {
 }
 
 
-export function addCategorySuccess(data: any): Action {
+static addCategorySuccess(data: any): Action {
     $.unblockUI();
     return {
         type: CategoryActionTypes.ADD_CATEGORY_SUCCESS,
@@ -55,7 +57,7 @@ export function addCategorySuccess(data: any): Action {
     }
 }
 
-export function editCategory(category: CategoryModel): Action {
+static editCategory(category: CategoryModel): Action {
 
     $.blockUI();
     return {
@@ -64,7 +66,7 @@ export function editCategory(category: CategoryModel): Action {
     }
 }
 
-export function editCatgorySuccess(data: any): Action {
+static editCatgorySuccess(data: any): Action {
     $.unblockUI();
     return {
         type: CategoryActionTypes.EDIT_CATEGORY_SUCCESS,
@@ -72,10 +74,12 @@ export function editCatgorySuccess(data: any): Action {
     }
 }
 
-export function validationErrorCategory(data: any): Action {
+static validationErrorCategory(data: any): Action {
 
     return {
         type: CategoryActionTypes.VALIDATION_ERROR_CATEGORY,
         payload:data
     }
+}
+
 }

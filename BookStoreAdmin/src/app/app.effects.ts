@@ -10,14 +10,14 @@ import { Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 
 import { AuthorService } from './author/author.service';
-import { AuthorActionTypes, loadAuthorsSuccess, loadAuthorsError , addAuthorSuccess , editAuthorSuccess} from './author/actions';
+import { AuthorActionTypes, AuthorActions} from './author/actions';
 
 import { CategoryService } from './category.service';
 
-import { CategoryActionTypes, loadCategoriesSuccess, addCategorySuccess , editCatgorySuccess } from './category/actions';
+import { CategoryActionTypes, CategoryActions } from './category/actions';
 
 import { BookService } from './book.service';
-import { BookActionTypes, loadBooksSuccess, addBook, addBookSuccess, loadBookAuthorCategory, loadAllSuccess , editBookSuccess  } from './book/actions';
+import { BookActionTypes, BooksActions  } from './book/actions';
 
 import { UserService } from './user.service';
 import { UserActionTypes, validateUser, validateUserSuccess, logOutSuccess, logOut , canActivateSuccess } from './actions';
@@ -42,10 +42,10 @@ export class AppEffects {
     @Effect() authors$ = this.actions$
         .ofType(AuthorActionTypes.LOAD_AUTHORS)
         .switchMap(() => this.authorService.loadAuthors() 
-            .map(authors => loadAuthorsSuccess(authors))
+            .map(authors => AuthorActions.loadAuthorsSuccess(authors))
             .catch((error) => {               
                 this.redirectToLogin(error);
-                return of(loadAuthorsSuccess([]))
+                return of(AuthorActions.loadAuthorsSuccess([]))
             })           
         );
         
@@ -53,10 +53,10 @@ export class AppEffects {
     @Effect() addAuthor$ = this.actions$
         .ofType(AuthorActionTypes.ADD_AUTHOR)
         .switchMap((action) => this.authorService.addAuthor(action.payload)
-            .map(author => addAuthorSuccess(author))
+            .map(author => AuthorActions.addAuthorSuccess(author))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(addAuthorSuccess({}))
+                return of(AuthorActions.addAuthorSuccess({}))
             }) 
             //.catch(() => of(addAuthorSuccess({})))
         );
@@ -65,10 +65,10 @@ export class AppEffects {
         .ofType(AuthorActionTypes.EDIT_AUTHOR)
         .switchMap(
         (action) => this.authorService.editAuthor(action.payload)
-            .map(author => editAuthorSuccess(author))
+            .map(author => AuthorActions.editAuthorSuccess(author))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(editAuthorSuccess({}))
+                return of(AuthorActions.editAuthorSuccess({}))
             }) 
             //.catch(() => of(editAuthorSuccess({})))
         );
@@ -77,10 +77,10 @@ export class AppEffects {
         .ofType(CategoryActionTypes.LOAD_CATEGORIES)
         .switchMap(
         (action) => this.service.loadCategories()
-            .map(categories => loadCategoriesSuccess(categories))
+            .map(categories => CategoryActions.loadCategoriesSuccess(categories))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(loadCategoriesSuccess([]))
+                return of(CategoryActions.loadCategoriesSuccess([]))
             })
 
           //  .catch(() => of(loadCategoriesSuccess([])))
@@ -90,10 +90,10 @@ export class AppEffects {
     @Effect() addCategory$ = this.actions$
         .ofType(CategoryActionTypes.ADD_CATEGORY)
         .switchMap((action) => this.service.addCategory(action.payload)
-            .map((category) => addCategorySuccess(category))
+            .map((category) => CategoryActions.addCategorySuccess(category))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(addCategorySuccess({}))
+                return of(CategoryActions.addCategorySuccess({}))
             })
 
             //.catch(() => of(addCategorySuccess({})))
@@ -103,10 +103,10 @@ export class AppEffects {
         .ofType(CategoryActionTypes.EDIT_CATEGORY)
         .switchMap(
         (action) => this.service.editAuthor(action.payload)
-            .map(category => editCatgorySuccess(category))
+            .map(category => CategoryActions.editCatgorySuccess(category))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(editCatgorySuccess({}))
+                return of(CategoryActions.editCatgorySuccess({}))
             })
 
            // .catch(() => of(editCatgorySuccess({})))
@@ -117,10 +117,10 @@ export class AppEffects {
         .ofType(BookActionTypes.LOAD_BOOKS)
         .switchMap(
         (action) => this.bookService.loadBooks()
-            .map(books => loadBooksSuccess(books))
+            .map(books => BooksActions.loadBooksSuccess(books))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(loadBooksSuccess([]))
+                return of(BooksActions.loadBooksSuccess([]))
             })
 
            // .catch(() => of(loadBooksSuccess([])))
@@ -131,10 +131,10 @@ export class AppEffects {
         .ofType(BookActionTypes.LOAD_BOOKS_AUTHORS_CATEGORIES)        
         .switchMap(
         (action) => this.bookService.loadBookCategoryAuthor()
-            .map((data: BookCategoryAuthorModel) => loadAllSuccess(data))
+            .map((data: BookCategoryAuthorModel) => BooksActions.loadAllSuccess(data))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(loadAllSuccess({ books: [], authors: [], categories: [] }))
+                return of(BooksActions.loadAllSuccess({ books: [], authors: [], categories: [] }))
             })
 
             //.catch(() => of(loadAllSuccess({books:[] , authors:[] , categories:[]})))
@@ -144,10 +144,10 @@ export class AppEffects {
     @Effect() addBook$ = this.actions$
         .ofType(BookActionTypes.ADD_BOOK)
         .switchMap((action) => this.bookService.addBook(action.payload)
-            .map((book) => addBookSuccess(book))
+            .map((book) => BooksActions.addBookSuccess(book))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(addBookSuccess({}))
+                return of(BooksActions.addBookSuccess({}))
             })
 
             //.catch(() => of(addBookSuccess({})))
@@ -157,10 +157,10 @@ export class AppEffects {
         .ofType(BookActionTypes.EDIT_BOOK)
         .switchMap(
         (action) => this.bookService.editBook(action.payload)
-            .map(book => editBookSuccess(book))
+            .map(book => BooksActions.editBookSuccess(book))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(editBookSuccess({}))
+                return of(BooksActions.editBookSuccess({}))
             })
 
             //.catch(() => of(editBookSuccess({})))

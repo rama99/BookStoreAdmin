@@ -26,16 +26,20 @@ export const AuthorActionTypes = {
     LOAD_ALL_ERROR: 'LOAD_ALL_ERROR'
 }
 
+export class AuthorActions {
+
+    constructor() {        
+    }
+
 // Actions
-export function loadAuthors(): Action {
+static loadAuthors(): Action {
     $.blockUI();
     return {
         type: AuthorActionTypes.LOAD_AUTHORS,
         payload:{}
     }
 }
-
-export function loadAuthorsSuccess(authors: AuthorModel[]): Action {
+static loadAuthorsSuccess(authors: AuthorModel[]): Action {
     $.unblockUI();
     return {
         type: AuthorActionTypes.LOAD_AUTHORS_SUCCESS,
@@ -43,7 +47,7 @@ export function loadAuthorsSuccess(authors: AuthorModel[]): Action {
     }
 }
 
-export function loadAuthorsError(errors: string[]): Action {
+static loadAuthorsError(errors: string[]): Action {
 
     return {
         type: AuthorActionTypes.LOAD_AUTHORS_ERROR,
@@ -51,7 +55,7 @@ export function loadAuthorsError(errors: string[]): Action {
     }
 }
 
-export function addAuthor(author: AuthorModel): Action {
+static addAuthor(author: AuthorModel): Action {
 
     $.blockUI();
     return {
@@ -60,7 +64,7 @@ export function addAuthor(author: AuthorModel): Action {
     }
 }
 
-export function addAuthorSuccess(data: any): Action {    
+static addAuthorSuccess(data: any): Action {    
     $.unblockUI();
     return {
         type: AuthorActionTypes.ADD_AUTHOR_SUCCESS,
@@ -68,7 +72,7 @@ export function addAuthorSuccess(data: any): Action {
     }
 }
 
-export function editAuthor(author: AuthorModel): Action {
+static editAuthor(author: AuthorModel): Action {
     $.blockUI();
     return {
         type: AuthorActionTypes.EDIT_AUTHOR,
@@ -76,7 +80,7 @@ export function editAuthor(author: AuthorModel): Action {
     }
 }
 
-export function editAuthorSuccess(data: any): Action {
+static editAuthorSuccess(data: any): Action {
     $.unblockUI();
     return {
         type: AuthorActionTypes.EDIT_AUTHOR_SUCCESS,
@@ -84,11 +88,13 @@ export function editAuthorSuccess(data: any): Action {
     }
 }
 
-export function validationErrorAuthor(data: any): Action {
+static validationErrorAuthor(data: any): Action {
 
     return {
         type: AuthorActionTypes.VALIDATION_ERROR_AUTHOR,
         payload:data
     }
+}
+
 }
 

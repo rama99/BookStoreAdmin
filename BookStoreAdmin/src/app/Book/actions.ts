@@ -23,7 +23,9 @@ export const BookActionTypes = {
     LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS'
 }
 
-export function loadBooks(): Action {   
+export class BooksActions {
+
+static loadBooks(): Action {   
     $.blockUI();
     return {
         type: BookActionTypes.LOAD_BOOKS,
@@ -31,7 +33,7 @@ export function loadBooks(): Action {
     }
 }
 
-export function loadBooksSuccess(books:BookModel[]): Action {
+static loadBooksSuccess(books:BookModel[]): Action {
     $.unblockUI();
     return {
         type: BookActionTypes.LOAD_BOOKS_SUCCESS,
@@ -39,7 +41,7 @@ export function loadBooksSuccess(books:BookModel[]): Action {
     }
 }
 
-export function loadBookAuthorCategory(): Action {
+static loadBookAuthorCategory(): Action {
     $.blockUI();
     return {
         type: BookActionTypes.LOAD_BOOKS_AUTHORS_CATEGORIES,
@@ -47,7 +49,7 @@ export function loadBookAuthorCategory(): Action {
     }
 }
 
-export function loadBookAuthorCategorySuccess(data: any): Action {
+static loadBookAuthorCategorySuccess(data: any): Action {
     $.unblockUI();
     return {
         type: BookActionTypes.LOAD_BOOKS_AUTHORS_CATEGORIES_SUCCESS,
@@ -56,7 +58,7 @@ export function loadBookAuthorCategorySuccess(data: any): Action {
 
 }
 
-export function addBook(book: BookModel): Action {
+static addBook(book: BookModel): Action {
     $.blockUI();
     return {
         type: BookActionTypes.ADD_BOOK,
@@ -65,7 +67,7 @@ export function addBook(book: BookModel): Action {
 
 }
 
-export function addBookSuccess(data: any): Action {
+static addBookSuccess(data: any): Action {
     $.unblockUI();
     return {
         type: BookActionTypes.ADD_BOOK_SUCCESS,
@@ -73,7 +75,7 @@ export function addBookSuccess(data: any): Action {
     }
 }
 
-export function editBook(book: BookModel): Action {
+static editBook(book: BookModel): Action {
     $.blockUI();
     return {
         type: BookActionTypes.EDIT_BOOK,
@@ -81,7 +83,7 @@ export function editBook(book: BookModel): Action {
     };
 }
 
-export function editBookSuccess(data: any): Action {
+static editBookSuccess(data: any): Action {
     $.unblockUI();
     return {
         type: BookActionTypes.EDIT_BOOK_SUCCESS,
@@ -89,7 +91,7 @@ export function editBookSuccess(data: any): Action {
     }
 }
 
-export function loadAllSuccess(all: BookCategoryAuthorModel): Action {
+static loadAllSuccess(all: BookCategoryAuthorModel): Action {
     $.unblockUI();
     return {
         type: BookActionTypes.LOAD_ALL_SUCCESS,
@@ -97,10 +99,12 @@ export function loadAllSuccess(all: BookCategoryAuthorModel): Action {
     }
 }
 
-export function validationErrorBook(data: any): Action {
+static validationErrorBook(data: any): Action {
 
     return {
         type: BookActionTypes.VALIDATION_ERROR_BOOK,
         payload: data
     }
+}
+
 }

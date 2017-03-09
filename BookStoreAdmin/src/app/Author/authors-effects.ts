@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 
 import { AuthorService } from './author.service';
-import { AuthorActionTypes , loadAuthorsSuccess , addAuthorSuccess} from './actions';
+import { AuthorActionTypes, AuthorActions} from './actions';
 
 @Injectable()
 export class AuthorEffects {
@@ -17,10 +17,10 @@ export class AuthorEffects {
     @Effect() authors$ = this.actions$
         .ofType(AuthorActionTypes.LOAD_AUTHORS)
         .mergeMap(() => this.authorService.loadAuthors())
-        .map(authors => loadAuthorsSuccess(authors));
+        .map(authors => AuthorActions.loadAuthorsSuccess(authors));
 
     @Effect() addAuthor$ = this.actions$
         .ofType(AuthorActionTypes.ADD_AUTHOR)
         .mergeMap((action) => this.authorService.addAuthor(action.payload))
-        .map(author => addAuthorSuccess(author));
+        .map(author => AuthorActions.addAuthorSuccess(author));
 }

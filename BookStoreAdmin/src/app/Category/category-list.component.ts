@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { CategoryModel } from './category-model';
-import { loadCatgories } from './actions';
+import { CategoryActions } from './actions';
 
 @Component({
     selector: '',
@@ -23,7 +23,7 @@ export class CategoryListComponent {
     }
 
     ngOnInit() {
-        this.store.dispatch(loadCatgories());
+        this.store.dispatch(CategoryActions.loadCatgories());
     }
 
     edit(category: CategoryModel) {

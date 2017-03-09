@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild , OnInit , AfterViewInit} from '@angular/core';
 import { ModalDirective } from 'ng2-bootstrap/modal';
 
-import { loadAuthors } from './actions';
+import { AuthorActions } from './actions';
 import { AuthorModel } from './author-model';
 
 import { Store } from '@ngrx/store';
@@ -24,7 +24,7 @@ export class AuthorListComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {        
 
-        this.store.dispatch(loadAuthors());        
+        this.store.dispatch(AuthorActions.loadAuthors());        
     }
 
     ngAfterViewInit() {

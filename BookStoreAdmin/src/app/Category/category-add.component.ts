@@ -1,7 +1,7 @@
 ﻿import { Component , OnInit , ViewChild  , Renderer , AfterViewInit , ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { addCategory, validationErrorCategory } from './actions';
+import { CategoryActions } from './actions';
 import { validationMessages } from './validations';
 
 @Component({
@@ -47,11 +47,11 @@ export class CategoryAddComponent implements OnInit , AfterViewInit {
         
 
         if (this.fg.invalid) {
-            this.store.dispatch(validationErrorCategory(this.getValidationErrorMsgs()));
+            this.store.dispatch(CategoryActions.validationErrorCategory(this.getValidationErrorMsgs()));
             this.modal.show();
         }
         else {
-            this.store.dispatch(addCategory(this.fg.value));
+            this.store.dispatch(CategoryActions.addCategory(this.fg.value));
            // this.fg.reset();
         }        
     }

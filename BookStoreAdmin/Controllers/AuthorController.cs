@@ -48,7 +48,7 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost]        
         public ActionResult AddAuthor(BookStoreAdmin.ViewModels.Author author)
         {          
 

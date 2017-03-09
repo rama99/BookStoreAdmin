@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { BookModel } from './book-model';
-import { loadBooks } from './actions';
+import { BooksActions } from './actions';
 
 @Component({
     selector: '',

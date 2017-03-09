@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
-import { addAuthor , validationErrorAuthor } from './actions';
+import { AuthorActions } from './actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthorModel } from './author-model';
 import { validationMessages } from './validation';
@@ -61,12 +61,12 @@ export class AuthorAddComponent implements OnInit, AfterViewInit{
         console.log(this.fg.value);
 
         if (this.fg.invalid) {            
-            this.store.dispatch(validationErrorAuthor(this.getValidationErrorMsgs()));
+            this.store.dispatch(AuthorActions.validationErrorAuthor(this.getValidationErrorMsgs()));
             this.model.show();
         }
         else
         {            
-            this.store.dispatch(addAuthor(this.fg.value));
+            this.store.dispatch(AuthorActions.addAuthor(this.fg.value));
         }
     }
 

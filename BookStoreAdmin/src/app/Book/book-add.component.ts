@@ -6,12 +6,12 @@ import { AuthorModel } from '../author/author-model';
 import { CategoryModel } from '../Category/category-model';
 import { validationMessages } from './validations';
 
-import { addBook } from './actions';
+import { BooksActions } from './actions';
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 
-import { loadAuthors } from '../author/actions';
-import { loadCatgories } from '../Category/actions';
-import { loadBooks, loadBookAuthorCategory, loadAllSuccess , validationErrorBook } from '../book/actions';
+import { AuthorActions } from '../author/actions';
+import { CategoryActions } from '../Category/actions';
+//import { loadBooks, loadBookAuthorCategory, loadAllSuccess , validationErrorBook  } from './actions';
 
 @Component({
     selector: 'book-add',
@@ -58,7 +58,7 @@ export class BookAddComponent implements OnInit , AfterViewInit{
             "price": [, Validators.compose([Validators.required])]
         });     
 
-        this.store.dispatch(loadBookAuthorCategory());
+        this.store.dispatch(BooksActions.loadBookAuthorCategory());
 
 
         this.authors$ = this.store.select('authors');
@@ -68,11 +68,11 @@ export class BookAddComponent implements OnInit , AfterViewInit{
     addBook() {
 
         if (this.fg.invalid) {
-            this.store.dispatch(validationErrorBook(this.getValidationErrorMsgs()));
+            this.store.dispatch(BooksActions.validationErrorBook(this.getValidationErrorMsgs()));
             this.model.show();
         }
         else {
-            this.store.dispatch(addBook(this.fg.value));           
+            this.store.dispatch(BooksActions.addBook(this.fg.value));           
         }        
     }
 

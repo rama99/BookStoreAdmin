@@ -3,7 +3,7 @@ import { FormBuilder, FormArray, FormGroup , Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { AuthorModel } from './author-model';
-import { editAuthor, validationErrorAuthor } from './actions';
+import { AuthorActions } from './actions';
 import { validationMessages } from './validation';
 
 @Component({
@@ -69,7 +69,7 @@ export class AuthorEditComponent implements OnInit, OnChanges, AfterViewInit, Do
             
             if (!this.fg.invalid)
             {               
-                this.store.dispatch(editAuthor(this.fg.value));               
+                this.store.dispatch(AuthorActions.editAuthor(this.fg.value));               
                 this.model.hide();
             }
             else

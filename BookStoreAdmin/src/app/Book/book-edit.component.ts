@@ -7,7 +7,7 @@ import { BookModel } from './book-model';
 import { AuthorModel } from '../author/author-model';
 import { CategoryModel } from '../Category/category-model';
 
-import { editBook } from './actions';
+import { BooksActions } from './actions';
 import { validationMessages } from './validations';
 
 @Component({
@@ -81,7 +81,7 @@ export class BookEditComponent implements OnInit, OnChanges, AfterViewInit{
         { 
             if (!this.fg.invalid)
             {
-                this.store.dispatch(editBook(this.fg.value));                
+                this.store.dispatch(BooksActions.editBook(this.fg.value));                
                 this.model.hide();
             }
             else
