@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using BookStoreAdmin.ViewModels;
 using BookStoreAdmin.BAL;
+using BookStoreAdmin.Filters;
 
 namespace BookStoreAdmin.Controllers
 {
@@ -17,6 +18,7 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
+        [CustomAuth]
         public ActionResult GetCategories()
         {
             List<BookStoreAdmin.ViewModels.Category> categories = BookStoreAdmin.BAL.Category.GetCategories();
@@ -47,6 +49,7 @@ namespace BookStoreAdmin.Controllers
         }
 
         [HttpPost]
+        [CustomAuth]
         public ActionResult AddCategory(BookStoreAdmin.ViewModels.Category category)
         {
             BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.Category> response = new ViewModels.Response<BookStoreAdmin.ViewModels.Category>();
@@ -61,6 +64,7 @@ namespace BookStoreAdmin.Controllers
         }
 
         [HttpPost]
+        [CustomAuth]
         public ActionResult EditCategory(BookStoreAdmin.ViewModels.Category category)
         {
             BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.Category> response = new ViewModels.Response<BookStoreAdmin.ViewModels.Category>();

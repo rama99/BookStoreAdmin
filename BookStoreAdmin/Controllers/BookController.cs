@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using BookStoreAdmin.BAL;
 using BookStoreAdmin.ViewModels;
+using BookStoreAdmin.Filters;
 
 namespace BookStoreAdmin.Controllers
 {
@@ -36,11 +37,13 @@ namespace BookStoreAdmin.Controllers
         }
 
         // GetBooks
+        [CustomAuth]
         public ActionResult GetBooks()
         {
             return Json(BookStoreAdmin.BAL.Book.GetBookDetails(), JsonRequestBehavior.AllowGet);
         }
 
+        [CustomAuth]
         public ActionResult GetBooks1()
         {
             BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.BooksListAndAdd> response = new Response<ViewModels.BooksListAndAdd>();
@@ -60,6 +63,7 @@ namespace BookStoreAdmin.Controllers
         }
 
         [HttpPost]
+        [CustomAuth]
         public ActionResult AddBook(BookStoreAdmin.ViewModels.BookRequest bookRequest)
         {
             BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.Book> response = new ViewModels.Response<BookStoreAdmin.ViewModels.Book>();
@@ -72,6 +76,7 @@ namespace BookStoreAdmin.Controllers
         } 
 
         [HttpPost]
+        [CustomAuth]
         public ActionResult EditBook(BookStoreAdmin.ViewModels.BookRequest bookRequest)
         {
             BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.Book> response = new Response<ViewModels.Book>();

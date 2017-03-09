@@ -18,13 +18,10 @@ export function reducer(state: State = initialState, action: Action) {
 
     switch (action.type) {
 
-        case AuthorActionTypes.LOAD_AUTHORS:           
-            return state;      
-        case AuthorActionTypes.LOAD_AUTHORS_SUCCESS:            
-              return {
-                  currentPage: state.currentPage,
-                  authors:action.payload.data
-            }
+        /*case AuthorActionTypes.LOAD_AUTHORS:           
+            return state; */     
+        case AuthorActionTypes.LOAD_AUTHORS_SUCCESS:              
+            return Object.assign({}, state, { authors: action.payload.data } ) 
         case AuthorActionTypes.LOAD_ALL_SUCCESS: 
 
             return Object.assign({}, state, { authors: action.payload.data.authors });
@@ -37,12 +34,9 @@ export function reducer(state: State = initialState, action: Action) {
 
 
         case AuthorActionTypes.ADD_AUTHOR_SUCCESS:
+            console.log('ADD_AUTHOR_SUCCESS', JSON.stringify(state));
+            return Object.assign({}, state, { authors: state.authors.concat(action.payload) } )
 
-            let xx = {
-                currentPage: state.currentPage,
-                authors: state.authors.concat(action.payload)
-            }           
-            return xx;
         case AuthorActionTypes.EDIT_AUTHOR_SUCCESS:
 
             return Object.assign({}, state, {
@@ -58,7 +52,8 @@ export function reducer(state: State = initialState, action: Action) {
                     });
         case AuthorActionTypes.VALIDATION_ERROR_AUTHOR:            
             return Object.assign({}, state, { errors: action.payload });   
-        default: return state;
+        default:            
+            return state;
     }
 
 }

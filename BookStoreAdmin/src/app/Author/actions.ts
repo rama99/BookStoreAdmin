@@ -23,7 +23,9 @@ export const AuthorActionTypes = {
     
     LOAD_ALL: 'LOAD_ALL',
     LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS',
-    LOAD_ALL_ERROR: 'LOAD_ALL_ERROR'
+    LOAD_ALL_ERROR: 'LOAD_ALL_ERROR',
+
+    SERVER_ERROR_AUTHOR:'SERVER_ERROR_AUTHOR'
 }
 
 export class AuthorActions {
@@ -95,6 +97,15 @@ static validationErrorAuthor(data: any): Action {
         payload:data
     }
 }
+
+static serverErrorAuthor(): Action {
+    $.unblockUI();
+    return {
+        type: AuthorActionTypes.SERVER_ERROR_AUTHOR,
+        payload: {}
+    }
+}
+
 
 }
 

@@ -16,7 +16,9 @@ export const CategoryActionTypes = {
     VALIDATION_ERROR_CATEGORY: 'VALIDATION_ERROR_CATEGORY', 
 
     LOAD_ALL: 'LOAD_ALL',
-    LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS'
+    LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS',
+
+    SERVER_ERROR_CATEGORY: 'SERVER_ERROR_CATEGORY'
 }
 
 export class CategoryActions {
@@ -80,6 +82,15 @@ static validationErrorCategory(data: any): Action {
         type: CategoryActionTypes.VALIDATION_ERROR_CATEGORY,
         payload:data
     }
+}
+
+static serverErrorCategory(): Action {
+        $.unblockUI();
+        return {
+            type: CategoryActionTypes.SERVER_ERROR_CATEGORY,
+            payload: {}
+        }
+
 }
 
 }

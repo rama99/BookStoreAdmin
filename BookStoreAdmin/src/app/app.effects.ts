@@ -45,7 +45,7 @@ export class AppEffects {
             .map(authors => AuthorActions.loadAuthorsSuccess(authors))
             .catch((error) => {               
                 this.redirectToLogin(error);
-                return of(AuthorActions.loadAuthorsSuccess([]))
+                return of(AuthorActions.serverErrorAuthor())
             })           
         );
         
@@ -56,9 +56,9 @@ export class AppEffects {
             .map(author => AuthorActions.addAuthorSuccess(author))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(AuthorActions.addAuthorSuccess({}))
+                return of(AuthorActions.serverErrorAuthor())               
             }) 
-            //.catch(() => of(addAuthorSuccess({})))
+            
         );
 
     @Effect() editAuthor$ = this.actions$
@@ -68,9 +68,9 @@ export class AppEffects {
             .map(author => AuthorActions.editAuthorSuccess(author))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(AuthorActions.editAuthorSuccess({}))
+                return of(AuthorActions.serverErrorAuthor())
             }) 
-            //.catch(() => of(editAuthorSuccess({})))
+           
         );
 
     @Effect() categories$ = this.actions$
@@ -80,10 +80,10 @@ export class AppEffects {
             .map(categories => CategoryActions.loadCategoriesSuccess(categories))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(CategoryActions.loadCategoriesSuccess([]))
+                return of(CategoryActions.serverErrorCategory())
             })
 
-          //  .catch(() => of(loadCategoriesSuccess([])))
+          
         );
         
 
@@ -93,10 +93,9 @@ export class AppEffects {
             .map((category) => CategoryActions.addCategorySuccess(category))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(CategoryActions.addCategorySuccess({}))
+                return of(CategoryActions.serverErrorCategory())
             })
-
-            //.catch(() => of(addCategorySuccess({})))
+           
         );
 
     @Effect() editCategory$ = this.actions$
@@ -106,10 +105,9 @@ export class AppEffects {
             .map(category => CategoryActions.editCatgorySuccess(category))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(CategoryActions.editCatgorySuccess({}))
+                return of(CategoryActions.serverErrorCategory())
             })
-
-           // .catch(() => of(editCatgorySuccess({})))
+          
         );
      
 
@@ -120,10 +118,9 @@ export class AppEffects {
             .map(books => BooksActions.loadBooksSuccess(books))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(BooksActions.loadBooksSuccess([]))
+                return of(BooksActions.serverErrorBook())
             })
-
-           // .catch(() => of(loadBooksSuccess([])))
+          
         );
        
 
@@ -134,10 +131,10 @@ export class AppEffects {
             .map((data: BookCategoryAuthorModel) => BooksActions.loadAllSuccess(data))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(BooksActions.loadAllSuccess({ books: [], authors: [], categories: [] }))
+                //return of(BooksActions.loadAllSuccess({ books: [], authors: [], categories: [] }))
+                return of(BooksActions.serverErrorBook())
             })
-
-            //.catch(() => of(loadAllSuccess({books:[] , authors:[] , categories:[]})))
+            
         );       
 
 
@@ -147,10 +144,9 @@ export class AppEffects {
             .map((book) => BooksActions.addBookSuccess(book))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(BooksActions.addBookSuccess({}))
+                return of(BooksActions.serverErrorBook())
             })
-
-            //.catch(() => of(addBookSuccess({})))
+            
         );  
 
     @Effect() editBook$ = this.actions$
@@ -160,10 +156,9 @@ export class AppEffects {
             .map(book => BooksActions.editBookSuccess(book))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(BooksActions.editBookSuccess({}))
+                return of(BooksActions.serverErrorBook())
             })
-
-            //.catch(() => of(editBookSuccess({})))
+          
         );  
 
     @Effect() login$ = this.actions$
@@ -187,7 +182,7 @@ export class AppEffects {
 
     redirectToLogin(error:any) 
     {
-        if (error.status === 403) {
+        if (error.status === 403 || error.status === 401) {
             this.router.navigate(['spa', 'login']);
         }
         

@@ -20,7 +20,9 @@ export const BookActionTypes = {
     EDIT_BOOK_ERROR: 'EDIT_BOOK_ERROR',
 
     LOAD_ALL: 'LOAD_ALL',
-    LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS'
+    LOAD_ALL_SUCCESS: 'LOAD_ALL_SUCCESS',
+
+    SERVER_ERROR_BOOK: 'SERVER_ERROR_BOOK'
 }
 
 export class BooksActions {
@@ -104,6 +106,14 @@ static validationErrorBook(data: any): Action {
     return {
         type: BookActionTypes.VALIDATION_ERROR_BOOK,
         payload: data
+    }
+}
+
+static serverErrorBook(): Action {
+    $.unblockUI();
+    return {
+        type: BookActionTypes.SERVER_ERROR_BOOK,
+        payload: {}
     }
 }
 

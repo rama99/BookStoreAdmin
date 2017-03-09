@@ -19,24 +19,18 @@ export function reducer(state:State = initialState, action: Action):State {
 
     switch (action.type) {
        
-        case CategoryActionTypes.LOAD_CATEGORIES_SUCCESS:           
-            return {
-            currentPage: 0,
-            categories: action.payload.data,
-            errors:[]
-            }
+        case CategoryActionTypes.LOAD_CATEGORIES_SUCCESS:   
 
+            return Object.assign({}, state, { categories: action.payload.data }); 
            
         case CategoryActionTypes.LOAD_ALL_SUCCESS:
         
             return Object.assign({}, state, { categories: action.payload.data.categories });
+
         case CategoryActionTypes.ADD_CATEGORY_SUCCESS:
 
-            return {
-            currentPage: state.currentPage,
-            categories: state.categories.concat(action.payload),
-            errors:[]
-            }
+            return Object.assign({}, state, { categories: state.categories.concat(action.payload) });
+            
         case CategoryActionTypes.EDIT_CATEGORY_SUCCESS:
 
             return Object.assign({}, state, {

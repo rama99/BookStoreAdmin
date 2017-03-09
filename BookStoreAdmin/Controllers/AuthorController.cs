@@ -6,9 +6,11 @@ using System.Web.Mvc;
 
 using BookStoreAdmin.BAL;
 using BookStoreAdmin.ViewModels;
+using BookStoreAdmin.Filters;
 
 namespace BookStoreAdmin.Controllers
 {
+    
     public class AuthorController : Controller
     {
         // GET: Author template
@@ -17,6 +19,7 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
+        [CustomAuth]
         public ActionResult GetAuthors()
         {            
 
@@ -48,7 +51,8 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
-        [HttpPost]        
+        [HttpPost]
+        [CustomAuth]
         public ActionResult AddAuthor(BookStoreAdmin.ViewModels.Author author)
         {          
 
@@ -62,6 +66,8 @@ namespace BookStoreAdmin.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [CustomAuth]
+        [HttpPost]
         public ActionResult EditAuthor(BookStoreAdmin.ViewModels.Author author)
         {
             BookStoreAdmin.ViewModels.Response<BookStoreAdmin.ViewModels.Author> response = new ViewModels.Response<BookStoreAdmin.ViewModels.Author>();
