@@ -142,6 +142,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\CustomAuthAttribute.cs" />
+    <Compile Include="Filters\CustomCSRF.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,6 +192,7 @@
     <Content Include="images\bootstrap.jpg" />
     <Content Include="images\ef.jpg" />
     <Content Include="images\es6.png" />
+    <Content Include="images\github.png" />
     <Content Include="images\ngrx.jpg" />
     <Content Include="images\nodejs.png" />
     <Content Include="images\rxjs.png" />

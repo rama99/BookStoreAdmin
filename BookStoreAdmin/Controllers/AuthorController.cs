@@ -19,9 +19,9 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
-        [CustomAuth]
+        [CustomAuth]        
         public ActionResult GetAuthors()
-        {            
+        {           
 
             List<BookStoreAdmin.ViewModels.Author> authors = BookStoreAdmin.BAL.Author.GetAuthors();
 
@@ -29,19 +29,22 @@ namespace BookStoreAdmin.Controllers
 
             response.success = true;
             response.errorMessage = null;
-            response.data = authors;            
+            response.data = authors;
+
+           //      
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult List()
-        {
+        {            
             return View();
         }
 
         // Template
         public ActionResult Add()
         {
+           // Response.Headers.Set("__RequestVerificationToken", AntiForgeryToken());
             return View();
         }
 
@@ -53,6 +56,8 @@ namespace BookStoreAdmin.Controllers
 
         [HttpPost]
         [CustomAuth]
+        //[ValidateAntiForgeryToken]
+        // [ValidateHeaderAntiForgeryToken]
         public ActionResult AddAuthor(BookStoreAdmin.ViewModels.Author author)
         {          
 

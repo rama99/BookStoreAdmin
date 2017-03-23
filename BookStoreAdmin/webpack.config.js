@@ -17,13 +17,13 @@ module.exports = {
     
     new webpack.optimize.UglifyJsPlugin({
         minimize: true,
-        compress: false
+        compress: true
     }),
      new AotPlugin({         
           tsConfigPath: 'src\\tsconfig.json',
           mainPath: 'main.ts',         
           "skipCodeGeneration": true
-      }), 
+      }),
     ],
     output: {
         filename:'./src/bundle.js'

@@ -2,7 +2,7 @@
 
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
+import { HttpModule, XSRFStrategy, CookieXSRFStrategy , Http} from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
@@ -23,6 +23,10 @@ import { AuthorEditComponent } from './author-edit.component';
 
 import { AuthorService } from './author.service';
 import { canActivateGuard } from '../canActivate';
+
+export function xsrfFactory() {
+    return new CookieXSRFStrategy('__RequestVerificationToken', '__RequestVerificationToken');
+}
 
 @NgModule({
     imports: [CommonModule,
@@ -54,7 +58,12 @@ import { canActivateGuard } from '../canActivate';
         AuthorAddComponent,
         AuthorDetailComponent,
         AuthorEditComponent],
-    providers: [AuthorService]
+    providers: [AuthorService,
+       // { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('__RequestVerificationToken', '__RequestVerificationToken') }
+        { provide: XSRFStrategy, useFactory: xsrfFactory }       
+]
 })
+
+
 
 export class AuthorModule { }

@@ -10,6 +10,7 @@ namespace BookStoreAdmin.Controllers
     {
         public ActionResult Index()
         {
+            //Response.SetCookie(new HttpCookie("__RequestVerificationToken", "test"));
             return View();
         }
 
