@@ -320,6 +320,7 @@
     <TypeScriptCompile Include="src\app\login.component.ts" />
     <TypeScriptCompile Include="src\app\reducer.ts" />
     <TypeScriptCompile Include="src\app\Shared\keys.pipe.ts" />
+    <TypeScriptCompile Include="src\app\Shared\rupee.pipe.ts" />
     <TypeScriptCompile Include="src\app\Shared\shared.module.ts" />
     <TypeScriptCompile Include="src\app\StoreModel.ts" />
     <TypeScriptCompile Include="src\app\user.service.ts" />

@@ -2,6 +2,8 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+
 import { RouterModule } from '@angular/router';
 
 // RECOMMENDED (doesn't work with system.js)
@@ -27,7 +29,8 @@ import { canActivateGuard } from '../canActivate';
                 ]
             }
         ]),
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        SharedModule
     ],
     exports: [],
     declarations: [BookMainComponent, BookListComponent, BookAddComponent, BookEditComponent],
