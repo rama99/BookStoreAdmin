@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable , Inject } from '@angular/core';
 import { Http , Headers , RequestOptions } from '@angular/http';
 import { LoginModel, LoginResponseModel } from './login-model';
 import { Observable } from 'rxjs/Observable';
@@ -7,12 +7,14 @@ import 'rxjs/add/operator/throttleTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-//throttleTime(1000);
+import { CONFIG } from './config';
+
 
 @Injectable()
 export class UserService {
 
-    constructor(private http:Http) {
+    constructor(private http: Http,
+                @Inject(CONFIG) private config:any) {
 
     }
 
@@ -26,13 +28,13 @@ export class UserService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        return this.http.post('http://localhost:57599/user/login', login, { headers: headers })
+        return this.http.post(this.config.apiUrl + '/user/login', login, { headers: headers })
                         .map(data => data.json());       
     }
 
     canActivate(): Observable<any> {
 
-        return this.http.get('http://localhost:57599/user/CanActivate')
+        return this.http.get(this.config.apiUrl + '/user/CanActivate')
             .map(data => data.json());
     }
 
@@ -43,10 +45,8 @@ export class UserService {
             errorMessage: ""
         }
 
-        return this.http.get('http://localhost:57599/user/logout')
-            .map(data => data.json());
-
-      //  return Observable.of(response); //.throttleTime(2000);
+        return this.http.get(this.config.apiUrl + '/user/logout')
+            .map(data => data.json());      
     }
 
 }

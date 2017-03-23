@@ -315,6 +315,7 @@
     <TypeScriptCompile Include="src\app\category.service.ts" />
     <TypeScriptCompile Include="src\app\Category\reducer.ts" />
     <TypeScriptCompile Include="src\app\Category\validations.ts" />
+    <TypeScriptCompile Include="src\app\config.ts" />
     <TypeScriptCompile Include="src\app\login-model.ts" />
     <TypeScriptCompile Include="src\app\home.component.ts" />
     <TypeScriptCompile Include="src\app\login.component.ts" />

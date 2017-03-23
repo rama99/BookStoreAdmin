@@ -1,15 +1,16 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable , Inject } from '@angular/core';
 import { Http , Headers , RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { BookModel , BookCategoryAuthorModel } from './book/book-model';
-
+import { CONFIG } from './config';
 
 @Injectable()
 export class BookService {
 
-    constructor(private http: Http) {
+    constructor( private http: Http,
+        @Inject(CONFIG) private config:any ) {
 
     }
 
@@ -19,7 +20,7 @@ export class BookService {
             { id: 1, title: 'Fountain Head', description: ' this is a description', category: { id: 1, name: 'category 1', description: 'desc here' }, authors: [{ id: 1, first_name: 'fname', last_name: 'lname', description: 'description here' }, { id: 2, first_name: 'fname2', last_name: 'lname2', description: 'description here2' }] , price:99.99 }
         ]
 
-        return this.http.get('http://localhost:57599/book/getbooks')
+        return this.http.get(this.config.apiUrl + '/book/getbooks')
             .map((data) => data.json());
 
         //return Observable.of(data);
@@ -27,7 +28,7 @@ export class BookService {
 
     loadBookCategoryAuthor(): Observable<BookCategoryAuthorModel> {
 
-        return this.http.get('http://localhost:57599/book/getbooks1')
+        return this.http.get(this.config.apiUrl + '/book/getbooks1')
             .map((data) => data.json());
     }
 
@@ -37,7 +38,7 @@ export class BookService {
 
         headers.append('Content-Type', 'application/json');
 
-        return this.http.post('http://localhost:57599/book/AddBook', JSON.stringify(book), { headers: headers })
+        return this.http.post(this.config.apiUrl + '/book/AddBook', JSON.stringify(book), { headers: headers })
                         .map(data => data.json());
        
     }
@@ -47,7 +48,7 @@ export class BookService {
         let headers: Headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        return this.http.post('http://localhost:57599/book/EditBook', JSON.stringify(bookModel), { headers: headers })
+        return this.http.post(this.config.apiUrl + '/book/EditBook', JSON.stringify(bookModel), { headers: headers })
             .map(data => data.json());
     }
 

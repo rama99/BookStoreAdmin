@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable , Inject } from '@angular/core';
 import { Http , Headers , RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -7,10 +7,15 @@ import 'rxjs/add/operator/catch';
 
 import { CategoryModel } from './category/category-model';
 
+import { CONFIG } from './config';
+
 @Injectable()
 export class CategoryService {
 
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+        @Inject(CONFIG) private config:any
+    
+        ) { }
 
     loadCategories(): Observable<CategoryModel[]> {
 
@@ -19,7 +24,7 @@ export class CategoryService {
             { id: 2, name: 'CS', description: 'CS books here....' }
         ]
 
-        return this.http.get('http://localhost:57599/category/GetCategories')
+        return this.http.get(this.config.apiUrl + '/category/GetCategories')
                         .map(data => data.json());
        
        // return Observable.of(data);
@@ -31,7 +36,7 @@ export class CategoryService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        return this.http.post('http://localhost:57599/category/addCategory', JSON.stringify(category), { headers: headers })
+        return this.http.post(this.config.apiUrl + '/category/addCategory', JSON.stringify(category), { headers: headers })
                    .map(data => data.json());
             
         //return Observable.of(category);
@@ -42,7 +47,7 @@ export class CategoryService {
         let headers: Headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        return this.http.post('http://localhost:57599/category/EditCategory', JSON.stringify(authorModel), { headers: headers })
+        return this.http.post(this.config.apiUrl + '/category/EditCategory', JSON.stringify(authorModel), { headers: headers })
             .map(data => data.json());
     }
 

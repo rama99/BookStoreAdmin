@@ -31,6 +31,8 @@ import { CategoryService } from './category.service';
 import { BookService } from './book.service';
 import { UserService } from './user.service';
 
+import { CONFIG } from './config';
+
 
 @NgModule({
     imports: [BrowserModule,
@@ -57,7 +59,13 @@ import { UserService } from './user.service';
         EffectsModule.run(CategoryEffects)*/
     ],
     declarations: [AppComponent, AboutComponent, HomeComponent, LoginComponent, PageNotFoundComponent],
-    providers: [canActivateGuard, CategoryService, BookService, UserService, Title],
+    providers: [canActivateGuard,
+        CategoryService,
+        BookService,
+        UserService,
+        Title,
+        { provide: CONFIG, useValue: { apiUrl: 'http://localhost:57599' } }
+    ],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
