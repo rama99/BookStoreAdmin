@@ -263,6 +263,10 @@
     <Content Include="Views\Author\Edit.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\User\Add.cshtml" />
+    <Content Include="Views\User\List.cshtml" />
+    <Content Include="Views\User\Search.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -327,6 +331,11 @@
     <TypeScriptCompile Include="src\app\Temp\temp.component.ts" />
     <TypeScriptCompile Include="src\app\Temp\temp.module.ts" />
     <TypeScriptCompile Include="src\app\user.service.ts" />
+    <TypeScriptCompile Include="src\app\User\user-list.component.ts" />
+    <TypeScriptCompile Include="src\app\User\user-main.component.ts" />
+    <TypeScriptCompile Include="src\app\User\user-add.component.ts" />
+    <TypeScriptCompile Include="src\app\User\user.module.ts" />
+    <TypeScriptCompile Include="src\app\User\user-search.component.ts" />
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
   <ItemGroup>

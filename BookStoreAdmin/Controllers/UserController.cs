@@ -17,6 +17,26 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        public ActionResult List()
+        {
+            return View();
+        }
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(string userName , string password)
         {
@@ -41,6 +61,8 @@ namespace BookStoreAdmin.Controllers
             Session.Remove("user");
             return Json(new { }, JsonRequestBehavior.AllowGet);
         } 
+
+        
 
         //can activate action method
         public ActionResult CanActivate()

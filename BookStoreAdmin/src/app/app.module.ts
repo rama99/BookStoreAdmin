@@ -13,6 +13,7 @@ import { AuthorModule } from './author/author.module';
 import { CategoryModule } from './Category/category.module';
 import { BookModule } from './book/book.module';
 import { TempModule } from './temp/temp.module';
+import { UserModule } from './user/user.module';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -57,7 +58,8 @@ import { CONFIG } from './config';
             user: userReducer
         }),
         EffectsModule.run(AppEffects),
-        TempModule /*,
+        TempModule,
+        UserModule /*,
         EffectsModule.run(CategoryEffects)*/
     ],
     declarations: [AppComponent, AboutComponent, HomeComponent, LoginComponent, PageNotFoundComponent],
