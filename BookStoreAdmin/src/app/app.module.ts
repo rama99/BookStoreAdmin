@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './404.component';
 import { AuthorModule } from './author/author.module';
 import { CategoryModule } from './Category/category.module';
 import { BookModule } from './book/book.module';
+import { TempModule } from './temp/temp.module';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -55,7 +56,8 @@ import { CONFIG } from './config';
             books: bookReducer,
             user: userReducer
         }),
-        EffectsModule.run(AppEffects) /*,
+        EffectsModule.run(AppEffects),
+        TempModule /*,
         EffectsModule.run(CategoryEffects)*/
     ],
     declarations: [AppComponent, AboutComponent, HomeComponent, LoginComponent, PageNotFoundComponent],
