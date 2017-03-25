@@ -331,9 +331,12 @@
     <TypeScriptCompile Include="src\app\Temp\temp.component.ts" />
     <TypeScriptCompile Include="src\app\Temp\temp.module.ts" />
     <TypeScriptCompile Include="src\app\user.service.ts" />
+    <TypeScriptCompile Include="src\app\User\actions.ts" />
+    <TypeScriptCompile Include="src\app\User\reducer.ts" />
     <TypeScriptCompile Include="src\app\User\user-list.component.ts" />
     <TypeScriptCompile Include="src\app\User\user-main.component.ts" />
     <TypeScriptCompile Include="src\app\User\user-add.component.ts" />
+    <TypeScriptCompile Include="src\app\User\user.model.ts" />
     <TypeScriptCompile Include="src\app\User\user.module.ts" />
     <TypeScriptCompile Include="src\app\User\user-search.component.ts" />
     <TypeScriptCompile Include="src\main.ts" />
