@@ -22,6 +22,8 @@ import { reducer as authorReducer } from './author/reducer';
 import { reducer as categoryReducer } from './Category/reducer';
 import { reducer as bookReducer } from './book/reducer';
 import { reducer as userReducer } from './reducer';
+
+import { reducer as usersReducer } from './user/reducer';
  
 import { AppEffects } from './app.effects';
 //import { AuthorEffects } from './author/authors-effects';
@@ -55,7 +57,8 @@ import { CONFIG } from './config';
             authors: authorReducer,
             categories: categoryReducer,
             books: bookReducer,
-            user: userReducer
+            user: userReducer,
+            users: usersReducer
         }),
         EffectsModule.run(AppEffects),
         TempModule,

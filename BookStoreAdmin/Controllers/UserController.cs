@@ -37,6 +37,28 @@ namespace BookStoreAdmin.Controllers
             return View();
         }
 
+        public ActionResult GetUsers()
+        {
+            BookStoreAdmin.ViewModels.Response<List<UserResponse>> response = new Response<List<UserResponse>>();
+            List<BookStoreAdmin.ViewModels.UserResponse> data = BookStoreAdmin.BAL.User.GetUsers();
+
+            response.data = data;
+            response.success = true;
+            response.errorMessage = null;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult AddUser(BookStoreAdmin.ViewModels.UserRequest user)
+        {
+            BookStoreAdmin.ViewModels.Response<string> response = new Response<string>();
+            response.data = "";
+            response.success = true;
+            response.errorMessage = null;
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Login(string userName , string password)
         {

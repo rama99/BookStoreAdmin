@@ -1,6 +1,8 @@
 ﻿import { Injectable , Inject } from '@angular/core';
 import { Http , Headers , RequestOptions } from '@angular/http';
 import { LoginModel, LoginResponseModel } from './login-model';
+import { UserRequest , UserResponse } from './User/user.model';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/throttleTime';
@@ -16,6 +18,13 @@ export class UserService {
     constructor(private http: Http,
                 @Inject(CONFIG) private config:any) {
 
+    }
+
+    getUsers(): Observable<UserResponse[]> {
+
+        console.log('getusers');
+        return this.http.get(this.config.apiUrl + '/user/getusers')
+                   .map(data => data.json());
     }
 
     validateUser(login: LoginModel): Observable<LoginResponseModel> {

@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { ActivatedRoute , Router } from '@angular/router';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
@@ -20,9 +21,12 @@ import { BookService } from './book.service';
 import { BookActionTypes, BooksActions  } from './book/actions';
 
 import { UserService } from './user.service';
-import { UserActionTypes, validateUser, validateUserSuccess, logOutSuccess, logOut , canActivateSuccess } from './actions';
+import { UserActionTypes, validateUser, validateUserSuccess, logOutSuccess, logOut, canActivateSuccess } from './actions';
+
+import { UserActions , UsersActionTypes } from './user/actions';
 
 import { BookCategoryAuthorModel, BookModel } from './Book/book-model';
+
 
 @Injectable()
 export class AppEffects {
@@ -47,6 +51,18 @@ export class AppEffects {
                 this.redirectToLogin(error);
                 return of(AuthorActions.serverErrorAuthor())
             })           
+        );
+
+    // load users
+    @Effect() users$ = this.actions$
+        .ofType(UsersActionTypes.LOAD_USERS)
+        .do(() => { console.log('effects') })
+        .switchMap(() => this.userService.getUsers()
+            .map(users => UserActions.loadUsersSuccess(users))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                return of(AuthorActions.serverErrorAuthor())
+            })
         );
         
 

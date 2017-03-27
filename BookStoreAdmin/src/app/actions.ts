@@ -1,8 +1,9 @@
 ﻿import { Action } from '@ngrx/store';
 
-import { LoginModel , LoginResponseModel } from './login-model';
+import { LoginModel, LoginResponseModel } from './login-model';
+import { UserRequest , UserResponse } from './user/user.model';
 
-export const UserActionTypes = {
+export const UserActionTypes = {   
 
     VALIDATE_USER: 'VALIDATE_USER',
     VALIDATE_USER_SUCCESS: 'VALIDATE_USER_SUCCESS',
@@ -14,6 +15,7 @@ export const UserActionTypes = {
     LOGOUT_SUCCESS:'LOGOUT_SUCCESS'    
 
 }
+
 
 export function validateUser(login: LoginModel): Action {
     $.blockUI();

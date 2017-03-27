@@ -1,7 +1,7 @@
 ﻿import { Action } from '@ngrx/store';
 import { UserRequest , UserResponse} from './user.model';
 
-export const UserActionTypes = {
+export const UsersActionTypes = {
 
     LOAD_USERS: 'LOAD_USERS',
     LOAD_USERS_SUCCESS: 'LOAD_USERS_SUCCESS',
@@ -16,9 +16,9 @@ export const UserActionTypes = {
 export class UserActions {
     
     static loadUsers():Action {
-
+        console.log('loadUsers()');
         return {
-            type: UserActionTypes.LOAD_USERS,
+            type: UsersActionTypes.LOAD_USERS,
             payload: {}
         }
     }
@@ -26,7 +26,7 @@ export class UserActions {
     static loadUsersSuccess(users: UserResponse[]): Action {
 
         return {
-            type: UserActionTypes.LOAD_USERS_SUCCESS,
+            type: UsersActionTypes.LOAD_USERS_SUCCESS,
             payload:users
         }
     }   

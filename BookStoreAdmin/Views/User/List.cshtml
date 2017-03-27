@@ -3,3 +3,6 @@
     Layout = null;
 }
 <h2> LIST USERS </h2>
+
+
+{{ store.select('users') | async | json }}

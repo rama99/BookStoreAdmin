@@ -1,4 +1,6 @@
 ﻿import { Component, OnInit, ViewChild, ChangeDetectionStrategy, DoCheck } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { UserActions , UsersActionTypes } from './actions';
 
 @Component({
     selector: '',
@@ -9,9 +11,12 @@
 
 export class UserListComponent implements OnInit {
 
-    constructor() { }
+    constructor(
+        private store:Store<any>
+    ) { }
 
     ngOnInit() {
-
+        console.log('LOAD USERS');
+        this.store.dispatch(UserActions.loadUsers());
     }
 }

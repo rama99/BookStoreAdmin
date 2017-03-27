@@ -179,6 +179,7 @@
     <Compile Include="ViewModels\Category.cs" />
     <Compile Include="ViewModels\LoginResponse.cs" />
     <Compile Include="ViewModels\Response.cs" />
+    <Compile Include="ViewModels\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

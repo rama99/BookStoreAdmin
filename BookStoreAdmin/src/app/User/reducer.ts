@@ -1,6 +1,6 @@
 ﻿import { Action } from '@ngrx/store';
 
-import { UserActionTypes } from './actions';
+import { UsersActionTypes } from './actions';
 
 import { UserRequest, UserResponse } from './user.model';
 
@@ -19,6 +19,13 @@ const initialState: State = {
 export function reducer(state: State = initialState, action: Action): State {
 
     switch (action.type) {
+
+        case UsersActionTypes.LOAD_USERS_SUCCESS:
+            return {
+                     currentPage: 0,
+                     users: action.payload,
+                     errors: [],
+                   }
         default:
             return state;
     }
