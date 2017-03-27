@@ -25,7 +25,9 @@ export function reducer(state: State = initialState, action: Action): State {
                      currentPage: 0,
                      users: action.payload,
                      errors: [],
-                   }
+            }
+        case UsersActionTypes.ADD_USER_SUCCESS:
+            return Object.assign({} , state , {users: state.users.concat(action.payload)})
         default:
             return state;
     }

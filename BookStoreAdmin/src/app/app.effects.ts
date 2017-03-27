@@ -61,10 +61,23 @@ export class AppEffects {
             .map(users => UserActions.loadUsersSuccess(users))
             .catch((error) => {
                 this.redirectToLogin(error);
+                // MODIFY BELOW LINE
                 return of(AuthorActions.serverErrorAuthor())
             })
         );
         
+    // add user
+    @Effect() addUser$ = this.actions$
+        .ofType(UsersActionTypes.ADD_USER)
+        .switchMap((action) => this.userService.addUser(action.payload)
+            .map(user => UserActions.addUserSuccess(user))
+            .catch((error) => {
+                this.redirectToLogin(error);
+                // MODFIY BELOW LINE
+                return of(AuthorActions.serverErrorAuthor())               
+            }) 
+            
+        );
 
     @Effect() addAuthor$ = this.actions$
         .ofType(AuthorActionTypes.ADD_AUTHOR)
@@ -72,9 +85,8 @@ export class AppEffects {
             .map(author => AuthorActions.addAuthorSuccess(author))
             .catch((error) => {
                 this.redirectToLogin(error);
-                return of(AuthorActions.serverErrorAuthor())               
-            }) 
-            
+                return of(AuthorActions.serverErrorAuthor())
+            })
         );
 
     @Effect() editAuthor$ = this.actions$

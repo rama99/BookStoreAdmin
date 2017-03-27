@@ -1,5 +1,8 @@
 ﻿import { Component, OnInit, ViewChild, ChangeDetectionStrategy, DoCheck, AfterViewInit, AfterViewChecked, AfterContentInit, AfterContentChecked } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup  , Validators} from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { UserActions } from './actions'; 
 
 @Component({
     selector: '',
@@ -11,7 +14,9 @@ export class UserAddComponent implements OnInit {
 
     fg: FormGroup;
 
-    constructor(private fb:FormBuilder ) { }
+    constructor( private fb: FormBuilder,
+                 private store:Store<{}>
+    ) { }
 
     ngOnInit() {
 
@@ -27,6 +32,8 @@ export class UserAddComponent implements OnInit {
 
     add() {
         alert(JSON.stringify(this.fg.value));
+
+        this.store.dispatch(UserActions.addUser(this.fg.value));
     }
 }
 

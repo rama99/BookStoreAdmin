@@ -29,6 +29,21 @@ export class UserActions {
             type: UsersActionTypes.LOAD_USERS_SUCCESS,
             payload:users
         }
-    }   
+    } 
+
+    static addUser(user: UserRequest): Action {
+
+        return {
+            type: UsersActionTypes.ADD_USER,
+            payload: user
+        }
+    }  
+
+    static addUserSuccess(data: any) {
+        return {
+            type: UsersActionTypes.ADD_USER_SUCCESS,
+            payload: data.data
+        }
+    }
 
 }

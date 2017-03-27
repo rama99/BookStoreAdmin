@@ -49,9 +49,12 @@ namespace BookStoreAdmin.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public ActionResult AddUser(BookStoreAdmin.ViewModels.UserRequest user)
         {
             BookStoreAdmin.ViewModels.Response<string> response = new Response<string>();
+
+            BookStoreAdmin.BAL.User.AddUser(user);
             response.data = "";
             response.success = true;
             response.errorMessage = null;

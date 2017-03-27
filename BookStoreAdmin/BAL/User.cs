@@ -67,7 +67,8 @@ namespace BookStoreAdmin.BAL
                 objUser.first_name = user.first_name;
                 objUser.last_name = user.last_name;
                 objUser.user_name = user.user_name;
-                objUser.password = objUser.password;
+                objUser.password = user.password;
+                context.users.Add(objUser);
                 context.SaveChanges();
             }          
 

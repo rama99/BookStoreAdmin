@@ -27,6 +27,16 @@ export class UserService {
                    .map(data => data.json());
     }
 
+    addUser(user: UserRequest): Observable<UserResponse> {
+
+        let headers: Headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.post(this.config.apiUrl + '/user/Adduser', JSON.stringify(user), { headers: headers })
+            .map(data => data.json());
+
+    }
+
     validateUser(login: LoginModel): Observable<LoginResponseModel> {
 
         let response: LoginResponseModel = {
