@@ -1,5 +1,5 @@
 ﻿import { Injectable , Inject } from '@angular/core';
-import { Http , Headers , RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { LoginModel, LoginResponseModel } from './login-model';
 import { UserRequest , UserResponse } from './User/user.model';
 
@@ -34,6 +34,14 @@ export class UserService {
 
         return this.http.post(this.config.apiUrl + '/user/Adduser', JSON.stringify(user), { headers: headers })
             .map(data => data.json());
+
+    }
+
+    searchUsers(search: string) {       
+
+        console.log('searchUsers');
+        return this.http.get(this.config.apiUrl + '/user/SearchUser?search=' + search)
+                        .map(data => data.json());
 
     }
 

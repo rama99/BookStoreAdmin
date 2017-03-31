@@ -70,9 +70,27 @@ namespace BookStoreAdmin.BAL
                 objUser.password = user.password;
                 context.users.Add(objUser);
                 context.SaveChanges();
-            }          
-
+            }
         }
+
+        public static List<BookStoreAdmin.ViewModels.UserResponse> Searchuser(string search)
+        {
+            List<BookStoreAdmin.ViewModels.UserResponse> users;
+
+            using (BookStoreAdmin.Models.BookStoreAdminEntities1 context = new BookStoreAdminEntities1())
+            {
+                users = context.users.Select(user => new BookStoreAdmin.ViewModels.UserResponse()
+                {
+                     id = user.id ,
+                     first_name = user.first_name,
+                     last_name = user.last_name,
+                     user_name = user.user_name,
+                     password = user.password
+                }).ToList();
+            }
+
+            return users;
+       }
 
     }
     }

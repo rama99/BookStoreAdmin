@@ -62,6 +62,17 @@ namespace BookStoreAdmin.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult SearchUser(string search)
+        {
+            BookStoreAdmin.ViewModels.Response<List<BookStoreAdmin.ViewModels.UserResponse>> response = new Response<List<BookStoreAdmin.ViewModels.UserResponse>>();
+            List<BookStoreAdmin.ViewModels.UserResponse> data = BookStoreAdmin.BAL.User.Searchuser(search);
+
+            response.data = data;
+            response.success = true;
+            response.errorMessage = null;
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Login(string userName , string password)
         {
