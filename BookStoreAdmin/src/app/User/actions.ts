@@ -24,7 +24,7 @@ export class UserActions {
     }
 
     static loadUsersSuccess(users: UserResponse[]): Action {
-
+        console.log('USERS', JSON.stringify(users));
         return {
             type: UsersActionTypes.LOAD_USERS_SUCCESS,
             payload:users

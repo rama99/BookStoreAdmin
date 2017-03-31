@@ -58,6 +58,7 @@ export class AppEffects {
         .ofType(UsersActionTypes.LOAD_USERS)
         .do(() => { console.log('effects') })
         .switchMap(() => this.userService.getUsers()
+            .do(() => console.log('LOAD USERS SUCCESS'))
             .map(users => UserActions.loadUsersSuccess(users))
             .catch((error) => {
                 this.redirectToLogin(error);

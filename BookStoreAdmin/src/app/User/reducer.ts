@@ -21,11 +21,8 @@ export function reducer(state: State = initialState, action: Action): State {
     switch (action.type) {
 
         case UsersActionTypes.LOAD_USERS_SUCCESS:
-            return {
-                     currentPage: 0,
-                     users: action.payload,
-                     errors: [],
-            }
+            console.log('xxx', JSON.stringify(action.payload.data.users));
+            return Object.assign({}, state, { users: action.payload.data.users })
         case UsersActionTypes.ADD_USER_SUCCESS:
             return Object.assign({} , state , {users: state.users.concat(action.payload)})
         default:

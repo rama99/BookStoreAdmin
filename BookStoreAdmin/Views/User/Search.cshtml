@@ -7,9 +7,28 @@
 
     <div class="form-group">
         <label for="username">User Name</label>
-        <input type="text" id="username" [formControl]="username" class="form-control" />
+        <input type="text" id="username" placeholder="User Name" [formControl]="username" class="form-control" />
     </div>
 
-{{ users | async | json }}
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users | async">
+            <td>{{user.user_name}}</td>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+
+
 
 
